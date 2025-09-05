@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 7%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 10%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 10%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 90%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 20%;
+  --muted-foreground: 0 0% 70%;
+  --accent: 0 0% 15%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
+  --ring: 0 0% 83.1%;
+  --chart-1: 0 0% 90%;
+  --chart-2: 0 0% 80%;
+  --chart-3: 0 0% 70%;
+  --chart-4: 0 0% 60%;
+  --chart-5: 0 0% 50%;
+  /* New vibrant colors */
+  --fire-red: 0 84.2% 60.2%;
+  --smoke-gray: 0 0% 40%;
+  --safety-blue: 217 91.2% 59.8%;
+  --energy-orange: 23 95.7% 53.3%;
+  --tech-teal: 174 65.7% 43.9%;
+  --premium-gold: 45 93.4% 52.2%;
+  --success-green: 142 70.6% 45.3%;
+}
+
+.dark {
+  --background: 0 0% 7%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 10%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 10%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 90%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 20%;
+  --muted-foreground: 0 0% 70%;
+  --accent: 0 0% 15%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
+  --ring: 0 0% 83.1%;
+  --chart-1: 0 0% 90%;
+  --chart-2: 0 0% 80%;
+  --chart-3: 0 0% 70%;
+  --chart-4: 0 0% 60%;
+  --chart-5: 0 0% 50%;
+  /* New vibrant colors */
+  --fire-red: 0 84.2% 60.2%;
+  --smoke-gray: 0 0% 40%;
+  --safety-blue: 217 91.2% 59.8%;
+  --energy-orange: 23 95.7% 53.3%;
+  --tech-teal: 174 65.7% 43.9%;
+  --premium-gold: 45 93.4% 52.2%;
+  --success-green: 142 70.6% 45.3%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom animations */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Glass effect utilities */
+.glass-effect {
+  @apply bg-gray-900/50 backdrop-blur-lg border border-gray-700/50;
+}
+
+.glass-effect-dark {
+  @apply bg-gray-900/70 backdrop-blur-lg border border-gray-600/50;
+}
+
+/* Gradient text utilities */
+.gradient-text {
+  @apply bg-gradient-to-r from-gray-300 to-gray-100 bg-clip-text text-transparent;
+}
+
+/* Hover scale animation */
+.hover-scale {
+  @apply transition-all duration-300 hover:transform hover:scale-105;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-lg;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
+
+/* Vibrant color utilities */
+.fire-red {
+  @apply text-[hsl(var(--fire-red))];
+}
+
+.bg-fire-red {
+  @apply bg-[hsl(var(--fire-red))];
+}
+
+.border-fire-red {
+  @apply border-[hsl(var(--fire-red))];
+}
+
+.safety-blue {
+  @apply text-[hsl(var(--safety-blue))];
+}
+
+.bg-safety-blue {
+  @apply bg-[hsl(var(--safety-blue))];
+}
+
+.border-safety-blue {
+  @apply border-[hsl(var(--safety-blue))];
+}
+
+.energy-orange {
+  @apply text-[hsl(var(--energy-orange))];
+}
+
+.bg-energy-orange {
+  @apply bg-[hsl(var(--energy-orange))];
+}
+
+.border-energy-orange {
+  @apply border-[hsl(var(--energy-orange))];
+}
+
+.tech-teal {
+  @apply text-[hsl(var(--tech-teal))];
+}
+
+.bg-tech-teal {
+  @apply bg-[hsl(var(--tech-teal))];
+}
+
+.border-tech-teal {
+  @apply border-[hsl(var(--tech-teal))];
+}
+
+.premium-gold {
+  @apply text-[hsl(var(--premium-gold))];
+}
+
+.bg-premium-gold {
+  @apply bg-[hsl(var(--premium-gold))];
+}
+
+.border-premium-gold {
+  @apply border-[hsl(var(--premium-gold))];
+}
