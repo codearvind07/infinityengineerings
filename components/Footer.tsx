@@ -58,20 +58,20 @@ export default function Footer() {
               </Link>
 
             </div>
-            <p className="text-gray-300 mb-6 leading-relaxed">
+            <p className="text-muted-foreground mb-6 leading-relaxed">
               Leading provider of innovative fire and smoke protection systems, 
               committed to safeguarding lives and property through cutting-edge technology.
             </p>
             <div className="space-y-2">
-              <div className="flex items-center space-x-2 text-gray-300">
+              <div className="flex items-center space-x-2 text-muted-foreground">
                 <Phone className="h-4 w-4 text-gray-400" />
                 <span>971-817-0004</span>
               </div>
-              <div className="flex items-center space-x-2 text-gray-300">
+              <div className="flex items-center space-x-2 text-muted-foreground">
                 <Mail className="h-4 w-4 text-gray-400" />
                 <span>sales@infinityengineerings.com</span>
               </div>
-              <div className="flex items-center space-x-2 text-gray-300">
+              <div className="flex items-center space-x-2 text-muted-foreground">
                 <MapPin className="h-4 w-4 text-gray-400" />
                 <span>India</span>
               </div>
@@ -85,7 +85,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.8 }}
           >
-            <h4 className="text-lg font-semibold text-gray-100 mb-6">Quick Links</h4>
+            <h4 className="text-lg font-semibold text-foreground mb-6">Quick Links</h4>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <motion.li 
@@ -95,7 +95,7 @@ export default function Footer() {
                 >
                   <a 
                     href={link.href}
-                    className="text-gray-400 hover:text-gray-200 transition-colors duration-200"
+                    className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                   >
                     {link.name}
                   </a>
@@ -111,7 +111,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <h4 className="text-lg font-semibold text-gray-100 mb-6">Legal</h4>
+            <h4 className="text-lg font-semibold text-foreground mb-6">Legal</h4>
             <ul className="space-y-3">
               {legalLinks.map((link, index) => (
                 <motion.li 
@@ -121,7 +121,7 @@ export default function Footer() {
                 >
                   <a 
                     href={link.href}
-                    className="text-gray-400 hover:text-gray-200 transition-colors duration-200"
+                    className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                   >
                     {link.name}
                   </a>
@@ -137,8 +137,8 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            <h4 className="text-lg font-semibold text-gray-100 mb-6">Stay Updated</h4>
-            <p className="text-gray-400 mb-4">
+            <h4 className="text-lg font-semibold text-foreground mb-6">Stay Updated</h4>
+            <p className="text-muted-foreground mb-4">
               Subscribe to our newsletter for the latest fire safety insights and product updates.
             </p>
            
@@ -154,7 +154,7 @@ export default function Footer() {
                   whileHover={{ y: -5, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <social.icon className="h-5 w-5 text-gray-400 hover:text-gray-200" />
+                  <social.icon className="h-5 w-5 text-muted-foreground hover:text-foreground" />
                 </motion.a>
               ))}
             </div>
@@ -170,10 +170,10 @@ export default function Footer() {
           transition={{ delay: 0.4, duration: 0.8 }}
         >
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-500 text-sm">
+            <p className="text-muted-foreground text-sm">
               © {new Date().getFullYear()} INFINITY ENGINEERINGS. All rights reserved.
             </p>
-            <p className="text-gray-500 text-sm mt-2 md:mt-0">
+            <p className="text-muted-foreground text-sm mt-2 md:mt-0">
               Protecting lives through innovative fire safety solutions.
             </p>
           </div>

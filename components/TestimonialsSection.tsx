@@ -116,25 +116,7 @@ export default function TestimonialsSection() {
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="mt-16 grid md:grid-cols-4 gap-8 animate-fade-in-up" style={{ animationDelay: '1s', animationFillMode: 'backwards' }}>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-gray-300 mb-2">25+</div>
-            <p className="text-gray-400">Years Experience</p>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-gray-300 mb-2">500+</div>
-            <p className="text-gray-400">Projects Completed</p>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-gray-300 mb-2">50+</div>
-            <p className="text-gray-400">Countries Served</p>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-gray-300 mb-2">24/7</div>
-            <p className="text-gray-400">Support Available</p>
-          </div>
-        </div>
+        
       </div>
     </section>
   );

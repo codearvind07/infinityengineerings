@@ -4,6 +4,65 @@ import { Shield, Target, Eye, Heart, Award, Users, Zap, Building } from 'lucide-
 import { motion } from 'framer-motion';
 import banner from '@/public/slider.jpg';
 import Image from 'next/image';
+import { useState, useEffect, useRef } from 'react';
+
+// Custom hook for counting animation
+function useCountUp(end: number, duration: number = 2000, start: number = 0) {
+  const [count, setCount] = useState(start);
+  const [isInView, setIsInView] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let startTimestamp: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const currentCount = Math.floor(progress * (end - start) + start);
+      setCount(currentCount);
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }, [end, duration, isInView]);
+  return [count, ref] as const;
+}
+// CountUp Component
+function CountUp({ end, duration = 2000, suffix = '' }: { end: number; duration?: number; suffix?: string }) {
+  const [count, ref] = useCountUp(end, duration);
+
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
 export default function AboutSection() {
   const values = [
     {
@@ -29,10 +88,10 @@ export default function AboutSection() {
   ];
 
   const stats = [
-    { number: '25+', label: 'Years Experience' },
-    { number: '500+', label: 'Projects Completed' },
-    { number: '98%', label: 'Client Satisfaction' },
-    { number: '24/7', label: 'Support Available' }
+    { number: 25, suffix: '+', label: 'Years Experience', duration: 2500 },
+    { number: 500, suffix: '+', label: 'Projects Completed', duration: 3000 },
+    { number: 98, suffix: '%', label: 'Client Satisfaction', duration: 2000 },
+    { number: 24, suffix: '/7', label: 'Support Available', duration: 1500 }
   ];
 
   return (
@@ -79,7 +138,7 @@ export default function AboutSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">
-                {stat.number}
+                <CountUp end={stat.number} duration={stat.duration} suffix={stat.suffix} />
               </div>
               <div className="text-gray-300 font-medium">{stat.label}</div>
             </motion.div>
@@ -179,30 +238,6 @@ export default function AboutSection() {
             ))}
           </div>
         </div>
-
-        {/* CTA Section */}
-        <motion.div 
-          className="text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="bg-gray-800 border border-gray-700 rounded-2xl p-8 max-w-4xl mx-auto">
-            <h3 className="text-3xl font-bold text-white mb-4">Ready to Enhance Your Building's Safety?</h3>
-            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              Contact our experts for a comprehensive consultation and custom solution design 
-              tailored to your specific building requirements.
-            </p>
-            <motion.button 
-              className="bg-amber-500 hover:bg-amber-600 text-gray-900 px-8 py-4 rounded-lg font-semibold transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Schedule a Consultation
-            </motion.button>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

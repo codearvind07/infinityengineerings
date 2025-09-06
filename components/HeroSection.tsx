@@ -51,7 +51,7 @@ export default function HeroSection(): JSX.Element {
   const activeSlide = sliderImages[currentSlide];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden text-white">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden text-foreground">
       {/* Background Slider */}
       <div className="absolute inset-0">
         {sliderImages.map((image, index) => (
@@ -72,14 +72,14 @@ export default function HeroSection(): JSX.Element {
 
       {/* Hero Content */}
       <div className="relative z-10 text-center px-4 animate-fade-in-up">
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 text-white">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 text-foreground">
           {activeSlide.title}
         </h1>
-        <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+        <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
           {activeSlide.subtitle}
         </p>
         <Link href="/products">
-        <Button size="lg" className="bg-fire-red hover:bg-fire-red/90 text-white border border-fire-red/50 shadow-lg shadow-fire-red/20 hover:shadow-fire-red/40 transition-all duration-300 transform hover:scale-105">
+        <Button size="lg" className="bg-fire-red hover:bg-fire-red/90 text-foreground border border-fire-red/50 shadow-lg shadow-fire-red/20 hover:shadow-fire-red/40 transition-all duration-300 transform hover:scale-105">
           Explore Our Solutions 
         </Button>
       </Link>

@@ -198,3 +198,12 @@ html {
 .border-premium-gold {
   @apply border-[hsl(var(--premium-gold))];
 }
+
+/* Text color utilities using CSS variables */
+.text-foreground {
+  color: hsl(var(--foreground));
+}
+
+.text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}
