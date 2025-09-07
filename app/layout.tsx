@@ -1,8 +1,12 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter_Tight } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const interTight = Inter_Tight({ 
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-inter-tight'
+});
 
 export const metadata: Metadata = {
   title: 'INFINITY ENGINEERINGS - Professional Fire & Smoke Protection Solutions',
@@ -37,8 +41,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-background text-foreground antialiased`}>
+    <html lang="en" className={`scroll-smooth ${interTight.variable}`}>
+      <body className={`${interTight.className} bg-background text-foreground antialiased`}>
         {children}
       </body>
     </html>
