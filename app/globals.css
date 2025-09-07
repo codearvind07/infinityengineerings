@@ -97,6 +97,34 @@
   }
 }
 
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 25s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Professional Event Banner */
+.event-banner-container {
+  @apply absolute top-32 left-1/2 transform -translate-x-1/2 w-4/5 z-20 overflow-hidden rounded-full shadow-2xl;
+  background: linear-gradient(90deg, hsl(var(--fire-red)/0.9) 0%, hsl(var(--fire-red)/0.7) 100%);
+  border: 1px solid hsl(var(--fire-red)/0.5);
+  backdrop-filter: blur(4px);
+}
+
+.event-banner-text {
+  @apply whitespace-nowrap inline-block px-8 py-4 text-foreground text-base font-bold tracking-wider;
+  animation: marquee 25s linear infinite;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;

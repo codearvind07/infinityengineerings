@@ -70,6 +70,13 @@ export default function HeroSection(): JSX.Element {
         <div className="absolute inset-0 bg-gradient-to-b from-gray-900/80 via-gray-900/60 to-fire-red/20" />
       </div>
 
+      {/* Professional Event Banner with Moving Text */}
+      <div className="event-banner-container">
+        <div className="event-banner-text">
+          INFINITY ENGINEERINGS 8th EDITION FSIE FIRE & SECURITY INDIA EXPO | MEET & TALK | 11-13 SEPT 2025
+        </div>
+      </div>
+
       {/* Hero Content */}
       <div className="relative z-10 text-center px-4 animate-fade-in-up">
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 text-foreground">
