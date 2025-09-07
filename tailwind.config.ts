@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter-tight)', 'Inter Tight', 'system-ui', 'sans-serif'],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
@@ -60,7 +63,18 @@ const config: Config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
-        // New vibrant colors
+        // Golden luxury color palette
+        'gold-dark': 'hsl(var(--gold-dark))',
+        'gold-deep': 'hsl(var(--gold-deep))',
+        'gold-primary': 'hsl(var(--gold-primary))',
+        'gold-light': 'hsl(var(--gold-light))',
+        'gold-bright': 'hsl(var(--gold-bright))',
+        'gold-accent': 'hsl(var(--gold-accent))',
+        'gold-copper': 'hsl(var(--gold-copper))',
+        'gold-platinum': 'hsl(var(--gold-platinum))',
+        'gold-champagne': 'hsl(var(--gold-champagne))',
+        'gold-glow': 'hsl(var(--gold-glow))',
+        // Legacy colors for compatibility
         'fire-red': 'hsl(var(--fire-red))',
         'smoke-gray': 'hsl(var(--smoke-gray))',
         'safety-blue': 'hsl(var(--safety-blue))',
@@ -86,10 +100,77 @@ const config: Config = {
             height: '0',
           },
         },
+        'gold-glow': {
+          '0%, 100%': {
+            boxShadow: '0 0 20px hsl(var(--gold-primary) / 0.4), 0 0 40px hsl(var(--gold-primary) / 0.3), 0 0 60px hsl(var(--gold-primary) / 0.2)',
+          },
+          '50%': {
+            boxShadow: '0 0 30px hsl(var(--gold-bright) / 0.5), 0 0 60px hsl(var(--gold-bright) / 0.4), 0 0 90px hsl(var(--gold-bright) / 0.3)',
+          },
+        },
+        'gold-pulse': {
+          '0%, 100%': {
+            opacity: '0.8',
+            transform: 'scale(1)',
+          },
+          '50%': {
+            opacity: '1',
+            transform: 'scale(1.05)',
+          },
+        },
+        'gold-float': {
+          '0%, 100%': {
+            transform: 'translateY(0px)',
+          },
+          '50%': {
+            transform: 'translateY(-10px)',
+          },
+        },
+        'gold-rotate': {
+          '0%': {
+            transform: 'rotate(0deg)',
+          },
+          '100%': {
+            transform: 'rotate(360deg)',
+          },
+        },
+        'gold-shimmer': {
+          '0%': {
+            backgroundPosition: '-200% 0',
+          },
+          '100%': {
+            backgroundPosition: '200% 0',
+          },
+        },
+        'gold-drift': {
+          '0%': {
+            transform: 'translateX(-100%)',
+          },
+          '100%': {
+            transform: 'translateX(100vw)',
+          },
+        },
+        'gold-sparkle': {
+          '0%, 100%': {
+            opacity: '0.3',
+            transform: 'scale(1)',
+          },
+          '50%': {
+            opacity: '1',
+            transform: 'scale(1.2)',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'gold-glow': 'gold-glow 3s ease-in-out infinite',
+        'gold-pulse': 'gold-pulse 2s ease-in-out infinite',
+        'gold-float': 'gold-float 6s ease-in-out infinite',
+        'gold-rotate': 'gold-rotate 20s linear infinite',
+        'gold-shimmer': 'gold-shimmer 2s linear infinite',
+        'gold-drift': 'gold-drift 30s linear infinite',
+        'gold-sparkle': 'gold-sparkle 2s ease-in-out infinite',
       },
     },
   },

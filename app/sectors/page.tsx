@@ -23,10 +23,10 @@ export default function SectorsPage() {
           {/* Content */}
           <div className="space-y-6 text-gray-300 text-xl max-w-3xl mx-auto mb-16">
             <p>
-              At Infinity Engineerings, we've developed a wide range of fire curtains and smoke curtains to protect every type of building.
+              At Infinity Engineerings, we&apos;ve developed a wide range of fire curtains and smoke curtains to protect every type of building.
             </p>
             <p>
-              No matter what your sector, whether it's a fire curtain for a domestic house or a smoke curtain for a tall building, we have a fire safety solution approved to protect.
+              No matter what your sector, whether it&apos;s a fire curtain for a domestic house or a smoke curtain for a tall building, we have a fire safety solution approved to protect.
             </p>
           </div>
           
