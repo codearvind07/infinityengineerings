@@ -48,7 +48,7 @@ const brands = [
 
 // Certification icons map
 interface BrandIconMap {
-  [key: string]: { icon: React.ForwardRefExoticComponent<React.Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>; color: string; };
+  [key: string]: { icon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>; color: string; };
 }
 
 const brandIcons: BrandIconMap = {
