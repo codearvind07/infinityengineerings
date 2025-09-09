@@ -449,7 +449,7 @@ export default function ProductsSection(): JSX.Element {
       selectedIntegrity, selectedRadiation, selectedInsulation]);
 
   return (
-    <section id="products" className="py-20 bg-gradient-to-br from-gray-900 to-black text-foreground">
+    <section id="products" className="py-20 bg-gradient-to-br from-sphere-navy-dark via-sphere-navy-medium to-sphere-navy-light text-sphere-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">

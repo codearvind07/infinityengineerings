@@ -66,14 +66,14 @@ const featuredProducts = [
 
 export default function FeaturedProductsSection() {
   return (
-    <section id="products" className="py-20 bg-gradient-to-br from-gold-dark via-gold-deep to-gold-dark/90 relative overflow-hidden gold-particles">
-      {/* Golden animated background elements */}
+    <section id="products" className="py-20 bg-gradient-to-br from-sphere-navy-dark via-sphere-navy-medium to-sphere-navy-light relative overflow-hidden">
+      {/* Navy blue animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 left-1/4 w-96 h-96 gold-gradient rounded-full mix-blend-soft-light filter blur-3xl opacity-20 animate-gold-pulse"></div>
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-gradient-to-r from-gold-bright/20 to-gold-accent/20 rounded-full mix-blend-soft-light filter blur-3xl opacity-15 animate-gold-float"></div>
-        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-gradient-to-r from-gold-copper/10 to-gold-light/10 rounded-full mix-blend-soft-light filter blur-3xl opacity-10 animate-gold-glow"></div>
+        <div className="absolute -top-1/2 left-1/4 w-96 h-96 bg-gradient-to-r from-sphere-blue-primary/20 to-sphere-blue-light/20 rounded-full mix-blend-soft-light filter blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-gradient-to-r from-sphere-blue-bright/20 to-sphere-blue-accent/20 rounded-full mix-blend-soft-light filter blur-3xl opacity-15 animate-pulse"></div>
+        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-gradient-to-r from-sphere-blue-primary/10 to-sphere-blue-light/10 rounded-full mix-blend-soft-light filter blur-3xl opacity-10 animate-pulse"></div>
         
-        {/* Golden floating particles */}
+        {/* Navy blue floating particles */}
         {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
@@ -83,7 +83,7 @@ export default function FeaturedProductsSection() {
               left: `${Math.random() * 100}%`,
               width: `${Math.random() * 12 + 2}px`,
               height: `${Math.random() * 12 + 2}px`,
-              background: `hsl(var(--gold-${['primary', 'light', 'bright', 'accent', 'platinum'][Math.floor(Math.random() * 5)]}) / 0.6)`,
+              background: `hsl(var(--sphere-blue-${['primary', 'light', 'bright', 'accent'][Math.floor(Math.random() * 4)]}) / 0.6)`,
             }}
             animate={{
               y: [0, -30, 0],
@@ -117,22 +117,22 @@ export default function FeaturedProductsSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             whileHover={{ scale: 1.1 }}
           >
-            <div className="gold-glass rounded-full px-4 py-1.5">
-              <span className="text-gold-platinum text-sm font-medium gold-glow-text">OUR PRODUCTS</span>
+            <div className="bg-sphere-navy-light/20 border border-sphere-blue-primary/30 rounded-full px-4 py-1.5">
+              <span className="text-sphere-blue-light text-sm font-medium">OUR PRODUCTS</span>
             </div>
           </motion.div>
           
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold gold-glow-text mb-6"
+            className="text-4xl md:text-5xl font-bold text-sphere-white mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            Our <span className="gold-shimmer">Products</span>
+            Our <span className="text-sphere-blue-light">Products</span>
           </motion.h2>
           <motion.p 
-            className="text-xl text-gold-platinum/80 max-w-3xl mx-auto"
+            className="text-xl text-sphere-slate-light max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -156,10 +156,10 @@ export default function FeaturedProductsSection() {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               whileHover={{ y: -10 }}
             >
-              <Card className="overflow-hidden gold-card h-full hover:border-gold-primary/60 transition-all duration-500 gold-interactive relative">
-                {/* Golden gradient border effect */}
+              <Card className="overflow-hidden bg-sphere-navy-light/20 border border-sphere-blue-primary/20 backdrop-blur-sm h-full hover:border-sphere-blue-light/40 transition-all duration-500 relative">
+                {/* Navy gradient border effect */}
                 <div className="absolute inset-0 rounded-xl overflow-hidden">
-                  <div className="absolute inset-0 gold-gradient opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-sphere-blue-primary/10 to-sphere-blue-light/10 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                 </div>
                 
                 <div className="aspect-video relative overflow-hidden">
@@ -170,11 +170,11 @@ export default function FeaturedProductsSection() {
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.3 }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gold-dark/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-sphere-navy-dark/80 via-transparent to-transparent" />
                   
-                  {/* Golden hover overlay */}
+                  {/* Navy hover overlay */}
                   <motion.div 
-                    className="absolute inset-0 gold-gradient opacity-0 group-hover:opacity-20 transition-opacity duration-500"
+                    className="absolute inset-0 bg-gradient-to-r from-sphere-blue-primary/20 to-sphere-blue-light/20 opacity-0 group-hover:opacity-20 transition-opacity duration-500"
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 0.2 }}
                   />
@@ -182,7 +182,7 @@ export default function FeaturedProductsSection() {
                 
                 <CardContent className="p-6 flex flex-col relative z-10">
                   <motion.span 
-                    className="text-sm font-semibold text-gold-light mb-2"
+                    className="text-sm font-semibold text-sphere-blue-light mb-2"
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -192,7 +192,7 @@ export default function FeaturedProductsSection() {
                   </motion.span>
                   
                   <motion.h3 
-                    className="font-semibold text-xl text-gold-platinum mb-3 flex-grow gold-glow-text"
+                    className="font-semibold text-xl text-sphere-white mb-3 flex-grow"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -202,7 +202,7 @@ export default function FeaturedProductsSection() {
                   </motion.h3>
                   
                   <motion.p 
-                    className="text-gold-platinum/70 mb-4"
+                    className="text-sphere-slate-light mb-4"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -222,8 +222,8 @@ export default function FeaturedProductsSection() {
                     <div className="space-y-2">
                       {product.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-center space-x-2">
-                          <div className="w-1.5 h-1.5 bg-gold-light rounded-full animate-gold-pulse"></div>
-                          <span className="text-xs text-gold-platinum/80 font-medium">{feature}</span>
+                          <div className="w-1.5 h-1.5 bg-sphere-blue-light rounded-full animate-pulse"></div>
+                          <span className="text-xs text-sphere-slate-light font-medium">{feature}</span>
                         </div>
                       ))}
                     </div>
@@ -237,7 +237,7 @@ export default function FeaturedProductsSection() {
                     <Link href={`/products/${product.slug}`}>
                       <Button 
                         variant="outline" 
-                        className="w-full gold-border-glow text-gold-platinum hover:bg-gold-primary/20 hover:text-gold-light transition-all duration-300"
+                        className="w-full border border-sphere-blue-primary/30 text-sphere-white hover:bg-sphere-blue-primary/20 hover:text-sphere-blue-light transition-all duration-300"
                       >
                         Learn More
                         <ArrowRight className="ml-2 h-4 w-4" />
@@ -245,10 +245,10 @@ export default function FeaturedProductsSection() {
                     </Link>
                   </motion.div>
                   
-                  {/* Golden line animation */}
+                  {/* Navy line animation */}
                   <div className="mt-4 opacity-0 group-hover:opacity-100 transition-all duration-700">
                     <motion.div 
-                      className="h-1 w-16 gold-gradient rounded-full mx-auto"
+                      className="h-1 w-16 bg-gradient-to-r from-sphere-blue-primary to-sphere-blue-light rounded-full mx-auto"
                       initial={{ width: 0 }}
                       whileHover={{ width: "100%" }}
                       transition={{ duration: 0.3 }}
@@ -276,7 +276,7 @@ export default function FeaturedProductsSection() {
             >
               <Button 
                 size="lg" 
-                className="gold-button text-lg px-8 py-3 font-semibold group transition-all duration-300 rounded-full gold-interactive"
+                className="bg-sphere-blue-primary hover:bg-sphere-blue-light text-sphere-white text-lg px-8 py-3 font-semibold group transition-all duration-300 rounded-full"
               >
                 Explore All Solutions
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />

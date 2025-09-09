@@ -106,8 +106,8 @@ export default function AboutSection() {
     <section id="about" className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-red-500/10 to-orange-500/10 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-sphere-navy-medium/30 to-sphere-navy-light/30 rounded-full mix-blend-soft-light filter blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-sphere-navy-light/20 to-sphere-navy-medium/20 rounded-full mix-blend-soft-light filter blur-3xl opacity-15 animate-pulse" style={{animationDelay: '2s'}}></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -120,29 +120,29 @@ export default function AboutSection() {
           transition={{ duration: 0.8 }}
         >
           <motion.div 
-            className="inline-flex items-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-6 py-2 mb-6"
+            className="inline-flex items-center bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-full px-6 py-2 mb-6"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <span className="text-white/80 text-sm font-medium tracking-wide uppercase">About Our Company</span>
+            <span className="text-sphere-white/80 text-sm font-medium tracking-wide uppercase">About Our Company</span>
           </motion.div>
           
           <motion.h2 
             className="text-5xl md:text-7xl font-bold mb-8 leading-tight"
-            style={{ color: 'rgb(247, 87, 73)' }}
+            style={{ color: 'hsl(var(--sphere-blue-light))' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             INFINITY 
-            <span className="block text-white">ENGINEERINGS</span>
+            <span className="block text-sphere-white">ENGINEERINGS</span>
           </motion.h2>
           
           <motion.p 
-            className="text-xl md:text-2xl text-center max-w-4xl mx-auto leading-relaxed text-gray-300"
+            className="text-xl md:text-2xl text-center max-w-4xl mx-auto leading-relaxed text-sphere-white/80"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -150,7 +150,7 @@ export default function AboutSection() {
           >
             India&apos;s premier fire and smoke protection specialist, delivering world-class safety solutions 
             that seamlessly integrate with architectural designs as the authorized distributor of 
-            <span style={{ color: 'rgb(247, 87, 73)' }} className="font-semibold"> COOPERS FIRE LIMITED UK</span>
+            <span style={{ color: 'hsl(var(--sphere-blue-light))' }} className="font-semibold"> COOPERS FIRE LIMITED UK</span>
           </motion.p>
         </motion.div>
 
@@ -172,14 +172,14 @@ export default function AboutSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 h-full transition-all duration-300 group-hover:bg-white/10 group-hover:border-white/20">
+              <div className="bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-2xl p-8 h-full transition-all duration-300 group-hover:bg-sphere-navy-dark/70 group-hover:border-sphere-blue-light/40">
                 <div 
                   className="text-4xl md:text-5xl font-bold mb-3 tracking-tight"
-                  style={{ color: 'rgb(247, 87, 73)' }}
+                  style={{ color: 'hsl(var(--sphere-blue-light))' }}
                 >
                   <CountUp end={stat.number} duration={stat.duration} suffix={stat.suffix} />
                 </div>
-                <div className="text-lg font-medium text-gray-300">{stat.label}</div>
+                <div className="text-lg font-medium text-sphere-white/80">{stat.label}</div>
               </div>
             </motion.div>
           ))}
@@ -198,7 +198,7 @@ export default function AboutSection() {
             <div>
               <motion.h3 
                 className="text-4xl md:text-5xl font-bold mb-6 leading-tight"
-                style={{ color: 'rgb(247, 87, 73)' }}
+                style={{ color: 'hsl(var(--sphere-blue-light))' }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -207,14 +207,14 @@ export default function AboutSection() {
                 Our Partnership
               </motion.h3>
               
-              <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
+              <div className="space-y-6 text-lg text-sphere-white/80 leading-relaxed">
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                 >
-                  INFINITY ENGINEERINGS is the <span style={{ color: 'rgb(247, 87, 73)' }} className="font-semibold">exclusive authorized distributor</span> of COOPERS FIRE LIMITED UK in India - the global pioneers and leading manufacturers of automatic drop-down fire and smoke curtains.
+                  INFINITY ENGINEERINGS is the <span style={{ color: 'hsl(var(--sphere-blue-light))' }} className="font-semibold">exclusive authorized distributor</span> of COOPERS FIRE LIMITED UK in India - the global pioneers and leading manufacturers of automatic drop-down fire and smoke curtains.
                 </motion.p>
                 
                 <motion.p
@@ -223,7 +223,7 @@ export default function AboutSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  This partnership brings over <span style={{ color: 'rgb(247, 87, 73)' }} className="font-semibold">30 years of British engineering excellence</span> to the Indian construction industry, ensuring compliance with international safety standards while maintaining architectural aesthetics.
+                  This partnership brings over <span style={{ color: 'hsl(var(--sphere-blue-light))' }} className="font-semibold">30 years of British engineering excellence</span> to the Indian construction industry, ensuring compliance with international safety standards while maintaining architectural aesthetics.
                 </motion.p>
               </div>
             </div>
@@ -239,7 +239,7 @@ export default function AboutSection() {
               {achievements.map((achievement, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-center space-x-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 transition-all duration-300 hover:bg-white/10 hover:border-white/20"
+                  className="flex items-center space-x-4 bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-xl p-4 transition-all duration-300 hover:bg-sphere-navy-dark/70 hover:border-sphere-blue-light/40"
                   whileHover={{ x: 8 }}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -249,17 +249,17 @@ export default function AboutSection() {
                   <div className="flex-shrink-0">
                     <achievement.icon 
                       className="h-6 w-6" 
-                      style={{ color: 'rgb(247, 87, 73)' }} 
+                      style={{ color: 'hsl(var(--sphere-blue-light))' }} 
                     />
                   </div>
-                  <p className="text-gray-300 font-medium">{achievement.text}</p>
+                  <p className="text-sphere-white/80 font-medium">{achievement.text}</p>
                 </motion.div>
               ))}
             </motion.div>
             
             {/* Mission Card */}
             <motion.div 
-              className="bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8"
+              className="bg-gradient-to-r from-sphere-navy-dark/50 to-sphere-navy-dark/70 backdrop-blur-sm border border-sphere-blue-light/30 rounded-2xl p-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -273,12 +273,12 @@ export default function AboutSection() {
                 <div>
                   <h4 
                     className="text-2xl font-bold mb-4"
-                    style={{ color: 'rgb(247, 87, 73)' }}
+                    style={{ color: 'hsl(var(--sphere-blue-light))' }}
                   >
                     Our Mission
                   </h4>
-                  <p className="text-lg text-gray-300 leading-relaxed">
-                    To be India&apos;s most trusted partner in fire and smoke protection, delivering innovative solutions that <span style={{ color: 'rgb(247, 87, 73)' }} className="font-semibold">save lives while preserving architectural integrity</span>. We aim to make advanced fire safety accessible across all building types, from luxury developments to essential infrastructure.
+                  <p className="text-lg text-sphere-white/80 leading-relaxed">
+                    To be India&apos;s most trusted partner in fire and smoke protection, delivering innovative solutions that <span style={{ color: 'hsl(var(--sphere-blue-light))' }} className="font-semibold">save lives while preserving architectural integrity</span>. We aim to make advanced fire safety accessible across all building types, from luxury developments to essential infrastructure.
                   </p>
                 </div>
               </div>
@@ -293,7 +293,7 @@ export default function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden group">
+            <div className="relative bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-3xl overflow-hidden group">
               <Image 
                 src={banner}
                 alt="Fire and smoke curtain protection system"
@@ -305,9 +305,9 @@ export default function AboutSection() {
               
               {/* Overlay Content */}
               <div className="absolute bottom-8 left-8 right-8">
-                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6">
-                  <h5 className="text-xl font-bold text-white mb-2">Advanced Fire Protection</h5>
-                  <p className="text-gray-200">Cutting-edge technology ensuring safety and compliance</p>
+                <div className="bg-sphere-navy-dark/60 backdrop-blur-md border border-sphere-blue-light/30 rounded-xl p-6">
+                  <h5 className="text-xl font-bold text-sphere-white mb-2">Advanced Fire Protection</h5>
+                  <p className="text-sphere-white/80">Cutting-edge technology ensuring safety and compliance</p>
                 </div>
               </div>
             </div>
@@ -324,7 +324,7 @@ export default function AboutSection() {
         >
           <motion.h3 
             className="text-4xl md:text-5xl font-bold mb-6 leading-tight"
-            style={{ color: 'rgb(247, 87, 73)' }}
+            style={{ color: 'hsl(var(--sphere-blue-light))' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -333,7 +333,7 @@ export default function AboutSection() {
             Our Core Values
           </motion.h3>
           <motion.p 
-            className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-sphere-white/80 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -354,27 +354,27 @@ export default function AboutSection() {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               whileHover={{ y: -8 }}
             >
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 h-full transition-all duration-300 group-hover:bg-white/10 group-hover:border-white/20 text-center">
+              <div className="bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-2xl p-8 h-full transition-all duration-300 group-hover:bg-sphere-navy-dark/70 group-hover:border-sphere-blue-light/40 text-center">
                 {/* Icon */}
                 <motion.div 
-                  className="inline-flex items-center justify-center w-16 h-16 rounded-xl mb-6 bg-gradient-to-br from-white/10 to-white/5 border border-white/20"
+                  className="inline-flex items-center justify-center w-16 h-16 rounded-xl mb-6 bg-gradient-to-br from-sphere-navy-dark/50 to-sphere-navy-dark/30 border border-sphere-blue-light/30"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <value.icon 
                     className="h-8 w-8" 
-                    style={{ color: 'rgb(247, 87, 73)' }} 
+                    style={{ color: 'hsl(var(--sphere-blue-light))' }} 
                   />
                 </motion.div>
                 
                 {/* Content */}
                 <h4 
                   className="text-xl font-bold mb-4"
-                  style={{ color: 'rgb(247, 87, 73)' }}
+                  style={{ color: 'hsl(var(--sphere-blue-light))' }}
                 >
                   {value.title}
                 </h4>
-                <p className="text-gray-300 leading-relaxed">
+                <p className="text-sphere-white/80 leading-relaxed">
                   {value.description}
                 </p>
               </div>

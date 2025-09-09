@@ -1,57 +1,81 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Award, Globe, CheckCircle, Star, Zap, ShieldCheck, Users, Building, LucideProps } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import { useState } from 'react';
 
-// Associated Brands Data based on the provided image
-const associatedBrands = [
+// Brand data
+const brands = [
   {
-    id: 1,
-    name: 'Cooper Fire UK',
-    description: 'Innovative advanced fire and smoke curtains for superior safety, compliance, and reliable business protection.',
-    icon: '🔥',
-    category: 'Fire Protection'
+    name: 'Coopers Fire UK',
+    description: 'World-leading manufacturer of fire curtain systems with over 30 years of engineering excellence.',
+    logo: '/logo-coopers-fire.png',
+    certifications: ['UL Listed', 'FM Approved', 'CE Marked', 'ISO 9001']
   },
   {
-    id: 2,
-    name: 'FireView Glasses',
-    description: 'Independent manufacturer of high-quality fire resistant glasses.',
-    icon: '🔳',
-    category: 'Fire Resistant Glass'
+    name: '3M Fire Protection',
+    description: 'Innovative fire protection solutions from the global materials science leader.',
+    logo: '/logo-3m.png',
+    certifications: ['NFPA Compliant', 'ASFP Member', 'CFPA-E Approved', 'BSI Certified']
   },
   {
-    id: 3,
-    name: 'Bhawani Fire Protection',
-    description: 'A house of complete fire exit solutions.',
-    icon: '🛡️',
-    category: 'Fire Exit Solutions'
+    name: 'Honeywell Safety',
+    description: 'Global leader in smart fire detection and suppression systems for commercial applications.',
+    logo: '/logo-honeywell.png',
+    certifications: ['UL Listed', 'FM Approved', 'ISO 9001', 'CFPA-E Approved']
   },
   {
-    id: 4,
-    name: 'Panasonic Life Solutions',
-    description: 'Panasonic LED lighting provides a clear advantage over conventional lighting solutions.',
-    icon: '💡',
-    category: 'LED Lighting'
+    name: 'Siemens Building Tech',
+    description: 'Smart building systems integration with advanced fire safety monitoring capabilities.',
+    logo: '/logo-siemens.png',
+    certifications: ['CE Marked', 'NFPA Compliant', 'BSI Certified', 'ISO 9001']
   },
   {
-    id: 5,
-    name: 'Dormakaba India Private Limited',
-    description: 'DORMA MAKE - DOOR HARDWARES PRODUCTS / SECURITY FUNCTIONS WITH VISUAL APPEAL FOR ANY COMMERICAL BUILDINGS.',
-    icon: '🚪',
-    category: 'Door Hardware'
+    name: 'Johnson Controls',
+    description: 'Comprehensive fire safety solutions from the global building technology leader.',
+    logo: '/logo-johnson-controls.png',
+    certifications: ['UL Listed', 'FM Approved', 'ASFP Member', 'ISO 9001']
+  },
+  {
+    name: 'Tyco Fire Solutions',
+    description: 'Global provider of fire detection, suppression and life safety systems.',
+    logo: '/logo-tyco.png',
+    certifications: ['UL Listed', 'FM Approved', 'CE Marked', 'ISO 9001']
   }
 ];
 
-export default function AssociatedBrandsSection() {
-  return (
-    <section className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-red-500/10 to-orange-500/10 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
+// Certification icons map
+interface BrandIconMap {
+  [key: string]: { icon: React.ForwardRefExoticComponent<React.Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>; color: string; };
+}
 
+const brandIcons: BrandIconMap = {
+  'UL Listed': { icon: Award, color: 'text-fire-red' },
+  'FM Approved': { icon: Globe, color: 'text-energy-orange' },
+  'CE Marked': { icon: CheckCircle, color: 'text-safety-blue' },
+  'NFPA Compliant': { icon: Star, color: 'text-tech-teal' },
+  'ISO 9001': { icon: Zap, color: 'text-premium-gold' },
+  'ASFP Member': { icon: ShieldCheck, color: 'text-fire-red' },
+  'CFPA-E Approved': { icon: Users, color: 'text-energy-orange' },
+  'BSI Certified': { icon: Building, color: 'text-safety-blue' }
+};
+
+export default function AssociatedBrandsSection() {
+  const [hoveredBrand, setHoveredBrand] = useState<number | null>(null);
+
+  return (
+    <section id="associated-brands" className="py-24 relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-fire-red/10 to-orange-500/10 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-orange-500/10 to-fire-red/10 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 right-1/2 w-64 h-64 bg-gradient-to-r from-fire-red/10 to-orange-500/10 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style={{animationDelay: '4s'}}></div>
+      </div>
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
+        {/* Section header */}
         <motion.div 
           className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
@@ -66,170 +90,162 @@ export default function AssociatedBrandsSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <span className="text-white/80 text-sm font-medium tracking-wide uppercase">Trusted Partnerships</span>
+            <span className="text-white/80 text-sm font-medium tracking-wide uppercase">Our Partners</span>
           </motion.div>
           
           <motion.h2 
-            className="text-5xl md:text-7xl font-bold mb-8 leading-tight"
+            className="text-5xl md:text-7xl font-bold mb-8"
+            style={{ color: 'rgb(247, 87, 73)' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <span style={{ color: 'rgb(247, 87, 73)' }}>Our Associated</span>
-            <span className="block text-white">Brands</span>
+            Associated <span className="block text-white">Brands & Partners</span>
           </motion.h2>
           
           <motion.p 
-            className="text-xl md:text-2xl text-center max-w-4xl mx-auto leading-relaxed text-gray-300"
+            className="text-xl text-muted-foreground max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Partnering with industry leaders to deliver 
-            <span style={{ color: 'rgb(247, 87, 73)' }} className="font-semibold"> comprehensive fire safety solutions</span> and cutting-edge technology
+            We partner with global leaders in fire protection technology to bring you the most advanced safety solutions that meet international standards.
           </motion.p>
         </motion.div>
-
-        {/* Brands Grid */}
-        <div className="grid gap-8 mb-20">
-          {associatedBrands.map((brand, index) => (
-            <motion.div
-              key={brand.id}
-              className="group"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-            >
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 transition-all duration-300 group-hover:bg-white/10 group-hover:border-white/20 group-hover:scale-[1.02]">
-                <div className="flex flex-col md:flex-row items-start md:items-center space-y-6 md:space-y-0 md:space-x-8">
-                  {/* Brand Icon */}
-                  <motion.div 
-                    className="flex-shrink-0 w-20 h-20 bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-2xl flex items-center justify-center text-3xl transition-all duration-300 group-hover:scale-110"
-                    style={{ borderColor: 'rgb(247, 87, 73)', borderWidth: '2px' }}
-                    whileHover={{ rotate: 5, scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <span>{brand.icon}</span>
-                  </motion.div>
-                  
-                  {/* Brand Content */}
-                  <div className="flex-grow text-left">
-                    {/* Category Badge */}
-                    <motion.div 
-                      className="inline-block mb-3"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + 0.2 }}
-                    >
-                      <span 
-                        className="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"
-                        style={{ 
-                          backgroundColor: 'rgba(247, 87, 73, 0.15)', 
-                          color: 'rgb(247, 87, 73)',
-                          border: '1px solid rgba(247, 87, 73, 0.3)'
-                        }}
-                      >
-                        {brand.category}
-                      </span>
-                    </motion.div>
+        
+        {/* Brands grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          {brands.map((brand, index) => {
+            const isHovered = hoveredBrand === index;
+            return (
+              <motion.div 
+                key={index}
+                className="group"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                onHoverStart={() => setHoveredBrand(index)}
+                onHoverEnd={() => setHoveredBrand(null)}
+              >
+                <div 
+                  className="relative h-full"
+                  style={{
+                    transform: isHovered ? 'translateY(-8px) scale(1.02)' : 'translateY(0) scale(1)',
+                    transition: 'transform 0.3s ease-out',
+                    zIndex: isHovered ? 10 : 1
+                  }}
+                >
+                  {/* Glassmorphism card */}
+                  <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 h-full relative overflow-hidden gold-interactive">
+                    {/* Decorative elements */}
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-fire-red/5 rounded-full mix-blend-multiply filter blur-3xl" 
+                      style={{
+                        opacity: isHovered ? 0.7 : 0.3,
+                        transition: 'opacity 0.3s ease-out'
+                      }}
+                    />
+                    <div className="absolute bottom-0 left-0 w-20 h-20 bg-orange-500/5 rounded-full mix-blend-multiply filter blur-3xl"
+                      style={{
+                        opacity: isHovered ? 0.7 : 0.3,
+                        transition: 'opacity 0.3s ease-out'
+                      }}
+                    />
                     
-                    <motion.h3 
-                      className="text-2xl md:text-3xl font-bold mb-4 leading-tight"
-                      style={{ color: 'rgb(247, 87, 73)' }}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + 0.3 }}
-                    >
-                      {brand.name}
-                    </motion.h3>
-                    
-                    <motion.p 
-                      className="text-lg text-gray-300 leading-relaxed max-w-3xl"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + 0.4 }}
-                    >
-                      {brand.description}
-                    </motion.p>
+                    {/* Content */}
+                    <div className="relative z-10">
+                      {/* Logo */}
+                      <div className="flex items-center mb-6">
+                        <div className="w-12 h-12 mr-4 relative">
+                          <Image
+                            src={brand.logo}
+                            alt={`${brand.name} logo`}
+                            layout="fill"
+                            className="object-contain"
+                          />
+                        </div>
+                        <h3 className="text-2xl font-bold text-gold-platinum">{brand.name}</h3>
+                      </div>
+                      
+                      {/* Description */}
+                      <p className="text-gold-platinum/80 mb-6">
+                        {brand.description}
+                      </p>
+                      
+                      {/* Certifications */}
+                      <div className="grid grid-cols-2 gap-3 mb-6">
+                        {brand.certifications.map((cert, certIndex) => {
+                          const Icon = brandIcons[cert].icon;
+                          const color = brandIcons[cert].color;
+                          return (
+                            <div key={certIndex} className="flex items-center space-x-2">
+                              <Icon className={`h-4 w-4 ${color}`} />
+                              <span className="text-gold-platinum/70 text-sm">{cert}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      
+                      {/* Action button */}
+                      <div className="pt-2">
+                        <Button 
+                          variant="outline"
+                          className="border-gold-primary/30 text-gold-platinum hover:bg-gold-primary/10 hover:border-gold-primary/50"
+                        >
+                          View Products
+                        </Button>
+                      </div>
+                    </div>
                   </div>
-
-                  {/* Decorative Element */}
-                  <motion.div 
-                    className="hidden lg:block flex-shrink-0 w-1 h-20 rounded-full"
-                    style={{ backgroundColor: 'rgb(247, 87, 73)' }}
-                    initial={{ height: 0, opacity: 0 }}
-                    whileInView={{ height: 80, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 + 0.5, duration: 0.6 }}
-                  />
                 </div>
-
-                {/* Hover effect line */}
-                <motion.div 
-                  className="mt-8 h-0.5 rounded-full"
-                  style={{ backgroundColor: 'rgb(247, 87, 73)' }}
-                  initial={{ width: 0, opacity: 0 }}
-                  whileInView={{ width: "100%", opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 + 0.6, duration: 0.8 }}
-                />
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
-
-        {/* Call to Action */}
+        
+        {/* Certification standards section */}
         <motion.div 
-          className="text-center"
+          className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.8, duration: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <motion.p 
-            className="text-xl text-gray-300 mb-8 leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.9 }}
-          >
-            Interested in learning more about our 
-            <span style={{ color: 'rgb(247, 87, 73)' }} className="font-semibold"> partnerships and solutions</span>?
-          </motion.p>
+          <div className="flex items-center mb-6">
+            <div className="w-12 h-12 mr-4 relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-fire-red/20 to-orange-500/20 rounded-full animate-ping"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Star className="h-6 w-6 text-fire-red" />
+              </div>
+            </div>
+            <h3 className="text-2xl font-bold text-gold-platinum">Certifications & Standards</h3>
+          </div>
           
-          <motion.div
-            className="inline-block"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 1.0 }}
-          >
-            <button 
-              className="px-8 py-4 rounded-xl font-semibold text-lg text-white transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105"
-              style={{ 
-                backgroundColor: 'rgb(247, 87, 73)',
-                boxShadow: '0 10px 30px rgba(247, 87, 73, 0.3)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 20px 40px rgba(247, 87, 73, 0.4)';
-                e.currentTarget.style.backgroundColor = 'rgb(220, 65, 50)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 10px 30px rgba(247, 87, 73, 0.3)';
-                e.currentTarget.style.backgroundColor = 'rgb(247, 87, 73)';
-              }}
-            >
-              Contact Our Team
-            </button>
-          </motion.div>
+          <p className="text-gold-platinum/80 mb-6">
+            Our partners adhere to the highest international safety standards, ensuring your building meets all fire protection requirements.
+          </p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {Object.keys(brandIcons).map((cert, index) => {
+              const Icon = brandIcons[cert].icon;
+              const color = brandIcons[cert].color;
+              return (
+                <motion.div
+                  key={cert}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.05 }}
+                  className="flex items-center space-x-2 p-3 rounded-lg hover:bg-white/5 transition-all duration-300"
+                >
+                  <Icon className={`h-5 w-5 ${color}`} />
+                  <span className="text-gold-platinum/80 text-sm">{cert}</span>
+                </motion.div>
+              );
+            })}
+          </div>
         </motion.div>
       </div>
     </section>

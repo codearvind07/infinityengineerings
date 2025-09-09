@@ -36,52 +36,53 @@ export default function Header() {
     { name: 'Applications', href: '/applications' },
     { name: 'Resources', href: '/resources' },
     { name: 'Contact', href: '/contact' },
+    { name: 'Design System', href: '/design-system' },
   ];
 
   return (
     <>
-      {/* Golden Glass Header */}
+      {/* Navy Glass Header */}
       <header 
         className={`fixed top-4 left-4 right-4 z-50 transition-all duration-700 ease-out ${
           isScrolled 
-            ? 'gold-glass' 
+            ? 'navy-glass' 
             : ''
         }`}
       >
-        {/* Main golden container */}
+        {/* Main navy container */}
         <div className="relative mx-auto max-w-6xl">
-          {/* Golden glass background with morphing effect */}
+          {/* Navy glass background with morphing effect */}
           <div 
-            className="absolute inset-0 rounded-2xl overflow-hidden gold-particles"
+            className="absolute inset-0 rounded-2xl overflow-hidden"
             style={{
               background: `
                 radial-gradient(circle at ${mousePosition.x * 0.1}% ${mousePosition.y * 0.1}%, 
-                hsl(var(--gold-primary) / 0.15) 0%, 
-                hsl(var(--gold-accent) / 0.05) 50%, 
-                hsl(var(--gold-copper) / 0.02) 100%)
+                hsl(var(--sphere-blue-primary) / 0.15) 0%, 
+                hsl(var(--sphere-blue-light) / 0.08) 50%, 
+                hsl(var(--sphere-blue-pale) / 0.04) 100%)
               `,
             }}
           >
-            {/* Animated golden layers */}
-            <div className="absolute inset-0 gold-gradient opacity-10 animate-gold-pulse" />
+            {/* Animated navy layers */}
+            <div className="absolute inset-0 navy-gradient opacity-10 animate-pulse" />
             <div 
-              className="absolute inset-0 opacity-30"
+              className="absolute inset-0 opacity-20"
               style={{
                 background: `
                   conic-gradient(from ${Date.now() * 0.01}deg at 50% 50%, 
-                  transparent, hsl(var(--gold-primary) / 0.2), transparent, 
-                  hsl(var(--gold-bright) / 0.2), transparent)
+                  transparent, hsl(var(--sphere-blue-primary) / 0.2), transparent, 
+                  hsl(var(--sphere-blue-light) / 0.2), transparent)
                 `,
-                animation: 'gold-rotate 20s linear infinite',
+                animation: 'rotate 20s linear infinite',
               }}
             />
           </div>
 
-          {/* Golden frosted glass effect */}
-          <div className="absolute inset-0 rounded-2xl backdrop-blur-3xl gold-glass" />
+          {/* Navy frosted glass effect */}
+          <div className="absolute inset-0 rounded-2xl backdrop-blur-3xl navy-glass" />
           
-          {/* Golden inner glow */}
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-gold-primary/[0.1] via-transparent to-transparent" />
+          {/* Navy inner glow */}
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-sphere-blue-primary/[0.1] via-transparent to-transparent" />
           
           {/* Content */}
           <div className="relative px-8 py-4">
@@ -103,12 +104,12 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="relative group px-4 py-2 rounded-xl transition-all duration-500 ease-out hover:bg-gold-primary/[0.08] gold-interactive"
+                    className="relative group px-4 py-2 rounded-xl transition-all duration-500 ease-out hover:bg-sphere-blue-primary/[0.08] hover-scale"
                     style={{
                       animationDelay: `${index * 100}ms`
                     }}
                   >
-                    <span className="font-medium text-sm text-gold-platinum group-hover:text-gold-light transition-all duration-300 relative z-10 gold-glow-text">
+                    <span className="font-medium text-sm text-sphere-white group-hover:text-sphere-blue-light transition-all duration-300 relative z-10">
                       {item.name}
                     </span>
                   </Link>
@@ -118,16 +119,16 @@ export default function Header() {
               {/* Right side actions */}
               <div className="hidden lg:flex items-center space-x-4">
                 {/* Phone */}
-                <div className="flex items-center space-x-2 px-4 py-2 rounded-xl gold-glass gold-interactive">
-                  <Phone className="h-4 w-4 text-gold-light animate-gold-pulse" />
-                  <span className="text-sm font-medium text-gold-platinum">971-817-0004</span>
+                <div className="flex items-center space-x-2 px-4 py-2 rounded-xl navy-glass hover-scale">
+                  <Phone className="h-4 w-4 text-sphere-blue-light animate-pulse" />
+                  <span className="text-sm font-medium text-sphere-white">971-817-0004</span>
                 </div>
               </div>
 
               {/* Mobile menu button */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-3 rounded-xl gold-glass gold-interactive text-gold-platinum hover:text-gold-light"
+                className="md:hidden p-3 rounded-xl navy-glass hover-scale text-sphere-white hover:text-sphere-blue-light"
               >
                 {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </button>
@@ -138,31 +139,31 @@ export default function Header() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden mt-4 mx-auto max-w-6xl">
-            <div className="relative gold-particles">
-              {/* Mobile menu golden glass background */}
-              <div className="absolute inset-0 rounded-2xl gold-glass" />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-gold-primary/[0.1] via-transparent to-transparent" />
+            <div className="relative">
+              {/* Mobile menu navy glass background */}
+              <div className="absolute inset-0 rounded-2xl navy-glass" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-sphere-blue-primary/[0.1] via-transparent to-transparent" />
               
               <div className="relative p-6 space-y-2">
                 {navigation.map((item, index) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="block p-4 rounded-xl font-medium gold-interactive hover:bg-gold-primary/[0.08] transition-all duration-300"
+                    className="block p-4 rounded-xl font-medium hover-scale hover:bg-sphere-blue-primary/[0.08] transition-all duration-300"
                     style={{
                       animationDelay: `${index * 50}ms`,
                       animation: `slideIn 0.5s ease-out forwards`
                     }}
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <span className="text-gold-platinum hover:text-gold-light gold-glow-text">{item.name}</span>
+                    <span className="text-sphere-white hover:text-sphere-blue-light">{item.name}</span>
                   </Link>
                 ))}
                 
-                <div className="pt-4 mt-4 border-t border-gold-primary/[0.2] space-y-3">
-                  <div className="flex items-center space-x-2 p-4 rounded-xl gold-glass gold-interactive">
-                    <Phone className="h-4 w-4 text-gold-light animate-gold-pulse" />
-                    <span className="text-gold-platinum">971-817-0004</span>
+                <div className="pt-4 mt-4 border-t border-sphere-blue-primary/[0.2] space-y-3">
+                  <div className="flex items-center space-x-2 p-4 rounded-xl navy-glass hover-scale">
+                    <Phone className="h-4 w-4 text-sphere-blue-light animate-pulse" />
+                    <span className="text-sphere-white">971-817-0004</span>
                   </div>
                 </div>
               </div>
