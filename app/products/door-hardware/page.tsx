@@ -211,7 +211,7 @@ export default function DoorHardwarePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16"                   
           >
             <h2 className="text-4xl font-bold text-sphere-white mb-6">
               Technical Specifications
