@@ -50,14 +50,14 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gold-dark via-gold-deep to-gold-dark/90 relative overflow-hidden gold-particles">
-      {/* Golden animated background elements */}
+    <section className="py-20 bg-gradient-to-br from-sphere-navy-dark via-sphere-navy-medium to-sphere-navy-light relative overflow-hidden gold-particles">
+      {/* Navy blue animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 left-1/4 w-96 h-96 gold-gradient rounded-full mix-blend-soft-light filter blur-3xl opacity-20 animate-gold-pulse"></div>
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-gradient-to-r from-gold-bright/20 to-gold-accent/20 rounded-full mix-blend-soft-light filter blur-3xl opacity-15 animate-gold-pulse"></div>
-        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-gradient-to-r from-gold-copper/10 to-gold-light/10 rounded-full mix-blend-soft-light filter blur-3xl opacity-10 animate-gold-pulse"></div>
+        <div className="absolute -top-1/2 left-1/4 w-96 h-96 bg-gradient-to-r from-sphere-blue-primary/20 to-sphere-blue-light/20 rounded-full mix-blend-soft-light filter blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-gradient-to-r from-sphere-blue-bright/20 to-sphere-blue-accent/20 rounded-full mix-blend-soft-light filter blur-3xl opacity-15 animate-pulse"></div>
+        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-gradient-to-r from-sphere-blue-primary/10 to-sphere-blue-light/10 rounded-full mix-blend-soft-light filter blur-3xl opacity-10 animate-pulse"></div>
         
-        {/* Golden floating particles */}
+        {/* Navy blue floating particles */}
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
@@ -67,7 +67,7 @@ export default function FeaturesSection() {
               left: `${Math.random() * 100}%`,
               width: `${Math.random() * 15 + 3}px`,
               height: `${Math.random() * 15 + 3}px`,
-              background: `hsl(var(--gold-${['primary', 'light', 'bright', 'accent', 'platinum'][Math.floor(Math.random() * 5)]}) / 0.6)`,
+              background: `hsl(var(--sphere-blue-${['primary', 'light', 'bright', 'accent'][Math.floor(Math.random() * 4)]}) / 0.6)`,
             }}
             animate={{
               y: [0, -40, 0],
@@ -85,7 +85,7 @@ export default function FeaturesSection() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Golden Header with enhanced animations */}
+        {/* Navy Header with enhanced animations */}
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -101,22 +101,22 @@ export default function FeaturesSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             whileHover={{ scale: 1.1 }}
           >
-            <div className="gold-glass rounded-full px-4 py-1.5">
-              <span className="text-gold-platinum text-sm font-medium gold-glow-text">WHY CHOOSE US</span>
+            <div className="bg-sphere-navy-light/20 border border-sphere-blue-primary/30 rounded-full px-4 py-1.5">
+              <span className="text-sphere-blue-light text-sm font-medium">WHY CHOOSE US</span>
             </div>
           </motion.div>
           
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold gold-glow-text mb-6"
+            className="text-4xl md:text-5xl font-bold text-sphere-white mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            Why Choose <span className="gold-shimmer">INFINITY ENGINEERINGS</span>?
+            Why Choose <span className="text-sphere-blue-light">INFINITY ENGINEERINGS</span>?
           </motion.h2>
           <motion.p 
-            className="text-xl text-gold-platinum/80 max-w-3xl mx-auto"
+            className="text-xl text-sphere-slate-light max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -139,21 +139,21 @@ export default function FeaturesSection() {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               whileHover={{ y: -10 }}
             >
-              <div className="gold-card rounded-2xl p-8 h-full gold-interactive relative overflow-hidden">
-                {/* Golden gradient border effect */}
+              <div className="bg-sphere-navy-light/20 border border-sphere-blue-primary/20 backdrop-blur-sm rounded-2xl p-8 h-full hover:border-sphere-blue-light/40 transition-all duration-300 relative overflow-hidden">
+                {/* Navy gradient border effect */}
                 <div className="absolute inset-0 rounded-2xl overflow-hidden">
-                  <div className="absolute inset-0 gold-gradient opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-sphere-blue-primary/10 to-sphere-blue-light/10 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                 </div>
                 
-                {/* Golden Icon & Stats with enhanced animations */}
+                {/* Navy Icon & Stats with enhanced animations */}
                 <div className="flex items-center justify-between mb-6 relative z-10">
                   <motion.div 
-                    className="gold-glass rounded-xl p-3 gold-interactive"
+                    className="bg-sphere-navy-light/30 border border-sphere-blue-primary/30 rounded-xl p-3 hover:bg-sphere-blue-primary/20 transition-all duration-300"
                     whileHover={{ rotate: 15, scale: 1.15 }}
                     transition={{ type: "spring", stiffness: 300 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <feature.icon className="h-8 w-8 text-gold-light animate-gold-pulse" />
+                    <feature.icon className="h-8 w-8 text-sphere-blue-light animate-pulse" />
                   </motion.div>
                   <motion.div 
                     className="text-right"
@@ -162,13 +162,13 @@ export default function FeaturesSection() {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 + 0.3 }}
                   >
-                    <div className="text-2xl font-bold gold-shimmer">{feature.stats}</div>
+                    <div className="text-2xl font-bold text-sphere-blue-light">{feature.stats}</div>
                   </motion.div>
                 </div>
 
-                {/* Golden Content with staggered animations */}
+                {/* Navy Content with staggered animations */}
                 <motion.h3 
-                  className="text-2xl font-bold text-gold-platinum mb-4 relative z-10 gold-glow-text"
+                  className="text-2xl font-bold text-sphere-white mb-4 relative z-10"
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -177,7 +177,7 @@ export default function FeaturesSection() {
                   {feature.title}
                 </motion.h3>
                 <motion.p 
-                  className="text-gold-platinum/80 leading-relaxed relative z-10"
+                  className="text-sphere-slate-light leading-relaxed relative z-10"
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -186,10 +186,10 @@ export default function FeaturesSection() {
                   {feature.description}
                 </motion.p>
 
-                {/* Golden Hover Animation */}
+                {/* Navy Hover Animation */}
                 <div className="mt-6 opacity-0 group-hover:opacity-100 transition-all duration-700 relative z-10">
                   <motion.div 
-                    className="h-1 w-16 gold-gradient rounded-full"
+                    className="h-1 w-16 bg-gradient-to-r from-sphere-blue-primary to-sphere-blue-light rounded-full"
                     initial={{ width: 0 }}
                     whileHover={{ width: "100%" }}
                     transition={{ duration: 0.3 }}
@@ -200,7 +200,7 @@ export default function FeaturesSection() {
           ))}
         </div>
 
-        {/* Cosmic CTA Section with enhanced effects */}
+        {/* Navy CTA Section with enhanced effects */}
         <motion.div 
           className="mt-20 text-center"
           initial={{ opacity: 0, y: 30 }}
@@ -208,14 +208,14 @@ export default function FeaturesSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.6, duration: 0.8 }}
         >
-          <div className="cosmic-card rounded-3xl p-10 relative overflow-hidden cosmic-particles">
-            {/* Cosmic decorative elements */}
-            <div className="absolute top-0 left-0 w-full h-1 cosmic-gradient"></div>
-            <div className="absolute -inset-px cosmic-gradient rounded-3xl blur-xl opacity-20"></div>
+          <div className="bg-sphere-navy-light/20 border border-sphere-blue-primary/30 backdrop-blur-sm rounded-3xl p-10 relative overflow-hidden">
+            {/* Navy decorative elements */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-sphere-blue-primary to-sphere-blue-light"></div>
+            <div className="absolute -inset-px bg-gradient-to-r from-sphere-blue-primary/20 to-sphere-blue-light/20 rounded-3xl blur-xl opacity-20"></div>
             
-            {/* Floating cosmic elements */}
+            {/* Floating navy elements */}
             <motion.div 
-              className="absolute top-4 left-4 w-8 h-8 rounded-full cosmic-border-glow"
+              className="absolute top-4 left-4 w-8 h-8 rounded-full border border-sphere-blue-primary/30 bg-sphere-blue-primary/10"
               animate={{ 
                 y: [0, -10, 0],
                 rotate: [0, 180, 360]
@@ -227,7 +227,7 @@ export default function FeaturesSection() {
               }}
             />
             <motion.div 
-              className="absolute bottom-4 right-4 w-6 h-6 rounded-full bg-cosmic-orange/20 animate-cosmic-pulse"
+              className="absolute bottom-4 right-4 w-6 h-6 rounded-full bg-sphere-blue-light/20 animate-pulse"
               animate={{ 
                 y: [0, 15, 0],
                 x: [0, -15, 0]
@@ -241,16 +241,16 @@ export default function FeaturesSection() {
             
             <div className="relative z-10">
               <motion.h3 
-                className="text-3xl md:text-4xl font-bold text-cosmic-silver mb-4"
+                className="text-3xl md:text-4xl font-bold text-sphere-white mb-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                Ready to Enhance Your <span className="cosmic-holographic">Building's Safety</span>?
+                Ready to Enhance Your <span className="text-sphere-blue-light">Building's Safety</span>?
               </motion.h3>
               <motion.p 
-                className="text-lg text-cosmic-silver/80 mb-8 max-w-2xl mx-auto"
+                className="text-lg text-sphere-slate-light mb-8 max-w-2xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -261,7 +261,7 @@ export default function FeaturesSection() {
               </motion.p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.button 
-                  className="cosmic-button text-cosmic-silver px-8 py-4 rounded-xl font-semibold cosmic-interactive"
+                  className="bg-sphere-blue-primary hover:bg-sphere-blue-light text-sphere-white px-8 py-4 rounded-xl font-semibold transition-all duration-300"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, x: -20 }}
@@ -272,7 +272,7 @@ export default function FeaturesSection() {
                   <span className="relative z-10">Schedule Consultation</span>
                 </motion.button>
                 <motion.button 
-                  className="cosmic-border-glow text-cosmic-silver hover:text-cosmic-cyan hover:bg-cosmic-blue/20 px-8 py-4 rounded-xl font-semibold cosmic-interactive bg-cosmic-deep/50"
+                  className="border border-sphere-blue-primary/30 text-sphere-white hover:text-sphere-blue-light hover:bg-sphere-blue-primary/20 px-8 py-4 rounded-xl font-semibold transition-all duration-300 bg-sphere-navy-light/20"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, x: 20 }}

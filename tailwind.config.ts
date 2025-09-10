@@ -63,6 +63,16 @@ const config: Config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
+        // ThreeDSphere theme colors
+        'sphere-navy-dark': 'hsl(var(--sphere-navy-dark))',
+        'sphere-navy-medium': 'hsl(var(--sphere-navy-medium))',
+        'sphere-navy-light': 'hsl(var(--sphere-navy-light))',
+        'sphere-blue-primary': 'hsl(var(--sphere-blue-primary))',
+        'sphere-blue-light': 'hsl(var(--sphere-blue-light))',
+        'sphere-blue-pale': 'hsl(var(--sphere-blue-pale))',
+        'sphere-slate-light': 'hsl(var(--sphere-slate-light))',
+        'sphere-slate-medium': 'hsl(var(--sphere-slate-medium))',
+        'sphere-white': 'hsl(var(--sphere-white))',
         // Golden luxury color palette
         'gold-dark': 'hsl(var(--gold-dark))',
         'gold-deep': 'hsl(var(--gold-deep))',
