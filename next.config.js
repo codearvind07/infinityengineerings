@@ -4,10 +4,62 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  images: { unoptimized: true },
+  images: { 
+    unoptimized: true,
+    // Optimize image loading
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
   experimental: {
     largePageDataBytes: 128 * 100000, // 128kb
+    // Enable performance optimizations
+    optimizeCss: true,
+    optimizeImages: true,
+    optimizeFonts: true,
+    scrollRestoration: true,
   },
+  // Performance optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
+  },
+  // Bundle optimizations
+  modularizeImports: {
+    '@radix-ui/react-*': {
+      transform: '@radix-ui/react-{{member}}',
+    },
+  },
+  // Enable React strict mode for better performance in development
+  reactStrictMode: true,
+  // Enable compression
+  compress: true,
+  // Optimize static assets
+  staticPageGenerationTimeout: 10000,
+  // Note: Custom headers are not supported with output: 'export'
+  // async headers() {
+  //   return [
+  //     {
+  //       source: '/:path*',
+  //       headers: [
+  //         {
+  //           key: 'Cache-Control',
+  //           value: 'public, max-age=31536000, immutable',
+  //         },
+  //         {
+  //           key: 'X-Content-Type-Options',
+  //           value: 'nosniff',
+  //         },
+  //         {
+  //           key: 'X-Frame-Options',
+  //           value: 'DENY',
+  //         },
+  //         {
+  //           key: 'X-XSS-Protection',
+  //           value: '1; mode=block',
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // },
 };
 
 module.exports = nextConfig;

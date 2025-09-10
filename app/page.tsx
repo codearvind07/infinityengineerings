@@ -7,9 +7,35 @@ import ContactSection from '@/components/ContactSection';
 import AboutSection from '@/components/AboutSection';
 import AssociatedBrandsSection from '@/components/AssociatedBrandsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
-import SectorsPage from './sectors/page';
-import ThreeDSphereSection from '@/components/ThreeDSphereSection';
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 
+// Dynamically import heavy components with lazy loading
+const ThreeDSphereSection = dynamic(() => import('@/components/ThreeDSphereSection'), {
+  ssr: false,
+  loading: () => (
+    <div className="relative min-h-screen flex items-center justify-center">
+      <div className="animate-pulse text-sphere-white">Loading...</div>
+    </div>
+  )
+});
+
+const SectorsPage = dynamic(() => import('./sectors/page'), {
+  ssr: false,
+  loading: () => (
+    <div className="py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <div className="animate-pulse space-y-4">
+            <div className="h-8 bg-sphere-navy-medium rounded w-1/4 mx-auto"></div>
+            <div className="h-16 bg-sphere-navy-medium rounded w-3/4 mx-auto"></div>
+            <div className="h-16 bg-sphere-navy-medium rounded w-2/3 mx-auto"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+});
 
 export default function Home() {
   return (
@@ -24,12 +50,51 @@ export default function Home() {
       </div>
       
       <Header />
-      <ThreeDSphereSection />
+      
+      <Suspense fallback={
+        <div className="relative min-h-screen flex items-center justify-center">
+          <div className="animate-pulse text-sphere-white">Loading...</div>
+        </div>
+      }>
+        <ThreeDSphereSection />
+      </Suspense>
+      
       <HeroSection />
      
       <AboutSection />
-      <AssociatedBrandsSection />
-      <SectorsPage />
+      
+      <Suspense fallback={
+        <div className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <div className="animate-pulse space-y-4">
+                <div className="h-8 bg-sphere-navy-medium rounded w-1/4 mx-auto"></div>
+                <div className="h-16 bg-sphere-navy-medium rounded w-3/4 mx-auto"></div>
+                <div className="h-16 bg-sphere-navy-medium rounded w-2/3 mx-auto"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }>
+        <AssociatedBrandsSection />
+      </Suspense>
+      
+      <Suspense fallback={
+        <div className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <div className="animate-pulse space-y-4">
+                <div className="h-8 bg-sphere-navy-medium rounded w-1/4 mx-auto"></div>
+                <div className="h-16 bg-sphere-navy-medium rounded w-3/4 mx-auto"></div>
+                <div className="h-96 bg-sphere-navy-medium rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }>
+        <SectorsPage />
+      </Suspense>
+      
       <FeaturesSection />
       <FeaturedProductsSection />
       <TestimonialsSection />

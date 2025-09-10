@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Performance optimization variables */
 :root {
   /* Navy Blue Theme - Based on ThreeDSphereSection */
   --background: 222 84% 5%;           /* Deep navy from ThreeDSphereSection */
@@ -62,6 +63,11 @@
   --chart-3: 158 64% 52%;             /* Green */
   --chart-4: 25 95% 53%;              /* Orange */
   --chart-5: 0 84% 60%;               /* Red */
+  
+  /* Performance optimization variables */
+  --transition-duration-fast: 0.2s;
+  --transition-duration-normal: 0.3s;
+  --transition-duration-slow: 0.5s;
 }
 
 .dark {
@@ -100,6 +106,9 @@
     background-attachment: fixed;
     position: relative;
     min-height: 100vh;
+    /* Optimize scrolling performance */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
   }
   
   /* Animated particles effect - matching ThreeDSphereSection */
@@ -117,6 +126,9 @@
     background-attachment: fixed;
     pointer-events: none;
     z-index: 1;
+    /* Optimize rendering */
+    will-change: transform;
+    transform: translateZ(0);
   }
 }
 
@@ -190,6 +202,9 @@
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 hsl(var(--sphere-blue-light) / 0.1);
+  /* Optimize rendering */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .navy-glass-card {
@@ -199,14 +214,23 @@
   box-shadow: 
     0 4px 24px rgba(0, 0, 0, 0.3),
     0 0 0 1px hsl(var(--sphere-blue-light) / 0.1);
+  /* Optimize rendering */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .navy-glow {
   animation: navy-glow 2s ease-in-out infinite;
+  /* Optimize animation */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .navy-pulse {
   animation: navy-pulse 2s ease-in-out infinite;
+  /* Optimize animation */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .navy-gradient {
@@ -250,6 +274,9 @@
       hsl(var(--sphere-blue-light) / 0.1) 180deg, 
       transparent 270deg);
   animation: wireframe-spin 10s linear infinite;
+  /* Optimize animation */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Modern button styles */
@@ -262,6 +289,9 @@
     0 4px 15px hsl(var(--sphere-blue-primary) / 0.3),
     0 0 20px hsl(var(--sphere-blue-primary) / 0.2);
   transition: all 0.3s ease;
+  /* Optimize transitions */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .crypto-button:hover {
@@ -283,6 +313,9 @@
     rgba(255, 255, 255, 0.2), 
     transparent);
   transition: left 0.5s ease;
+  /* Optimize transitions */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .crypto-button:hover::before {
@@ -307,9 +340,104 @@
   background: hsl(var(--sphere-blue-primary) / 0.8);
 }
 
-/* Smooth scrolling */
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .animate-marquee {
+    animation: none;
+  }
+  
+  .navy-glow, .crypto-button, .gold-glow {
+    animation: none;
+  }
+}
+
+/* Optimize for low performance devices */
+.low-performance {
+  .animate-marquee {
+    animation: none;
+    transform: translateX(0);
+  }
+  
+  .navy-glow, .crypto-button, .gold-glow {
+    animation: none;
+  }
+  
+  .will-change-transform {
+    will-change: auto;
+  }
+  
+  /* Simplify complex gradients */
+  .complex-gradient {
+    background: linear-gradient(135deg, #3b82f6, #93c5fd) !important;
+  }
+}
+
+/* Performance optimizations for all elements */
+* {
+  /* Enable hardware acceleration */
+  transform: translateZ(0);
+  will-change: transform;
+  
+  /* Optimize text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  /* Reduce repaints */
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize scroll performance */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 0;
+  
+  /* Optimize scrolling */
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  /* Optimize for performance */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  /* Reduce repaints and reflows */
+  transform: translateZ(0);
+  will-change: transform;
+  
+  /* Optimize background rendering */
+  background-attachment: fixed;
+}
+
+/* Hardware acceleration for animated elements */
+.will-change-transform {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.composited {
+  transform: translateZ(0);
+}
+
+/* Optimize transitions */
+.transition-fast {
+  transition-duration: var(--transition-duration-fast);
+}
+
+.transition-normal {
+  transition-duration: var(--transition-duration-normal);
+}
+
+.transition-slow {
+  transition-duration: var(--transition-duration-slow);
 }
 
 /* Legacy compatibility classes - updated for navy theme */
@@ -327,11 +455,17 @@ html {
 
 .hover-scale {
   @apply transition-all duration-300 hover:transform hover:scale-105;
+  /* Optimize transitions */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Custom animations */
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out;
+  /* Optimize animation */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 @keyframes fadeInUp {
@@ -348,6 +482,9 @@ html {
 .animate-marquee {
   display: inline-block;
   animation: marquee 25s linear infinite;
+  /* Optimize animation */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 @keyframes marquee {
@@ -365,26 +502,33 @@ html {
   background: linear-gradient(90deg, hsl(var(--fire-red)/0.9) 0%, hsl(var(--fire-red)/0.7) 100%);
   border: 1px solid hsl(var(--fire-red)/0.5);
   backdrop-filter: blur(4px);
+  /* Optimize rendering */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .event-banner-text {
   @apply whitespace-nowrap inline-block px-8 py-4 text-foreground text-base font-bold tracking-wider;
   animation: marquee 25s linear infinite;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+  /* Optimize animation */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Glass effect utilities */
 .glass-effect {
   @apply bg-gray-900/50 backdrop-blur-lg border border-gray-700/50;
+  /* Optimize rendering */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .glass-effect-dark {
   @apply bg-gray-900/70 backdrop-blur-lg border border-gray-600/50;
+  /* Optimize rendering */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Gradient text utilities */
@@ -395,6 +539,9 @@ html {
 /* Hover scale animation */
 .hover-scale {
   @apply transition-all duration-300 hover:transform hover:scale-105;
+  /* Optimize transitions */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Custom scrollbar */
@@ -408,6 +555,9 @@ html {
 
 ::-webkit-scrollbar-thumb {
   @apply bg-gray-600 rounded-lg;
+  /* Optimize rendering */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -514,6 +664,9 @@ html {
   box-shadow: 
     0 8px 32px hsl(var(--gold-primary) / 0.15),
     0 0 0 1px hsl(var(--gold-light) / 0.1);
+  /* Optimize rendering */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .gold-button {
@@ -526,6 +679,9 @@ html {
     0 4px 20px hsl(var(--gold-primary) / 0.4),
     0 0 25px hsl(var(--gold-bright) / 0.3);
   transition: all 0.3s ease;
+  /* Optimize transitions */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .gold-button:hover {
@@ -547,6 +703,9 @@ html {
     hsl(var(--gold-platinum) / 0.4), 
     transparent);
   transition: left 0.5s ease;
+  /* Optimize transitions */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .gold-button:hover::before {
@@ -557,6 +716,9 @@ html {
 .gold-particles {
   position: relative;
   overflow: hidden;
+  /* Optimize rendering */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .gold-particles::before {
@@ -573,6 +735,9 @@ html {
   background-size: 100px 100px;
   animation: gold-drift 20s linear infinite;
   pointer-events: none;
+  /* Optimize animation */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Luxury glass morphism effect */
@@ -583,6 +748,9 @@ html {
   box-shadow: 
     0 8px 32px hsl(var(--gold-primary) / 0.15),
     inset 0 1px 0 hsl(var(--gold-platinum) / 0.2);
+  /* Optimize rendering */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Luxury shimmer text effect */
@@ -598,12 +766,18 @@ html {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gold-shimmer 3s ease-in-out infinite;
+  /* Optimize animation */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Golden interactive effects */
 .gold-interactive {
   transition: all 0.3s ease;
   position: relative;
+  /* Optimize transitions */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .gold-interactive:hover {
@@ -631,6 +805,9 @@ html {
   mask-composite: exclude;
   opacity: 0;
   transition: opacity 0.3s ease;
+  /* Optimize transitions */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .gold-interactive:hover::after {

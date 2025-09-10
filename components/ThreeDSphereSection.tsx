@@ -1,46 +1,96 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, memo, useCallback, useMemo } from 'react';
+import Image from 'next/image';
+import anno from '../public/FSIE Expo Meet & Talk Announcement.png';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+
+const MemoizedParticle = memo(({ style, key }: { style: React.CSSProperties; key: number }) => (
+  <div
+    key={key}
+    className="absolute rounded-full bg-white transition-all duration-300 will-change-transform"
+    style={style}
+  />
+));
+
+MemoizedParticle.displayName = 'MemoizedParticle';
 
 export default function ThreeDSphereSection(): JSX.Element {
   const sphereRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-
+  const [isExpoDialogOpen, setIsExpoDialogOpen] = useState(false);
+  const [isHoverPopupOpen, setIsHoverPopupOpen] = useState(false);
+  const rafRef = useRef<number>(0);
+  
+  // Check for low performance device
+  const [isLowPerformance, setIsLowPerformance] = useState(false);
+  
   useEffect(() => {
-    const sphere = sphereRef.current;
-    const container = containerRef.current;
-    if (!sphere || !container) return;
+    // Check if device is low performance
+    // @ts-ignore
+    const deviceMemory = navigator.deviceMemory || 0;
+    const hardwareConcurrency = navigator.hardwareConcurrency || 0;
+    setIsLowPerformance(deviceMemory < 2 || hardwareConcurrency < 4);
+  }, []);
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      
-      const deltaX = (e.clientX - centerX) / rect.width;
-      const deltaY = (e.clientY - centerY) / rect.height;
-      
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!containerRef.current || !sphereRef.current) return;
+    
+    const rect = containerRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    const deltaX = (e.clientX - centerX) / rect.width;
+    const deltaY = (e.clientY - centerY) / rect.height;
+    
+    // Throttle mouse movement updates for better performance
+    if (isLowPerformance) {
+      // On low performance devices, update less frequently
+      if (Math.abs(deltaX - mousePosition.x) < 0.01 && Math.abs(deltaY - mousePosition.y) < 0.01) {
+        return;
+      }
+    }
+    
+    // Use requestAnimationFrame to optimize updates
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+    }
+    
+    rafRef.current = requestAnimationFrame(() => {
       setMousePosition({ x: deltaX, y: deltaY });
       
-      sphere.style.transform = `
-        perspective(1000px)
-        rotateY(${deltaX * 25}deg) 
-        rotateX(${-deltaY * 15}deg) 
-        translateZ(${isHovered ? 50 : 20}px)
-        scale(${isHovered ? 1.05 : 1})
-      `;
-    };
+      if (sphereRef.current) {
+        sphereRef.current.style.transform = `
+          perspective(1000px)
+          rotateY(${deltaX * 25}deg) 
+          rotateX(${-deltaY * 15}deg) 
+          translateZ(${isHovered ? 50 : 20}px)
+          scale(${isHovered ? 1.05 : 1})
+        `;
+        // Optimize rendering
+        sphereRef.current.style.willChange = 'transform';
+      }
+    });
+  }, [isHovered, mousePosition, isLowPerformance]);
 
-    const handleMouseLeave = () => {
-      setIsHovered(false);
-      sphere.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0px) scale(1)';
-    };
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered(false);
+    if (sphereRef.current) {
+      sphereRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0px) scale(1)';
+    }
+  }, []);
 
-    const handleMouseEnter = () => {
-      setIsHovered(true);
-    };
+  const handleMouseEnter = useCallback(() => {
+    setIsHovered(true);
+  }, []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
 
     container.addEventListener('mousemove', handleMouseMove);
     container.addEventListener('mouseleave', handleMouseLeave);
@@ -50,8 +100,107 @@ export default function ThreeDSphereSection(): JSX.Element {
       container.removeEventListener('mousemove', handleMouseMove);
       container.removeEventListener('mouseleave', handleMouseLeave);
       container.removeEventListener('mouseenter', handleMouseEnter);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
     };
-  }, [isHovered]);
+  }, [handleMouseMove, handleMouseLeave, handleMouseEnter]);
+
+  // Optimize particle rendering with useMemo
+  const backgroundParticles = useMemo(() => {
+    // Reduce particle count for better performance on low-end devices
+    const particleCount = isLowPerformance ? 2 : 4;
+    return [...Array(particleCount)].map((_, i) => (
+      <div
+        key={i}
+        className="absolute opacity-10 will-change-transform"
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          animation: isLowPerformance ? 'none' : `float ${6 + Math.random() * 4}s ease-in-out infinite`,
+          animationDelay: `${Math.random() * 4}s`,
+        }}
+      >
+        <div 
+          className="w-2 h-2 border border-blue-300 rounded-full will-change-transform"
+          style={{
+            transform: `rotate(${Math.random() * 360}deg)`,
+            boxShadow: `0 0 10px rgba(147, 197, 253, 0.2)`
+          }}
+        />
+      </div>
+    ));
+  }, [isLowPerformance]);
+
+  // Optimize particle dispersion with useMemo and memoized components
+  const particleDispersion = useMemo(() => {
+    // Reduce particle count for better performance on low-end devices
+    const particleCount = isLowPerformance ? 50 : 100;
+    return [...Array(particleCount)].map((_, i) => {
+      const angle = (i / particleCount) * 360;
+      const baseRadius = 180;
+      const disperseDistance = 80 + (i % 5) * 30;
+      const x = Math.cos((angle * Math.PI) / 180) * (baseRadius + disperseDistance);
+      const y = Math.sin((angle * Math.PI) / 180) * (baseRadius + disperseDistance);
+      
+      // Create perspective effect - dots get smaller as they move away
+      const distance = Math.sqrt(x * x + y * y);
+      const scale = Math.max(0.2, 1 - (distance - 180) / 400);
+      const opacity = Math.max(0.1, 1 - (distance - 180) / 300);
+      
+      return (
+        <MemoizedParticle
+          key={i}
+          style={{
+            left: `calc(50% + ${x}px)`,
+            top: `calc(50% + ${y}px)`,
+            width: `${2 * scale}px`,
+            height: `${2 * scale}px`,
+            opacity: opacity * (isHovered ? 0.9 : 0.7),
+            transform: `translate(-50%, -50%) scale(${isHovered ? 1.2 : 1})`,
+            boxShadow: `0 0 ${4 * scale}px rgba(255, 255, 255, ${opacity * 0.8})`,
+            animation: isLowPerformance ? 'none' : `drift-0 ${8 + (i % 3) * 2}s linear infinite`,
+            animationDelay: `${(i / particleCount) * 4}s`,
+            willChange: 'transform'
+          }}
+        />
+      );
+    });
+  }, [isHovered, isLowPerformance]);
+
+  // Optimize flowing particles with useMemo and memoized components
+  const flowingParticles = useMemo(() => {
+    // Reduce particle count for better performance on low-end devices
+    const particleCount = isLowPerformance ? 35 : 75;
+    return [...Array(particleCount)].map((_, i) => {
+      const flowAngle = -45 + (i / particleCount) * 90; // Flow from left side
+      const flowRadius = 160 + (i % 8) * 25;
+      const x = Math.cos((flowAngle * Math.PI) / 180) * flowRadius;
+      const y = Math.sin((flowAngle * Math.PI) / 180) * flowRadius;
+      
+      const distance = Math.abs(x) + Math.abs(y);
+      const scale = Math.max(0.3, 1 - distance / 400);
+      const opacity = Math.max(0.2, 1 - distance / 350);
+      
+      return (
+        <MemoizedParticle
+          key={1000 + i}  // Using offset to ensure unique keys between particleDispersion and flowingParticles
+          style={{
+            left: `calc(50% + ${x}px)`,
+            top: `calc(50% + ${y}px)`,
+            width: `${1.5 * scale}px`,
+            height: `${1.5 * scale}px`,
+            opacity: opacity * (isHovered ? 0.8 : 0.6),
+            transform: `translate(-50%, -50%)`,
+            boxShadow: `0 0 ${3 * scale}px rgba(255, 255, 255, ${opacity * 0.6})`,
+            animation: isLowPerformance ? 'none' : `flow-disperse ${6 + (i % 4)}s ease-out infinite`,
+            animationDelay: `${(i / particleCount) * 3}s`,
+            willChange: 'transform'
+          }}
+        />
+      );
+    });
+  }, [isHovered, isLowPerformance]);
 
   return (
     <section 
@@ -60,7 +209,7 @@ export default function ThreeDSphereSection(): JSX.Element {
     >
       {/* Dynamic background with mouse interaction */}
       <div 
-        className="absolute inset-0 transition-all duration-700 ease-out"
+        className="absolute inset-0 transition-all duration-700 ease-out will-change-transform"
         style={{
           background: `
             radial-gradient(circle at ${50 + mousePosition.x * 20}% ${50 + mousePosition.y * 20}%, 
@@ -78,35 +227,16 @@ export default function ThreeDSphereSection(): JSX.Element {
 
       {/* Subtle background particles */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute opacity-10"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `float ${6 + Math.random() * 4}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 4}s`,
-            }}
-          >
-            <div 
-              className="w-2 h-2 border border-blue-300 rounded-full"
-              style={{
-                transform: `rotate(${Math.random() * 360}deg)`,
-                boxShadow: `0 0 10px rgba(147, 197, 253, 0.2)`
-              }}
-            />
-          </div>
-        ))}
+        {backgroundParticles}
       </div>
 
       {/* Left Content Panel */}
       <div className="absolute left-0 top-0 h-full w-full lg:w-1/2 flex items-center justify-center lg:justify-start z-10">
         <div className="text-center lg:text-left lg:ml-16 xl:ml-24 max-w-lg px-8 lg:px-0">
           <div className="mb-8">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-none mb-6">
-              <div className="mb-2 text-white">INNOVATIVE</div>
-              <div className="text-blue-200 mb-2">FIRE</div>
+            <h1 className="text-5xl md:text-5xl lg:text-5xl font-bold tracking-tight leading-none mb-6">
+              
+              <div className="text-blue-200 mb-2">INNOVATIVE FIRE</div>
               <div className="text-slate-300 mb-2">PROTECTION</div>
               <div className="bg-gradient-to-r from-blue-200 via-slate-200 to-white bg-clip-text text-transparent">
                 SYSTEMS
@@ -185,7 +315,7 @@ export default function ThreeDSphereSection(): JSX.Element {
             <div className="absolute inset-0 rounded-full">
               {/* Main sphere with ultra-dense dotted pattern */}
               <div 
-                className="absolute inset-0 rounded-full backdrop-blur-sm border transition-all duration-500"
+                className="absolute inset-0 rounded-full backdrop-blur-sm border transition-all duration-500 will-change-transform"
                 style={{
                   background: `
                     radial-gradient(circle at 70% 30%, 
@@ -203,9 +333,9 @@ export default function ThreeDSphereSection(): JSX.Element {
               />
               
               {/* Ultra-dense core dotted pattern */}
-              <div className="absolute inset-0 rounded-full overflow-hidden">
+              <div className="absolute inset-0 rounded-full overflow-hidden will-change-transform">
                 <div 
-                  className="absolute inset-0 transition-opacity duration-500"
+                  className="absolute inset-0 transition-opacity duration-500 will-change-transform"
                   style={{
                     background: `
                       radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.95) 0.8px, transparent 0.8px),
@@ -221,9 +351,9 @@ export default function ThreeDSphereSection(): JSX.Element {
               </div>
 
               {/* Medium density outer ring */}
-              <div className="absolute inset-0 rounded-full overflow-hidden">
+              <div className="absolute inset-0 rounded-full overflow-hidden will-change-transform">
                 <div 
-                  className="absolute inset-0 transition-opacity duration-500"
+                  className="absolute inset-0 transition-opacity duration-500 will-change-transform"
                   style={{
                     background: `
                       radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.7) 1px, transparent 1px)
@@ -238,9 +368,9 @@ export default function ThreeDSphereSection(): JSX.Element {
               </div>
 
               {/* Sparse outer dispersion */}
-              <div className="absolute inset-0 rounded-full overflow-hidden">
+              <div className="absolute inset-0 rounded-full overflow-hidden will-change-transform">
                 <div 
-                  className="absolute inset-0 transition-opacity duration-500"
+                  className="absolute inset-0 transition-opacity duration-500 will-change-transform"
                   style={{
                     background: `
                       radial-gradient(circle at 3px 3px, rgba(255, 255, 255, 0.5) 1.2px, transparent 1.2px)
@@ -256,7 +386,7 @@ export default function ThreeDSphereSection(): JSX.Element {
 
               {/* Dynamic highlight that follows mouse */}
               <div 
-                className="absolute inset-0 rounded-full transition-all duration-500"
+                className="absolute inset-0 rounded-full transition-all duration-500 will-change-transform"
                 style={{
                   background: `
                     radial-gradient(circle at ${70 + mousePosition.x * 10}% ${30 + mousePosition.y * 10}%, 
@@ -271,110 +401,121 @@ export default function ThreeDSphereSection(): JSX.Element {
 
               {/* Particle dispersion effect - flowing away from sphere */}
               <div className="absolute inset-0">
-                {[...Array(200)].map((_, i) => {
-                  const angle = (i / 200) * 360;
-                  const baseRadius = 180;
-                  const disperseDistance = 80 + (i % 5) * 30;
-                  const x = Math.cos((angle * Math.PI) / 180) * (baseRadius + disperseDistance);
-                  const y = Math.sin((angle * Math.PI) / 180) * (baseRadius + disperseDistance);
-                  
-                  // Create perspective effect - dots get smaller as they move away
-                  const distance = Math.sqrt(x * x + y * y);
-                  const scale = Math.max(0.2, 1 - (distance - 180) / 400);
-                  const opacity = Math.max(0.1, 1 - (distance - 180) / 300);
-                  
-                  return (
-                    <div
-                      key={i}
-                      className="absolute rounded-full bg-white transition-all duration-300"
-                      style={{
-                        left: `calc(50% + ${x}px)`,
-                        top: `calc(50% + ${y}px)`,
-                        width: `${2 * scale}px`,
-                        height: `${2 * scale}px`,
-                        opacity: opacity * (isHovered ? 0.9 : 0.7),
-                        transform: `translate(-50%, -50%) scale(${isHovered ? 1.2 : 1})`,
-                        boxShadow: `0 0 ${4 * scale}px rgba(255, 255, 255, ${opacity * 0.8})`,
-                        animation: `drift-${i % 3} ${8 + (i % 3) * 2}s linear infinite`,
-                        animationDelay: `${(i / 200) * 4}s`
-                      }}
-                    />
-                  );
-                })}
+                {particleDispersion}
               </div>
 
               {/* Dense flowing particles from left side */}
               <div className="absolute inset-0">
-                {[...Array(150)].map((_, i) => {
-                  const flowAngle = -45 + (i / 150) * 90; // Flow from left side
-                  const flowRadius = 160 + (i % 8) * 25;
-                  const x = Math.cos((flowAngle * Math.PI) / 180) * flowRadius;
-                  const y = Math.sin((flowAngle * Math.PI) / 180) * flowRadius;
-                  
-                  const distance = Math.abs(x) + Math.abs(y);
-                  const scale = Math.max(0.3, 1 - distance / 400);
-                  const opacity = Math.max(0.2, 1 - distance / 350);
-                  
-                  return (
-                    <div
-                      key={`flow-${i}`}
-                      className="absolute rounded-full bg-white transition-all duration-500"
-                      style={{
-                        left: `calc(50% + ${x}px)`,
-                        top: `calc(50% + ${y}px)`,
-                        width: `${1.5 * scale}px`,
-                        height: `${1.5 * scale}px`,
-                        opacity: opacity * (isHovered ? 0.8 : 0.6),
-                        transform: `translate(-50%, -50%)`,
-                        boxShadow: `0 0 ${3 * scale}px rgba(255, 255, 255, ${opacity * 0.6})`,
-                        animation: `flow-disperse ${6 + (i % 4)}s ease-out infinite`,
-                        animationDelay: `${(i / 150) * 3}s`
-                      }}
-                    />
-                  );
-                })}
+                {flowingParticles}
               </div>
 
-              {/* Central Announcement Text */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-auto cursor-pointer">
-                <div 
-                  className="text-center px-8 py-6 rounded-xxl backdrop-blur-md transition-all duration-500 hover:scale-105"
-                  style={{
-                    background: 'rgba(15, 22, 41, 0.7)',
-                    border: '1px solid rgba(147, 197, 253, 0.3)',
-                    boxShadow: `
-                      0 8px 32px rgba(59, 130, 246, 0.2),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.1)
-                    `,
-                    maxWidth: '280px'
-                  }}
-                >
-                  <div className="text-xs md:text-sm font-bold text-blue-200 mb-2 tracking-wider">
-                    🔥 LATEST EXPO ANNOUNCEMENT 🔥
-                  </div>
-                  <div className="text-xs md:text-sm font-semibold text-white leading-tight mb-3">
-                    INFINITY ENGINEERINGS<br/>
-                    <span className="text-blue-300">8th EDITION FSIE</span><br/>
-                    FIRE & SECURITY INDIA EXPO
-                  </div>
-                  <div className="text-xs text-slate-300 mb-3">
-                    <div className="flex items-center justify-center space-x-2 mb-1">
-                      <span>📅 MEET & TALK</span>
-                    </div>
-                    <div className="font-medium text-blue-200">11-13 SEPT 2025</div>
-                  </div>
-                  <div 
-                    className="text-xs font-medium px-3 py-2 rounded-full transition-all duration-300 hover:scale-105"
-                    style={{
-                      background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(147, 197, 253, 0.6) 100%)',
-                      color: 'white',
-                      textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
-                    }}
-                  >
-                    CLICK HERE FOR MORE DETAILS
-                  </div>
+              {/* Event Banner - Click popup and clickable with scrolling text */}
+              <div 
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70%] z-20 overflow-hidden rounded-full cursor-pointer hover:scale-105 transition-transform duration-300 shadow-2xl will-change-transform"
+                style={{
+                  background: 'linear-gradient(90deg, hsl(var(--sphere-blue-light)/0.9) 0%, hsl(var(--sphere-blue-light)/0.7) 100%)',
+                  border: '1px solid hsl(var(--sphere-blue-light)/0.5)',
+                  backdropFilter: 'blur(4px)',
+                  // Add transform style to ensure proper positioning within the 3D sphere
+                  transformStyle: 'preserve-3d',
+                  // Center the banner in the middle of the sphere with slight elevation
+                  transform: 'translateZ(25px)',
+                  // Ensure the banner is centered and visible
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  // Add a slight shadow for better visibility
+                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)'
+                }}
+                onClick={() => setIsExpoDialogOpen(true)}
+              >
+                <div className="whitespace-nowrap inline-block px-6 py-3 text-sphere-white text-sm md:text-base font-bold tracking-wider animate-marquee will-change-transform" style={{
+                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)'
+                }}>
+                  INFINITY ENGINEERINGS 8th EDITION FSIE FIRE & SECURITY INDIA EXPO | MEET & TALK | 11-13 SEPT 2025 | CLICK HERE FOR MORE DETAILS
                 </div>
               </div>
+              
+              {/* Popover for hover information - Removed as per requirement */}
+              
+              {/* Dialog for full announcement */}
+              <Dialog open={isExpoDialogOpen} onOpenChange={setIsExpoDialogOpen}>
+                <DialogContent className="max-w-6xl max-h-[90vh] overflow-auto">
+                  <div className="space-y-6">
+                    {/* Featured Full Image */}
+                    <div className="relative h-[400px] md:h-[500px] rounded-xl overflow-hidden">
+                      <Image
+                        src={anno}
+                        alt="FSIE Fire & Security India Expo 2025 - Official Announcement"
+                        fill
+                        className="object-contain"
+                        priority
+                      />
+                    </div>
+                    
+                    <div className="text-center">
+                      <h2 className="text-3xl font-bold text-sphere-white mb-4">
+                        FSIE FIRE & SECURITY INDIA EXPO 2025
+                      </h2>
+                      <p className="text-lg text-sphere-white/80 mb-6">
+                        8th Edition | September 11-13, 2025
+                      </p>
+                      
+                      {/* Event Details Section */}
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                        <div className="bg-sphere-navy-dark/50 border border-sphere-blue-light/30 rounded-xl p-6">
+                          <div className="text-sphere-blue-light text-2xl mb-3">📅</div>
+                          <h3 className="text-xl font-bold text-sphere-white mb-2">Event Dates</h3>
+                          <p className="text-sphere-blue-light font-semibold">September 11-13, 2025</p>
+                          <p className="text-sphere-white/60 text-sm mt-2">India Expo Centre, Greater Noida</p>
+                          <p className="text-sphere-white/60 text-sm">Hall 6 & 7 | 10 AM - 6 PM</p>
+                        </div>
+                        
+                        <div className="bg-sphere-navy-dark/50 border border-sphere-blue-light/30 rounded-xl p-6">
+                          <div className="text-sphere-blue-light text-2xl mb-3">🏢</div>
+                          <h3 className="text-xl font-bold text-sphere-white mb-2">Our Presence</h3>
+                          <p className="text-sphere-blue-light font-semibold">Booth 6A-101</p>
+                          <p className="text-sphere-white/60 text-sm mt-2">Showcasing our latest fire safety innovations</p>
+                          <p className="text-sphere-white/60 text-sm">Live product demonstrations</p>
+                        </div>
+                        
+                        <div className="bg-sphere-navy-dark/50 border border-sphere-blue-light/30 rounded-xl p-6">
+                          <div className="text-sphere-blue-light text-2xl mb-3">🎯</div>
+                          <h3 className="text-xl font-bold text-sphere-white mb-2">Special Features</h3>
+                          <p className="text-sphere-blue-light font-semibold">Live Demos Available</p>
+                          <p className="text-sphere-white/60 text-sm mt-2">Expert consultations</p>
+                          <p className="text-sphere-white/60 text-sm">Exclusive offers for visitors</p>
+                        </div>
+                      </div>
+                      
+                      {/* Additional Information */}
+                      <div className="mt-8 bg-sphere-navy-dark/30 border border-sphere-blue-light/20 rounded-xl p-6 text-left">
+                        <h3 className="text-xl font-bold text-sphere-white mb-4">Event Highlights</h3>
+                        <ul className="space-y-2 text-sphere-white/80">
+                          <li className="flex items-start">
+                            <span className="text-sphere-blue-light mr-2">•</span>
+                            <span>Experience our cutting-edge fire curtain technology live in action</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-sphere-blue-light mr-2">•</span>
+                            <span>Meet our team of fire safety experts for personalized consultations</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-sphere-blue-light mr-2">•</span>
+                            <span>Discover exclusive expo-only pricing on our premium solutions</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-sphere-blue-light mr-2">•</span>
+                            <span>Learn about the latest industry trends and innovations</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+
+              {/* Test Button for Dialog - Remove this after testing */}
             </div>
           </div>
         </div>
@@ -425,6 +566,11 @@ export default function ThreeDSphereSection(): JSX.Element {
             transform: translate(-50%, -50%) translateX(-80px) translateY(-40px) scale(0.4); 
             opacity: 0.1; 
           }
+        }
+        
+        @keyframes marquee {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
         }
       `}</style>
     </section>

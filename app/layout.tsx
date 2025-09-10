@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter_Tight } from 'next/font/google';
+import { initPerformanceOptimizations } from '@/lib/performance';
 
 const interTight = Inter_Tight({ 
   subsets: ['latin'],
@@ -40,6 +41,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Initialize performance optimizations on client side
+  if (typeof window !== 'undefined') {
+    initPerformanceOptimizations();
+  }
+  
   return (
     <html lang="en" className={`scroll-smooth ${interTight.variable}`}>
       <body className={`${interTight.className} bg-background text-foreground antialiased`}>
