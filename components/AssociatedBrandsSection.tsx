@@ -43,6 +43,12 @@ const brands = [
     description: 'Global provider of fire detection, suppression and life safety systems.',
     logo: '/logo-tyco.png',
     certifications: ['UL Listed', 'FM Approved', 'CE Marked', 'ISO 9001']
+  },
+  {
+    name: 'Auronyx Systems',
+    description: 'Advanced fire protection technology with innovative smart detection systems.',
+    logo: '/logo-auronyx.png',
+    certifications: ['UL Listed', 'CE Marked', 'ISO 9001', 'NFPA Compliant']
   }
 ];
 

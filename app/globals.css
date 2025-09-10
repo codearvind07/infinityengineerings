@@ -358,24 +358,24 @@
 }
 
 /* Optimize for low performance devices */
-.low-performance {
-  .animate-marquee {
-    animation: none;
-    transform: translateX(0);
-  }
-  
-  .navy-glow, .crypto-button, .gold-glow {
-    animation: none;
-  }
-  
-  .will-change-transform {
-    will-change: auto;
-  }
-  
-  /* Simplify complex gradients */
-  .complex-gradient {
-    background: linear-gradient(135deg, #3b82f6, #93c5fd) !important;
-  }
+.low-performance .animate-marquee {
+  animation: none;
+  transform: translateX(0);
+}
+
+.low-performance .navy-glow,
+.low-performance .crypto-button,
+.low-performance .gold-glow {
+  animation: none;
+}
+
+.low-performance .will-change-transform {
+  will-change: auto;
+}
+
+/* Simplify complex gradients */
+.low-performance .complex-gradient {
+  background: linear-gradient(135deg, #3b82f6, #93c5fd) !important;
 }
 
 /* Performance optimizations for all elements */

@@ -10,13 +10,14 @@ const interTight = Inter_Tight({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.infinity-engineerings.com'),
   title: 'INFINITY ENGINEERINGS - Professional Fire & Smoke Protection Solutions',
   description: 'Leading provider of fire curtains, smoke curtains, and protection systems for commercial buildings. Certified safety solutions for atriums, corridors, and escape routes.',
   keywords: 'fire curtains, smoke curtains, fire protection, building safety, compartmentation, fire safety systems',
   openGraph: {
     title: 'INFINITY ENGINEERINGS Systems - Professional Fire & Smoke Protection',
     description: 'Industry-leading fire and smoke protection systems for commercial buildings.',
-    url: 'https://INFINITY ENGINEERINGS.com',
+    url: 'https://www.infinity-engineerings.com',
     siteName: 'INFINITY ENGINEERINGS',
     images: [
       {
