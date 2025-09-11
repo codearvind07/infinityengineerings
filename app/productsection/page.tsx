@@ -6,6 +6,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Search, Filter } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import ProductCard, { type Product } from './ProductCard';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import master1 from '@/public/FireMaster1.webp';
 import master2 from '@/public/FireMaster2.webp';
 import master3 from '@/public/FireMaster3.webp';
@@ -449,139 +451,145 @@ export default function ProductsSection(): JSX.Element {
       selectedIntegrity, selectedRadiation, selectedInsulation]);
 
   return (
-    <section id="products" className="py-20 bg-gradient-to-br from-sphere-navy-dark via-sphere-navy-medium to-sphere-navy-light text-sphere-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-block px-4 py-1 mb-4 text-sm font-semibold text-fire-red bg-gray-800 rounded-full border border-fire-red/30">
-            PRODUCT CATALOG
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Fire & Smoke Curtain Solutions
-          </h1>
-          <h2 className="text-xl font-semibold text-muted-foreground mb-6 max-w-3xl mx-auto">
-            Professional-grade fire protection systems engineered for modern building safety requirements
-          </h2>
-          <div className="max-w-4xl mx-auto text-muted-foreground space-y-4">
-            <p>
-              Our comprehensive range of fire and smoke curtains are designed to meet the most demanding safety standards. 
-              Each product is certified to British/European standards and carries the CE mark, ensuring compliance with 
-              international fire safety regulations.
-            </p>
-          </div>
-        </div>
-
-        {/* Product Description */}
-        <div className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700 p-8 rounded-2xl mb-12">
-          <h3 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
-            <Filter className="text-fire-red" />
-            Complete Fire Protection Solutions
-          </h3>
-          <div className="text-muted-foreground space-y-4">
-            <p className="text-lg">
-              <strong className="text-foreground">FireMaster Range:</strong> Our flagship fire curtain systems provide 
-              advanced compartmentation solutions for new buildings while ensuring virtually uninterrupted pedestrian 
-              and goods movement.
-            </p>
-            <div className="flex flex-wrap gap-4 mt-6">
-              <Button className="bg-fire-red hover:bg-fire-red/90 text-foreground px-6 py-3 rounded-lg font-semibold transition-all duration-300">
-                Explore FireMaster Range
-              </Button>
-              <Button variant="outline" className="border-gray-600 text-muted-foreground hover:bg-gray-700 hover:text-foreground px-6 py-3 rounded-lg font-semibold">
-                Request Technical Specifications
-              </Button>
+    <main className="min-h-screen bg-gradient-to-br from-sphere-navy-dark via-sphere-navy-medium to-sphere-navy-light relative">
+      <Header />
+      
+      <section id="products" className="py-20 bg-gradient-to-br from-sphere-navy-dark via-sphere-navy-medium to-sphere-navy-light text-sphere-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-1 mb-6 text-sm font-semibold text-sphere-blue-light bg-sphere-navy-dark/50 rounded-full border border-sphere-blue-light/30">
+              PRODUCT CATALOG
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Fire & Smoke Curtain Solutions
+            </h1>
+            <h2 className="text-xl font-semibold text-sphere-white/80 mb-6 max-w-3xl mx-auto">
+              Professional-grade fire protection systems engineered for modern building safety requirements
+            </h2>
+            <div className="max-w-4xl mx-auto text-sphere-white/70 space-y-4">
+              <p>
+                Our comprehensive range of fire and smoke curtains are designed to meet the most demanding safety standards. 
+                Each product is certified to British/European standards and carries the CE mark, ensuring compliance with 
+                international fire safety regulations.
+              </p>
             </div>
           </div>
-        </div> 
 
-        {/* Horizontal Filters */}
-        <div className="mb-12 p-6 bg-gray-800/50 rounded-2xl border border-gray-700">
-          <div className="flex flex-wrap items-end gap-6">
-            {/* Search */}
-            <div className="flex-1 min-w-[250px]">
-              <label className="block text-sm font-medium text-muted-foreground mb-2">Search Products</label>
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-                <Input
-                  type="text"
-                  placeholder="Search by name, standard, or type..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-12 pr-4 py-3 bg-gray-700/50 border border-gray-600 text-foreground focus:border-fire-red focus:ring-2 focus:ring-fire-red/30 rounded-xl w-full"
-                />
+          {/* Product Description */}
+          <div className="bg-gradient-to-r from-sphere-navy-dark/50 to-sphere-navy-medium/50 border border-sphere-blue-light/20 p-8 rounded-2xl mb-12">
+            <h3 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+              <Filter className="text-sphere-blue-light" />
+              Complete Fire Protection Solutions
+            </h3>
+            <div className="text-sphere-white/80 space-y-4">
+              <p className="text-lg">
+                <strong className="text-foreground">FireMaster Range:</strong> Our flagship fire curtain systems provide 
+                advanced compartmentation solutions for new buildings while ensuring virtually uninterrupted pedestrian 
+                and goods movement.
+              </p>
+              <div className="flex flex-wrap gap-4 mt-6">
+                <Button className="bg-sphere-blue-primary hover:bg-sphere-blue-light text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300">
+                  Explore FireMaster Range
+                </Button>
+                <Button variant="outline" className="border-sphere-blue-light/30 text-sphere-white hover:bg-sphere-blue-light/10 px-6 py-3 rounded-lg font-semibold">
+                  Request Technical Specifications
+                </Button>
               </div>
             </div>
+          </div> 
 
-            {/* Curtain Types */}
-            <div className="min-w-[180px]">
-              <label className="block text-sm font-medium text-muted-foreground mb-2">Curtain Types</label>
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="bg-gray-700/50 border border-gray-600 text-foreground focus:border-fire-red focus:ring-2 focus:ring-fire-red/30 rounded-xl py-3">
-                  <SelectValue placeholder="Select Category" />
-                </SelectTrigger>
-                <SelectContent className="bg-gray-700 border border-gray-600 text-foreground rounded-xl">
-                  {categories.map((category) => (
-                    <SelectItem key={category} value={category} className="py-2 hover:bg-gray-600 hover:text-foreground">
-                      {category === 'all' ? 'All Categories' : category}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+          {/* Horizontal Filters */}
+          <div className="mb-12 p-6 bg-sphere-navy-dark/50 rounded-2xl border border-sphere-blue-light/20">
+            <div className="flex flex-wrap items-end gap-6">
+              {/* Search */}
+              <div className="flex-1 min-w-[250px]">
+                <label className="block text-sm font-medium text-sphere-white/80 mb-2">Search Products</label>
+                <div className="relative">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-sphere-blue-light/50" />
+                  <Input
+                    type="text"
+                    placeholder="Search by name, standard, or type..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-12 pr-4 py-3 bg-sphere-navy-dark/50 border border-sphere-blue-light/20 text-foreground focus:border-sphere-blue-light focus:ring-2 focus:ring-sphere-blue-light/30 rounded-xl w-full"
+                  />
+                </div>
+              </div>
 
-            {/* Product Standards */}
-            <div className="min-w-[180px]">
-              <label className="block text-sm font-medium text-muted-foreground mb-2">Standards</label>
-              <Select value={selectedStandard} onValueChange={setSelectedStandard}>
-                <SelectTrigger className="bg-gray-700/50 border border-gray-600 text-foreground focus:border-fire-red focus:ring-2 focus:ring-fire-red/30 rounded-xl py-3">
-                  <SelectValue placeholder="Select Standard" />
-                </SelectTrigger>
-                <SelectContent className="bg-gray-700 border border-gray-600 text-foreground rounded-xl">
-                  {standards.map((standard) => (
-                    <SelectItem key={standard} value={standard} className="py-2 hover:bg-gray-600 hover:text-foreground">
-                      {standard === 'all' ? 'All Standards' : standard.substring(0, 25) + (standard.length > 25 ? '...' : '')}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+              {/* Curtain Types */}
+              <div className="min-w-[180px]">
+                <label className="block text-sm font-medium text-sphere-white/80 mb-2">Curtain Types</label>
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger className="bg-sphere-navy-dark/50 border border-sphere-blue-light/20 text-foreground focus:border-sphere-blue-light focus:ring-2 focus:ring-sphere-blue-light/30 rounded-xl py-3">
+                    <SelectValue placeholder="Select Category" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-sphere-navy-dark border border-sphere-blue-light/20 text-foreground rounded-xl">
+                    {categories.map((category) => (
+                      <SelectItem key={category} value={category} className="py-2 hover:bg-sphere-navy-medium hover:text-foreground">
+                        {category === 'all' ? 'All Categories' : category}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
 
-            {/* Orientations */}
-            <div className="min-w-[180px]">
-              <label className="block text-sm font-medium text-muted-foreground mb-2">Orientation</label>
-              <Select value={selectedOrientation} onValueChange={setSelectedOrientation}>
-                <SelectTrigger className="bg-gray-700/50 border border-gray-600 text-foreground focus:border-fire-red focus:ring-2 focus:ring-fire-red/30 rounded-xl py-3">
-                  <SelectValue placeholder="Select Orientation" />
-                </SelectTrigger>
-                <SelectContent className="bg-gray-700 border border-gray-600 text-foreground rounded-xl">
-                  {orientations.map((orientation) => (
-                    <SelectItem key={orientation} value={orientation} className="py-2 hover:bg-gray-600 hover:text-foreground">
-                      {orientation === 'all' ? 'All Orientations' : orientation}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              {/* Product Standards */}
+              <div className="min-w-[180px]">
+                <label className="block text-sm font-medium text-sphere-white/80 mb-2">Standards</label>
+                <Select value={selectedStandard} onValueChange={setSelectedStandard}>
+                  <SelectTrigger className="bg-sphere-navy-dark/50 border border-sphere-blue-light/20 text-foreground focus:border-sphere-blue-light focus:ring-2 focus:ring-sphere-blue-light/30 rounded-xl py-3">
+                    <SelectValue placeholder="Select Standard" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-sphere-navy-dark border border-sphere-blue-light/20 text-foreground rounded-xl">
+                    {standards.map((standard) => (
+                      <SelectItem key={standard} value={standard} className="py-2 hover:bg-sphere-navy-medium hover:text-foreground">
+                        {standard === 'all' ? 'All Standards' : standard.substring(0, 25) + (standard.length > 25 ? '...' : '')}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Orientations */}
+              <div className="min-w-[180px]">
+                <label className="block text-sm font-medium text-sphere-white/80 mb-2">Orientation</label>
+                <Select value={selectedOrientation} onValueChange={setSelectedOrientation}>
+                  <SelectTrigger className="bg-sphere-navy-dark/50 border border-sphere-blue-light/20 text-foreground focus:border-sphere-blue-light focus:ring-2 focus:ring-sphere-blue-light/30 rounded-xl py-3">
+                    <SelectValue placeholder="Select Orientation" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-sphere-navy-dark border border-sphere-blue-light/20 text-foreground rounded-xl">
+                    {orientations.map((orientation) => (
+                      <SelectItem key={orientation} value={orientation} className="py-2 hover:bg-sphere-navy-medium hover:text-foreground">
+                        {orientation === 'all' ? 'All Orientations' : orientation}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Products Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-        
-        {filteredProducts.length === 0 && (
-          <div className="text-center py-16">
-            <div className="text-5xl mb-4">🔍</div>
-            <h3 className="text-2xl font-bold text-muted-foreground mb-2">No Products Found</h3>
-            <p className="text-gray-500 text-lg">
-              Try adjusting your filters or search terms to find what you're looking for.
-            </p>
+          {/* Products Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
-        )}
-      </div>
-    </section>
+          
+          {filteredProducts.length === 0 && (
+            <div className="text-center py-16">
+              <div className="text-5xl mb-4">🔍</div>
+              <h3 className="text-2xl font-bold text-sphere-white/80 mb-2">No Products Found</h3>
+              <p className="text-sphere-white/60 text-lg">
+                Try adjusting your filters or search terms to find what you're looking for.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+      
+      <Footer />
+    </main>
   );
 }
