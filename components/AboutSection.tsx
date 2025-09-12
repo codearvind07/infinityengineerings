@@ -13,7 +13,7 @@ import shrutiImage from '@/public/Shruti.png';
 import aryanImage from '@/public/Aryan.png';
 import { useState, useEffect, useRef } from 'react';
 // Import the AssociatedBrandsSection from the correct location
-import AssociatedBrandsSection from './AssociatedBrandsSection';
+
 
 // Custom hook for counting animation
 function useCountUp(end: number, duration: number = 2000, start: number = 0) {
@@ -303,7 +303,7 @@ export default function AboutSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                Our Partnership
+                Our Company
               </motion.h3>
               
               <div className="space-y-6 text-lg text-sphere-white/90 leading-relaxed">
@@ -313,7 +313,7 @@ export default function AboutSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                 >
-                  INFINITY ENGINEERINGS is the <span className="text-sphere-blue-light font-semibold">exclusive authorized distributor</span> of COOPERS FIRE LIMITED UK in India - the global pioneers and leading manufacturers of automatic drop-down fire and smoke curtains.
+                  INFINITY ENGINEERINGS is a premier distributor of innovative building solutions, driving safety, sustainability, and functionality across the construction industry since June 2021.
                 </motion.p>
                 
                 <motion.p
@@ -322,39 +322,10 @@ export default function AboutSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  This partnership brings over <span className="text-sphere-blue-light font-semibold">30 years of British engineering excellence</span> to the Indian construction industry, ensuring compliance with international safety standards while maintaining architectural aesthetics.
+                  We have established ourselves as a trusted partner for architects, consultants, and builders throughout India through strategic partnerships that include serving as the authorized distributor for Coopers Fire Ltd. (London, UK) for Fire and Smoke Curtains across India, Nepal, Bhutan, and Sri Lanka, maintaining a corporate partnership with Panasonic LED Lighting for comprehensive pan-India operations, and operating as the North Indian distributor for Dormakaba&apos;s premium hardware solutions with nationwide service coverage.
                 </motion.p>
               </div>
             </div>
-            
-            {/* Achievement Cards */}
-            <motion.div 
-              className="grid gap-4"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              {achievements.map((achievement, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-center space-x-4 bg-gradient-to-r from-sphere-navy-dark/60 to-sphere-navy-medium/60 backdrop-blur-md border border-sphere-blue-light/30 rounded-xl p-4 transition-all duration-300 hover:from-sphere-navy-dark/80 hover:to-sphere-navy-medium/80 hover:border-teal-400/50 shadow-md"
-                  whileHover={{ x: 8 }}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                >
-                  <div className="flex-shrink-0">
-                    <achievement.icon 
-                      className="h-6 w-6" 
-                      style={{ color: 'hsl(var(--tech-teal))' }} 
-                    />
-                  </div>
-                  <p className="text-sphere-white/90 font-medium">{achievement.text}</p>
-                </motion.div>
-              ))}
-            </motion.div>
             
             {/* Mission Card */}
             <motion.div 
@@ -684,7 +655,7 @@ export default function AboutSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <AssociatedBrandsSection />
+         
         </motion.div>
       </div>
     </section>
