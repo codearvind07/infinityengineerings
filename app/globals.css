@@ -68,6 +68,10 @@
   --transition-duration-fast: 0.2s;
   --transition-duration-normal: 0.3s;
   --transition-duration-slow: 0.5s;
+  
+  /* Glitter animation durations */
+  --glitter-duration-min: 1.5s;
+  --glitter-duration-max: 3s;
 }
 
 .dark {
@@ -150,6 +154,63 @@
   50% {
     transform: scale(1.05);
     opacity: 0.8;
+  }
+}
+
+/* Glittering animation for sphere */
+@keyframes glitter {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+  }
+  25% {
+    opacity: 0.6;
+    transform: scale(0.8);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+  }
+  75% {
+    opacity: 0.6;
+    transform: scale(0.8);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes glitter-sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+  }
+  25% {
+    opacity: 0.4;
+    transform: scale(0.5);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+  75% {
+    opacity: 0.4;
+    transform: scale(0.5) rotate(270deg);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(360deg);
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -257,26 +318,45 @@
     inset 0 0 20px hsl(var(--sphere-blue-light) / 0.1);
 }
 
-.crypto-progress-bar {
-  background: linear-gradient(90deg, 
-    hsl(var(--sphere-blue-primary)) 0%, 
-    hsl(var(--sphere-blue-light)) 100%);
-  box-shadow: 0 0 15px hsl(var(--sphere-blue-primary) / 0.4);
+/* Glitter effect class */
+.glitter-effect {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffffff, #ffffff66, #ffffff33);
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  animation-fill-mode: forwards;
+  will-change: transform, opacity, box-shadow;
+  animation-name: glitter;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: var(--glitter-duration, 2s);
+  animation-play-state: running;
+  transform: translateZ(0);
+  filter: blur(0.5px);
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+  background-image: linear-gradient(135deg, #ffffff, #ffffff66, #ffffff33);
+  transition: all 0.3s ease;
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
-.crypto-wireframe {
-  border: 1px solid hsl(var(--sphere-blue-primary) / 0.3);
-  background: 
-    radial-gradient(circle at 50% 50%, hsl(var(--sphere-blue-primary) / 0.1) 0%, transparent 70%),
-    conic-gradient(from 0deg, 
-      hsl(var(--sphere-blue-primary) / 0.2) 0deg, 
-      transparent 90deg, 
-      hsl(var(--sphere-blue-light) / 0.1) 180deg, 
-      transparent 270deg);
-  animation: wireframe-spin 10s linear infinite;
-  /* Optimize animation */
-  will-change: transform;
-  transform: translateZ(0);
+/* Enhanced glitter effect for interactive elements */
+.glitter-effect.interactive {
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  filter: blur(1px);
+}
+
+.glitter-effect.intense {
+  animation-duration: 1.2s;
+  box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.6);
+  filter: blur(1px);
 }
 
 /* Modern button styles */
@@ -352,7 +432,7 @@
     animation: none;
   }
   
-  .navy-glow, .crypto-button, .gold-glow {
+  .navy-glow, .crypto-button, .gold-glow, .glitter-effect {
     animation: none;
   }
 }
@@ -365,8 +445,19 @@
 
 .low-performance .navy-glow,
 .low-performance .crypto-button,
-.low-performance .gold-glow {
-  animation: none;
+.low-performance .gold-glow,
+.low-performance .glitter-effect {
+  animation: none !important;
+}
+
+/* Enable hardware acceleration for animated elements */
+.will-change-transform {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.composited {
+  transform: translateZ(0);
 }
 
 .low-performance .will-change-transform {
@@ -485,6 +576,7 @@ body {
   /* Optimize animation */
   will-change: transform;
   transform: translateZ(0);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes marquee {
@@ -496,24 +588,67 @@ body {
   }
 }
 
-/* Professional Event Banner */
-.event-banner-container {
-  @apply absolute top-32 left-1/2 transform -translate-x-1/2 w-4/5 z-20 overflow-hidden rounded-full shadow-2xl;
-  background: linear-gradient(90deg, hsl(var(--fire-red)/0.9) 0%, hsl(var(--fire-red)/0.7) 100%);
-  border: 1px solid hsl(var(--fire-red)/0.5);
-  backdrop-filter: blur(4px);
+/* Add a subtle text animation */
+.text-shine {
+  background: linear-gradient(90deg, 
+    hsl(var(--sphere-navy-dark)) 0%, 
+    hsl(var(--sphere-navy-dark)) 40%, 
+    hsl(var(--sphere-white)) 50%, 
+    hsl(var(--sphere-navy-dark)) 60%, 
+    hsl(var(--sphere-navy-dark)) 100%);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Enhanced Professional Event Banner */
+.professional-banner {
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] md:w-[80%] lg:w-[70%] z-20 overflow-hidden rounded-full cursor-pointer transition-all duration-300 shadow-2xl;
+  background: linear-gradient(90deg, hsl(var(--sphere-blue-light)/0.95) 0%, hsl(var(--sphere-blue-primary)/0.9) 100%);
+  border: 1px solid hsl(var(--sphere-blue-light)/0.7);
+  backdrop-filter: blur(6px);
   /* Optimize rendering */
   will-change: transform;
   transform: translateZ(0);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(147, 197, 253, 0.4);
 }
 
-.event-banner-text {
-  @apply whitespace-nowrap inline-block px-8 py-4 text-foreground text-base font-bold tracking-wider;
-  animation: marquee 25s linear infinite;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  /* Optimize animation */
-  will-change: transform;
-  transform: translateZ(0);
+.professional-banner:hover {
+  transform: translateZ(25px) scale(0.92) translate(-50%, -50%);
+}
+
+.professional-banner-content {
+  @apply whitespace-nowrap inline-block px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 text-[10px] sm:text-xs md:text-sm font-bold tracking-wider will-change-transform relative;
+  color: hsl(var(--sphere-navy-dark));
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Dialog enhancements */
+.dialog-content-enhanced {
+  @apply max-w-4xl max-h-[90vh] overflow-auto bg-sphere-navy-dark/95 text-sphere-white border border-sphere-blue-light/40 backdrop-blur-xl rounded-2xl shadow-2xl;
+}
+
+.dialog-header {
+  @apply flex justify-between items-center p-6 border-b border-sphere-blue-light/20;
+}
+
+.dialog-title-enhanced {
+  @apply text-2xl font-bold text-sphere-white;
+}
+
+.dialog-close-button {
+  @apply p-2 rounded-full hover:bg-sphere-navy-medium/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sphere-blue-light;
 }
 
 /* Glass effect utilities */
@@ -564,68 +699,7 @@ body {
   @apply bg-gray-500;
 }
 
-/* Vibrant color utilities */
-.fire-red {
-  @apply text-[hsl(var(--fire-red))];
-}
-
-.bg-fire-red {
-  @apply bg-[hsl(var(--fire-red))];
-}
-
-.border-fire-red {
-  @apply border-[hsl(var(--fire-red))];
-}
-
-.safety-blue {
-  @apply text-[hsl(var(--safety-blue))];
-}
-
-.bg-safety-blue {
-  @apply bg-[hsl(var(--safety-blue))];
-}
-
-.border-safety-blue {
-  @apply border-[hsl(var(--safety-blue))];
-}
-
-.energy-orange {
-  @apply text-[hsl(var(--energy-orange))];
-}
-
-.bg-energy-orange {
-  @apply bg-[hsl(var(--energy-orange))];
-}
-
-.border-energy-orange {
-  @apply border-[hsl(var(--energy-orange))];
-}
-
-.tech-teal {
-  @apply text-[hsl(var(--tech-teal))];
-}
-
-.bg-tech-teal {
-  @apply bg-[hsl(var(--tech-teal))];
-}
-
-.border-tech-teal {
-  @apply border-[hsl(var(--tech-teal))];
-}
-
-.premium-gold {
-  @apply text-[hsl(var(--premium-gold))];
-}
-
-.bg-premium-gold {
-  @apply bg-[hsl(var(--premium-gold))];
-}
-
-.border-premium-gold {
-  @apply border-[hsl(var(--premium-gold))];
-}
-
-/* Text color utilities using CSS variables */
+/* Vibrant color utilities using CSS variables */
 .text-foreground {
   color: hsl(var(--foreground));
 }

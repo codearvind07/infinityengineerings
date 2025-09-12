@@ -115,7 +115,7 @@ export function lazyLoadImages() {
 export function optimizeCSSAnimations() {
   // Add will-change property to animated elements
   const animatedElements = document.querySelectorAll(
-    '.animate-fade-in-up, .animate-marquee, .navy-glow, .navy-pulse, .crypto-wireframe, .crypto-button, .gold-glow, .gold-pulse, .gold-float, .gold-rotate, .gold-shimmer, .gold-drift, .gold-sparkle, .will-change-transform'
+    '.animate-fade-in-up, .animate-marquee, .navy-glow, .navy-pulse, .gold-glow, .gold-pulse, .gold-float, .gold-rotate, .gold-shimmer, .gold-drift, .gold-sparkle, .will-change-transform'
   );
   
   animatedElements.forEach(el => {

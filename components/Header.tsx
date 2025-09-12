@@ -36,7 +36,7 @@ export default function Header() {
     { name: 'Applications', href: '/applications' },
     { name: 'Resources', href: '/resources' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Design System', href: '/design-system' },
+   
   ];
 
   return (

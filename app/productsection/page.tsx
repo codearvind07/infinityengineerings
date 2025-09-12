@@ -431,7 +431,7 @@ export default function ProductsSection(): JSX.Element {
     return ['all', ...Array.from(uniqueInsulation)];
   }, []);
 
-  // Memoize the filtered products to avoid re-filtering on every render.
+ 
   // This calculation now only runs when a filter state changes.
   const filteredProducts = useMemo(() => {
     return products.filter((product: Product) => {
@@ -454,7 +454,7 @@ export default function ProductsSection(): JSX.Element {
     <main className="min-h-screen bg-gradient-to-br from-sphere-navy-dark via-sphere-navy-medium to-sphere-navy-light relative">
       <Header />
       
-      <section id="products" className="py-20 bg-gradient-to-br from-sphere-navy-dark via-sphere-navy-medium to-sphere-navy-light text-sphere-white">
+      <section id="products" className="pt-20 md:pt-24 py-20 bg-gradient-to-br from-sphere-navy-dark via-sphere-navy-medium to-sphere-navy-light text-sphere-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">

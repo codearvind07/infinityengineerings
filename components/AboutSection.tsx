@@ -12,6 +12,8 @@ import hiteshImage from '@/public/Hitesh.png';
 import shrutiImage from '@/public/Shruti.png';
 import aryanImage from '@/public/Aryan.png';
 import { useState, useEffect, useRef } from 'react';
+// Import the AssociatedBrandsSection from the correct location
+import AssociatedBrandsSection from './AssociatedBrandsSection';
 
 // Custom hook for counting animation
 function useCountUp(end: number, duration: number = 2000, start: number = 0) {
@@ -231,7 +233,7 @@ export default function AboutSection() {
           </motion.h2>
           
           <motion.p 
-            className="text-xl md:text-2xl text-center max-w-4xl mx-auto leading-relaxed text-sphere-white/90"
+            className="text-base md:text-lg text-center max-w-4xl mx-auto leading-relaxed text-sphere-white/80 font-light"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -620,7 +622,6 @@ export default function AboutSection() {
           >
             A STRONG TEAM, BEHIND EVERY SOLUTION.
           </h4>
-          <p className="text-sphere-blue-light text-lg">www.infinityengineerings.com</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
@@ -673,9 +674,18 @@ export default function AboutSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-sphere-blue-light text-lg">www.infinityengineerings.com</p>
         </motion.div>
 
+        {/* Add Associated Brands Section after the main content grid */}
+        <motion.div 
+          className="mt-24"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <AssociatedBrandsSection />
+        </motion.div>
       </div>
     </section>
   );

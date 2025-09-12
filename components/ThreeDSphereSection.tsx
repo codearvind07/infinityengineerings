@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { X } from 'lucide-react';
+import { X, Calendar, MapPin, Star, Flame, Users, Tag, TrendingUp, ArrowRight, Sparkles } from 'lucide-react';
 
 const MemoizedParticle = memo(({ style, particleKey }: { style: React.CSSProperties; particleKey: number }) => (
   <div
@@ -15,14 +15,25 @@ const MemoizedParticle = memo(({ style, particleKey }: { style: React.CSSPropert
   />
 ));
 MemoizedParticle.displayName = 'MemoizedParticle';
+
+// Glitter component for the glittering effect
+const Glitter = memo(({ style, key }: { style: React.CSSProperties; key: number }) => (
+  <div
+    key={key}
+    className="glitter-effect absolute rounded-full"
+    style={style}
+  />
+));
+Glitter.displayName = 'Glitter';
+
 export default function ThreeDSphereSection(): JSX.Element {
   const sphereRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  const [isExpoDialogOpen, setIsExpoDialogOpen] = useState(false);
-  const [isHoverPopupOpen, setIsHoverPopupOpen] = useState(false);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const rafRef = useRef<number>(0);
+  const glitterContainerRef = useRef<HTMLDivElement>(null);
   
   // Check for low performance device
   const [isLowPerformance, setIsLowPerformance] = useState(false);
@@ -46,6 +57,51 @@ export default function ThreeDSphereSection(): JSX.Element {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Create glittering effect
+  const createGlitter = useCallback(() => {
+    if (!glitterContainerRef.current || isLowPerformance) return;
+    
+    const glitterCount = 30;
+    const newGlitters = [];
+    
+    for (let i = 0; i < glitterCount; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 70 + Math.random() * 130;
+      const x = Math.cos(angle) * distance;
+      const y = Math.sin(angle) * distance;
+      const size = 1 + Math.random() * 4;
+      const delay = Math.random() * 3;
+      const duration = parseFloat((1.8 + Math.random() * 2.2).toFixed(2));
+      const hue = 217 + Math.random() * 20;
+      const saturation = 85 + Math.random() * 15;
+      const lightness = 65 + Math.random() * 25;
+      const animationName = i % 2 === 0 ? 'glitter' : 'glitter-sparkle';
+      
+      newGlitters.push(
+        <Glitter
+          key={i}
+          style={{
+            left: `calc(50% + ${x}px)`,
+            top: `calc(50% + ${y}px)`,
+            width: `${size}px`,
+            height: `${size}px`,
+            animationName: animationName,
+            animationTimingFunction: 'ease-in-out',
+            animationIterationCount: 'infinite',
+            animationDelay: `${delay}s`,
+            animationDuration: `${duration}s`,
+            background: `hsl(${hue}, ${saturation}%, ${lightness}%)`,
+            boxShadow: `0 0 ${size * 2.5}px ${size * 1.2}px hsla(${hue}, ${saturation}%, 70%, 0.4)`,
+            opacity: 0,
+            willChange: 'transform, opacity, box-shadow'
+          }}
+        />
+      );
+    }
+    
+    return newGlitters;
+  }, [isLowPerformance]);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!containerRef.current || !sphereRef.current) return;
@@ -128,7 +184,7 @@ export default function ThreeDSphereSection(): JSX.Element {
           left: `${Math.random() * 100}%`,
           top: `${Math.random() * 100}%`,
           animation: isLowPerformance ? 'none' : `float ${6 + Math.random() * 4}s ease-in-out infinite`,
-          animationDelay: `${Math.random() * 4}s`,
+          animationDelay: `${Math.random() * 4}s`
         }}
       >
         <div 
@@ -214,6 +270,51 @@ export default function ThreeDSphereSection(): JSX.Element {
     });
   }, [isHovered, isLowPerformance, windowWidth]);
 
+  // Create glittering effect
+  const glitterEffect = useMemo(() => {
+    if (isLowPerformance) return null;
+    return createGlitter();
+  }, [isLowPerformance, createGlitter]);
+
+  // Create additional sparkle effects
+  const sparkleEffect = useMemo(() => {
+    if (isLowPerformance) return null;
+    
+    const sparkleCount = 10;
+    const newSparkles = [];
+    
+    for (let i = 0; i < sparkleCount; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 150 + Math.random() * 50;
+      const x = Math.cos(angle) * distance;
+      const y = Math.sin(angle) * distance;
+      const size = 1 + Math.random() * 3;
+      const delay = Math.random() * 3;
+      const duration = 2 + Math.random() * 2;
+      const hue = 217 + Math.random() * 20;
+      
+      newSparkles.push(
+        <div
+          key={`sparkle-${i}`}
+          className="glitter-effect"
+          style={{
+            left: `calc(50% + ${x}px)`,
+            top: `calc(50% + ${y}px)`,
+            width: `${size}px`,
+            height: `${size}px`,
+            animation: `glitter-sparkle ${duration}s ease-in-out ${delay}s infinite`,
+            animationDelay: `${delay}s`,
+            background: `hsl(${hue}, 100%, 80%)`,
+            boxShadow: `0 0 ${size * 3}px ${size * 1.5}px hsla(${hue}, 100%, 85%, 0.5)`,
+            opacity: 0
+          }}
+        />
+      );
+    }
+    
+    return newSparkles;
+  }, [isLowPerformance]);
+
   return (
     <section 
       ref={containerRef}
@@ -249,6 +350,18 @@ export default function ThreeDSphereSection(): JSX.Element {
           <div className="w-full lg:w-1/2 py-8 md:py-12 lg:py-0">
             <div className="text-center lg:text-left max-w-lg mx-auto lg:mx-0">
               <div className="mb-6">
+                {/* Announcement text in one line with horizontal moving animation */}
+                <div 
+                  className="mb-4 overflow-hidden cursor-pointer"
+                  onClick={() => setIsImageModalOpen(true)}
+                >
+                  <div className="inline-block animate-marquee whitespace-nowrap">
+                    <span className="text-lg sm:text-xl md:text-2xl font-bold text-blue-300 hover:text-blue-200 transition-colors duration-300">
+                      INFINITY ENGINEERINGS 8th EDITION FSIE FIRE & SECURITY INDIA EXPO | MEET & TALK | 11-13 SEPT 2025
+                    </span>
+                  </div>
+                </div>
+                
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-2">
                   <div className="text-blue-200 mb-2">INNOVATIVE FIRE</div>
                   <div className="text-slate-300 mb-2">PROTECTION</div>
@@ -323,6 +436,30 @@ export default function ThreeDSphereSection(): JSX.Element {
             >
               {/* Revolutionary dotted sphere design */}
               <div className="absolute inset-0 rounded-full">
+                {/* Glittering effect container with multiple glitter effects */}
+                <div 
+                  ref={glitterContainerRef}
+                  className="absolute inset-0 rounded-full overflow-hidden will-change-transform"
+                >
+                  {glitterEffect}
+                  {sparkleEffect}
+                  {/* Additional glitter effects */}
+                  {Array.from({ length: 12 }).map((_, i) => (
+                    <div
+                      key={`glitter-${i}`}
+                      className="glitter-effect"
+                      style={{
+                        left: `${20 + (i * 7.5)}%`,
+                        top: `${20 + (i * 8.3)}%`,
+                        animation: i % 2 === 0 ? 'glitter 2s ease-in-out infinite' : 'glitter-sparkle 2.5s ease-in-out infinite',
+                        animationDelay: `${i * 0.15}s`,
+                        animationDuration: `${2 + i * 0.2}s`,
+                        background: `hsl(${217 + Math.random() * 20}, 100%, 80%)`
+                      }}
+                    />
+                  ))}
+                </div>
+                
                 {/* Main sphere with ultra-dense dotted pattern */}
                 <div 
                   className="absolute inset-0 rounded-full backdrop-blur-sm border transition-all duration-500 will-change-transform"
@@ -418,132 +555,58 @@ export default function ThreeDSphereSection(): JSX.Element {
                 <div className="absolute inset-0 block">
                   {flowingParticles}
                 </div>
-
-                {/* Event Banner - Click popup and clickable with scrolling text */}
-                <div 
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] md:w-[80%] lg:w-[70%] z-20 overflow-hidden rounded-full cursor-pointer hover:scale-105 transition-transform duration-300 shadow-2xl will-change-transform"
-                  style={{
-                    background: 'linear-gradient(90deg, hsl(var(--sphere-blue-light)/0.9) 0%, hsl(var(--sphere-blue-light)/0.7) 100%)',
-                    border: '1px solid hsl(var(--sphere-blue-light)/0.5)',
-                    backdropFilter: 'blur(4px)',
-                    // Add transform style to ensure proper positioning within the 3D sphere
-                    transformStyle: 'preserve-3d',
-                    // Center the banner in the middle of the sphere with slight elevation
-                    transform: 'translateZ(25px) scale(0.9) translate(-50%, -50%)',
-                    // Ensure the banner is centered and visible
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    // Add a slight shadow for better visibility
-                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)'
-                  }}
-                  onClick={() => setIsExpoDialogOpen(true)}
-                >
-                  <div className="whitespace-nowrap inline-block px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 text-[10px] xs:text-xs sm:text-sm font-bold tracking-wider animate-marquee will-change-transform" style={{
-                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)'
-                  }}>
-                    INFINITY ENGINEERINGS 8th EDITION FSIE FIRE & SECURITY INDIA EXPO | MEET & TALK | 11-13 SEPT 2025 | CLICK HERE FOR MORE DETAILS
-                  </div>
-                </div>
                 
-                {/* Dialog for full announcement */}
-                <Dialog open={isExpoDialogOpen} onOpenChange={setIsExpoDialogOpen}>
-                  <DialogContent className="max-w-6xl max-h-[90vh] overflow-auto bg-sphere-navy-dark/90 text-sphere-white border border-sphere-blue-light/30 backdrop-blur-lg">
-                    {/* Hidden title for accessibility */}
-                    <DialogTitle className="sr-only">FSIE Fire & Security India Expo 2025</DialogTitle>
-                    {/* Hidden description for accessibility */}
-                    <DialogDescription className="sr-only">
-                      Details about the 8th Edition FSIE Fire & Security India Expo 2025, including event dates, location, and our presence at the expo.
-                    </DialogDescription>
-                    
-                    <div className="space-y-6 p-6">
-                      {/* Close button */}
-                      <div className="flex justify-end">
-                        <button 
-                          onClick={() => setIsExpoDialogOpen(false)}
-                          className="p-2 rounded-full hover:bg-sphere-navy-medium/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sphere-blue-light"
-                          aria-label="Close dialog"
-                        >
-                          <X className="h-5 w-5 text-sphere-white" />
-                        </button>
-                      </div>
-                      
-                      {/* Featured Full Image */}
-                      <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden">
-                        <Image
-                          src="/expo-announcement.png"
-                          alt="FSIE Fire & Security India Expo 2025 - Official Announcement"
-                          fill
-                          className="object-contain"
-                          priority
-                        />
-                      </div>
-                      <div className="text-center">
-                        <h2 className="text-3xl font-bold text-sphere-white mb-4">
-                          FSIE FIRE & SECURITY INDIA EXPO 2025
-                        </h2>
-                        <p className="text-lg text-sphere-white/80 mb-6">
-                          8th Edition | September 11-13, 2025
-                        </p>
-                        
-                        {/* Event Details Section */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                          <div className="bg-sphere-navy-medium/50 border border-sphere-blue-light/30 rounded-xl p-6">
-                            <div className="text-sphere-blue-light text-2xl mb-3">📅</div>
-                            <h3 className="text-xl font-bold text-sphere-white mb-2">Event Dates</h3>
-                            <p className="text-sphere-blue-light font-semibold">September 11-13, 2025</p>
-                            <p className="text-sphere-white/60 text-sm mt-2">India Expo Centre, Greater Noida</p>
-                            <p className="text-sphere-white/60 text-sm">Hall 6 & 7 | 10 AM - 6 PM</p>
-                          </div>
-                          
-                          <div className="bg-sphere-navy-medium/50 border border-sphere-blue-light/30 rounded-xl p-6">
-                            <div className="text-sphere-blue-light text-2xl mb-3">🏢</div>
-                            <h3 className="text-xl font-bold text-sphere-white mb-2">Our Presence</h3>
-                            <p className="text-sphere-blue-light font-semibold">Booth 6A-101</p>
-                            <p className="text-sphere-white/60 text-sm mt-2">Showcasing our latest fire safety innovations</p>
-                            <p className="text-sphere-white/60 text-sm">Live product demonstrations</p>
-                          </div>
-                          
-                          <div className="bg-sphere-navy-medium/50 border border-sphere-blue-light/30 rounded-xl p-6">
-                            <div className="text-sphere-blue-light text-2xl mb-3">🎯</div>
-                            <h3 className="text-xl font-bold text-sphere-white mb-2">Special Features</h3>
-                            <p className="text-sphere-blue-light font-semibold">Live Demos Available</p>
-                            <p className="text-sphere-white/60 text-sm mt-2">Expert consultations</p>
-                            <p className="text-sphere-white/60 text-sm">Exclusive offers for visitors</p>
-                          </div>
-                        </div>
-                        
-                        {/* Additional Information */}
-                        <div className="mt-8 bg-sphere-navy-medium/30 border border-sphere-blue-light/20 rounded-xl p-6 text-left">
-                          <h3 className="text-xl font-bold text-sphere-white mb-4">Event Highlights</h3>
-                          <ul className="space-y-2 text-sphere-white/80">
-                            <li className="flex items-start">
-                              <span className="text-sphere-blue-light mr-2">•</span>
-                              <span>Experience our cutting-edge fire curtain technology live in action</span>
-                            </li>
-                            <li className="flex items-start">
-                              <span className="text-sphere-blue-light mr-2">•</span>
-                              <span>Meet our team of fire safety experts for personalized consultations</span>
-                            </li>
-                            <li className="flex items-start">
-                              <span className="text-sphere-blue-light mr-2">•</span>
-                              <span>Discover exclusive expo-only pricing on our premium solutions</span>
-                            </li>
-                            <li className="flex items-start">
-                              <span className="text-sphere-blue-light mr-2">•</span>
-                              <span>Learn about the latest industry trends and innovations</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </DialogContent>
-                </Dialog>
+                {/* Performance optimization hint */}
+                <div className="absolute bottom-2 right-2 text-xs text-slate-500/30 hidden md:block">
+                  {isLowPerformance ? 'Low performance mode' : 'High performance mode'}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Image Modal */}
+      {isImageModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-lg">
+          <div className="relative max-w-6xl w-full max-h-[90vh]">
+            {/* Close button */}
+            <button
+              onClick={() => setIsImageModalOpen(false)}
+              className="absolute top-4 right-4 z-20 p-2 rounded-full bg-sphere-navy-dark/50 backdrop-blur-sm hover:bg-sphere-navy-medium/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sphere-blue-light border border-sphere-blue-light/30"
+              aria-label="Close dialog"
+            >
+              <X className="h-5 w-5 text-sphere-white" />
+            </button>
+
+            {/* Image container */}
+            <div className="relative w-full h-[70vh] rounded-xl overflow-hidden bg-sphere-navy-medium flex items-center justify-center">
+              <Image
+                src="/expo-announcement.png"
+                alt="FSIE Fire & Security India Expo 2025 - Official Announcement"
+                fill
+                className="object-contain"
+                priority
+                onError={(e) => {
+                  // Fallback if image fails to load
+                  const target = e.target as HTMLImageElement;
+                  target.src = '/slider.jpg';
+                }}
+              />
+            </div>
+
+            {/* Image info overlay */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-sphere-navy-dark/90 to-transparent p-6">
+              <h2 className="text-2xl font-bold text-sphere-white mb-2">
+                FSIE FIRE & SECURITY INDIA EXPO 2025
+              </h2>
+              <p className="text-sphere-blue-light font-semibold">
+                8th Edition | September 11-13, 2025
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

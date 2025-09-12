@@ -11,43 +11,43 @@ const brands = [
   {
     name: 'Coopers Fire UK',
     description: 'World-leading manufacturer of fire curtain systems with over 30 years of engineering excellence.',
-    logo: '/logo-coopers-fire.png',
+    logo: '/CoopersFireUK.webp',
     certifications: ['UL Listed', 'FM Approved', 'CE Marked', 'ISO 9001']
   },
   {
     name: '3M Fire Protection',
     description: 'Innovative fire protection solutions from the global materials science leader.',
-    logo: '/logo-3m.png',
+    logo: '/3MFireProtection.png',
     certifications: ['NFPA Compliant', 'ASFP Member', 'CFPA-E Approved', 'BSI Certified']
   },
   {
     name: 'Honeywell Safety',
     description: 'Global leader in smart fire detection and suppression systems for commercial applications.',
-    logo: '/logo-honeywell.png',
+    logo: '/Honeywell-global-logo.jpg',
     certifications: ['UL Listed', 'FM Approved', 'ISO 9001', 'CFPA-E Approved']
   },
   {
     name: 'Siemens Building Tech',
     description: 'Smart building systems integration with advanced fire safety monitoring capabilities.',
-    logo: '/logo-siemens.png',
+    logo: '/Siemens-Logo.png',
     certifications: ['CE Marked', 'NFPA Compliant', 'BSI Certified', 'ISO 9001']
   },
   {
     name: 'Johnson Controls',
     description: 'Comprehensive fire safety solutions from the global building technology leader.',
-    logo: '/logo-johnson-controls.png',
+    logo: '/JohnsonControls.png',
     certifications: ['UL Listed', 'FM Approved', 'ASFP Member', 'ISO 9001']
   },
   {
     name: 'Tyco Fire Solutions',
     description: 'Global provider of fire detection, suppression and life safety systems.',
-    logo: '/logo-tyco.png',
+    logo: '/TycoFireSolutions.png',
     certifications: ['UL Listed', 'FM Approved', 'CE Marked', 'ISO 9001']
   },
   {
     name: 'Auronyx Systems',
     description: 'Advanced fire protection technology with innovative smart detection systems.',
-    logo: '/logo-auronyx.png',
+    logo: '/AuronyxSystems.png',
     certifications: ['UL Listed', 'CE Marked', 'ISO 9001', 'NFPA Compliant']
   }
 ];
@@ -98,17 +98,6 @@ export default function AssociatedBrandsSection() {
           >
             <span className="text-white/80 text-sm font-medium tracking-wide uppercase">Our Partners</span>
           </motion.div>
-          
-          <motion.h2 
-            className="text-5xl md:text-7xl font-bold mb-8"
-            style={{ color: 'rgb(247, 87, 73)' }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            Associated <span className="block text-white">Brands & Partners</span>
-          </motion.h2>
           
           <motion.p 
             className="text-xl text-muted-foreground max-w-4xl mx-auto"
@@ -164,12 +153,17 @@ export default function AssociatedBrandsSection() {
                     <div className="relative z-10">
                       {/* Logo */}
                       <div className="flex items-center mb-6">
-                        <div className="w-12 h-12 mr-4 relative">
+                        <div className="w-16 h-16 mr-4 relative bg-white rounded-md flex-shrink-0 border border-white/20">
                           <Image
                             src={brand.logo}
                             alt={`${brand.name} logo`}
                             layout="fill"
-                            className="object-contain"
+                            className="object-contain p-2"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                              // You can add a fallback content here if needed
+                            }}
                           />
                         </div>
                         <h3 className="text-2xl font-bold text-gold-platinum">{brand.name}</h3>
