@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  darkMode: ['class'],
+  darkMode: [], // Remove dark mode
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -63,7 +63,7 @@ const config: Config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
-        // ThreeDSphere theme colors
+        // ThreeDSphere theme colors (light version)
         'sphere-navy-dark': 'hsl(var(--sphere-navy-dark))',
         'sphere-navy-medium': 'hsl(var(--sphere-navy-medium))',
         'sphere-navy-light': 'hsl(var(--sphere-navy-light))',
@@ -73,7 +73,7 @@ const config: Config = {
         'sphere-slate-light': 'hsl(var(--sphere-slate-light))',
         'sphere-slate-medium': 'hsl(var(--sphere-slate-medium))',
         'sphere-white': 'hsl(var(--sphere-white))',
-        // Golden luxury color palette
+        // Golden luxury color palette (light version)
         'gold-dark': 'hsl(var(--gold-dark))',
         'gold-deep': 'hsl(var(--gold-deep))',
         'gold-primary': 'hsl(var(--gold-primary))',
@@ -110,22 +110,40 @@ const config: Config = {
             height: '0',
           },
         },
-        'gold-glow': {
+        'light-glow': {
           '0%, 100%': {
-            boxShadow: '0 0 20px hsl(var(--gold-primary) / 0.4), 0 0 40px hsl(var(--gold-primary) / 0.3), 0 0 60px hsl(var(--gold-primary) / 0.2)',
+            boxShadow: '0 0 20px hsl(var(--sphere-blue-primary) / 0.2)',
           },
           '50%': {
-            boxShadow: '0 0 30px hsl(var(--gold-bright) / 0.5), 0 0 60px hsl(var(--gold-bright) / 0.4), 0 0 90px hsl(var(--gold-bright) / 0.3)',
+            boxShadow: '0 0 30px hsl(var(--sphere-blue-primary) / 0.3), 0 0 40px hsl(var(--sphere-blue-light) / 0.2)',
+          },
+        },
+        'light-pulse': {
+          '0%, 100%': {
+            opacity: '1',
+            transform: 'scale(1)',
+          },
+          '50%': {
+            opacity: '0.9',
+            transform: 'scale(1.02)',
+          },
+        },
+        'gold-glow': {
+          '0%, 100%': {
+            boxShadow: '0 0 20px hsl(var(--gold-primary) / 0.3), 0 0 40px hsl(var(--gold-primary) / 0.2), 0 0 60px hsl(var(--gold-primary) / 0.1)',
+          },
+          '50%': {
+            boxShadow: '0 0 30px hsl(var(--gold-bright) / 0.4), 0 0 60px hsl(var(--gold-bright) / 0.3), 0 0 90px hsl(var(--gold-bright) / 0.2)',
           },
         },
         'gold-pulse': {
           '0%, 100%': {
-            opacity: '0.8',
+            opacity: '0.9',
             transform: 'scale(1)',
           },
           '50%': {
             opacity: '1',
-            transform: 'scale(1.05)',
+            transform: 'scale(1.03)',
           },
         },
         'gold-float': {
@@ -133,7 +151,7 @@ const config: Config = {
             transform: 'translateY(0px)',
           },
           '50%': {
-            transform: 'translateY(-10px)',
+            transform: 'translateY(-8px)',
           },
         },
         'gold-rotate': {
@@ -162,18 +180,20 @@ const config: Config = {
         },
         'gold-sparkle': {
           '0%, 100%': {
-            opacity: '0.3',
+            opacity: '0.2',
             transform: 'scale(1)',
           },
           '50%': {
             opacity: '1',
-            transform: 'scale(1.2)',
+            transform: 'scale(1.1)',
           },
         },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'light-glow': 'light-glow 3s ease-in-out infinite',
+        'light-pulse': 'light-pulse 2s ease-in-out infinite',
         'gold-glow': 'gold-glow 3s ease-in-out infinite',
         'gold-pulse': 'gold-pulse 2s ease-in-out infinite',
         'gold-float': 'gold-float 6s ease-in-out infinite',

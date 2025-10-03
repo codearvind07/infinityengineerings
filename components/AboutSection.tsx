@@ -178,16 +178,27 @@ export default function AboutSection() {
   };
 
   return (
-    <section id="about" className="py-24 bg-gradient-to-br from-sphere-navy-dark via-sphere-navy-medium to-sphere-navy-light relative overflow-hidden">
-      {/* Background Effects */}
+    <section id="about" className="py-24 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 relative overflow-hidden">
+      {/* Enhanced Background Effects with more vibrant colors */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-sphere-blue-primary/20 to-sphere-blue-light/30 rounded-full mix-blend-soft-light filter blur-3xl opacity-30 animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-sphere-blue-light/20 to-sphere-blue-pale/30 rounded-full mix-blend-soft-light filter blur-3xl opacity-25 animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-sphere-blue-primary/15 to-teal-400/20 rounded-full mix-blend-soft-light filter blur-3xl opacity-20 animate-pulse" style={{animationDelay: '4s'}}></div>
+        {/* Gradient Orbs with warm colors */}
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-full filter blur-3xl opacity-30 animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full filter blur-3xl opacity-25 animate-pulse" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-indigo-400/10 to-blue-400/10 rounded-full filter blur-3xl opacity-20 animate-pulse" style={{animationDelay: '4s'}}></div>
+        </div>
+        
+        {/* Geometric Elements with vibrant colors */}
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-10 left-10 w-24 h-24 border-2 border-indigo-300/40 rotate-45 rounded-lg"></div>
+          <div className="absolute top-20 right-20 w-16 h-16 border-2 border-purple-300/40 rounded-full"></div>
+          <div className="absolute bottom-20 left-20 w-20 h-20 border-2 border-pink-300/40 rotate-12 rounded-xl"></div>
+          <div className="absolute bottom-10 right-10 w-12 h-12 border-2 border-blue-300/40 rotate-[-30deg] rounded-full"></div>
+        </div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Hero Header */}
+        {/* Hero Header with enhanced styling */}
         <motion.div 
           className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
@@ -196,56 +207,45 @@ export default function AboutSection() {
           transition={{ duration: 0.8 }}
         >
           <motion.div 
-            className="inline-flex items-center bg-gradient-to-r from-sphere-navy-dark/70 to-sphere-navy-medium/70 backdrop-blur-md border border-sphere-blue-light/40 rounded-full px-6 py-2 mb-6 shadow-lg"
+            className="inline-flex items-center bg-gradient-to-r from-indigo-600/15 to-purple-600/15 backdrop-blur-sm border border-indigo-200/50 rounded-full px-6 py-2 mb-6 shadow-lg"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
+            whileHover={{ scale: 1.05 }}
           >
+            <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2 animate-pulse"></div>
             <span 
-              className="text-sm font-medium tracking-wide uppercase"
-              style={{ 
-                background: 'linear-gradient(135deg, hsl(var(--sphere-blue-light)) 0%, hsl(var(--tech-teal)) 100%)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
-              }}
+              className="text-sm font-semibold tracking-wider uppercase text-indigo-700"
             >
-              About Company
+              About Our Company
             </span>
           </motion.div>
           
           <motion.h2 
-            className="text-5xl md:text-7xl font-bold mb-8 leading-tight"
-            style={{ 
-              background: 'linear-gradient(135deg, hsl(var(--sphere-blue-light)) 0%, hsl(var(--sphere-blue-pale)) 50%, hsl(var(--tech-teal)) 100%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}
+            className="text-4xl md:text-6xl font-bold mb-8 leading-tight bg-gradient-to-r from-slate-800 via-indigo-900 to-purple-900 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            INFINITY ENGINEERINGS
-            
+            INFINITY <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">ENGINEERINGS</span>
           </motion.h2>
           
           <motion.p 
-            className="text-base md:text-lg text-center max-w-4xl mx-auto leading-relaxed text-sphere-white/80 font-light"
+            className="text-lg md:text-xl text-center max-w-4xl mx-auto leading-relaxed text-slate-700 font-light"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            INFINITY ENGINEERINGS is a premier distributor of innovative building solutions, driving safety, sustainability, and functionality across the construction industry since June 2021. We have established ourselves as a trusted partner for architects, consultants, and builders throughout India through strategic partnerships that include serving as the authorized distributor for Coopers Fire Ltd. (London, UK) for Fire and Smoke Curtains across India, Nepal, Bhutan, and Sri Lanka, maintaining a corporate partnership with Panasonic LED Lighting for comprehensive pan-India operations, and operating as the North Indian distributor for Dormakaba&apos;s premium hardware solutions with nationwide service coverage.
+            Premier distributor of innovative building solutions, driving safety, sustainability, and functionality across the construction industry since June 2021. Trusted partner for architects, consultants, and builders throughout India.
           </motion.p>
         </motion.div>
 
-        {/* Stats Section */}
+        {/* Enhanced Stats Section with more vibrant colors */}
         <motion.div 
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-24"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -255,33 +255,25 @@ export default function AboutSection() {
             <motion.div 
               key={index}
               className="text-center group"
-              whileHover={{ y: -8, scale: 1.05 }}
+              whileHover={{ y: -10 }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="bg-gradient-to-br from-sphere-navy-dark/70 to-sphere-navy-medium/70 backdrop-blur-md border border-sphere-blue-light/30 rounded-2xl p-8 h-full transition-all duration-300 group-hover:from-sphere-navy-dark/90 group-hover:to-sphere-navy-medium/90 group-hover:border-teal-400/50 shadow-xl">
-                <div 
-                  className="text-4xl md:text-5xl font-bold mb-3 tracking-tight"
-                  style={{ 
-                    background: 'linear-gradient(135deg, hsl(var(--sphere-blue-light)) 0%, hsl(var(--tech-teal)) 100%)',
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }}
-                >
+              <div className="bg-white/80 backdrop-blur-lg border border-indigo-100/50 rounded-2xl p-6 h-full transition-all duration-500 group-hover:shadow-xl group-hover:border-indigo-200/50 group-hover:bg-gradient-to-br group-hover:from-white/90 group-hover:to-indigo-50/50">
+                <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                   <CountUp end={stat.number} duration={stat.duration} suffix={stat.suffix} />
                 </div>
-                <div className="text-lg font-medium text-sphere-white/90">{stat.label}</div>
+                <div className="text-sm font-semibold text-indigo-700 uppercase tracking-wider">{stat.label}</div>
               </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Main Content Grid */}
+        {/* Main Content Grid with enhanced layout */}
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
-          {/* Content */}
+          {/* Content with improved typography */}
           <motion.div 
             className="space-y-8"
             initial={{ opacity: 0, x: -30 }}
@@ -291,22 +283,16 @@ export default function AboutSection() {
           >
             <div>
               <motion.h3 
-                className="text-4xl md:text-5xl font-bold mb-6 leading-tight"
-                style={{ 
-                  background: 'linear-gradient(135deg, hsl(var(--sphere-blue-light)) 0%, hsl(var(--tech-teal)) 100%)',
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent'
-                }}
+                className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-indigo-800 bg-clip-text text-transparent"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                Our Company
+                Leading Fire Protection <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Solutions</span>
               </motion.h3>
               
-              <div className="space-y-6 text-lg text-sphere-white/90 leading-relaxed">
+              <div className="space-y-5 text-base text-slate-700 leading-relaxed">
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -322,45 +308,41 @@ export default function AboutSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  We have established ourselves as a trusted partner for architects, consultants, and builders throughout India through strategic partnerships that include serving as the authorized distributor for Coopers Fire Ltd. (London, UK) for Fire and Smoke Curtains across India, Nepal, Bhutan, and Sri Lanka, maintaining a corporate partnership with Panasonic LED Lighting for comprehensive pan-India operations, and operating as the North Indian distributor for Dormakaba&apos;s premium hardware solutions with nationwide service coverage.
+                  We have established ourselves as a trusted partner for architects, consultants, and builders throughout India through strategic partnerships that include serving as the authorized distributor for Coopers Fire Ltd. (London, UK) for Fire and Smoke Curtains across India, Nepal, Bhutan, and Sri Lanka.
                 </motion.p>
               </div>
             </div>
             
-            {/* Mission Card */}
+            {/* Enhanced Mission Card */}
             <motion.div 
-              className="bg-gradient-to-r from-sphere-navy-dark/70 to-sphere-navy-medium/70 backdrop-blur-md border border-sphere-blue-light/40 rounded-2xl p-8 shadow-xl"
+              className="bg-gradient-to-br from-white/90 to-indigo-50/50 backdrop-blur-lg border border-indigo-200/50 rounded-3xl p-8 shadow-xl relative overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.5 }}
+              whileHover={{ y: -5 }}
             >
-              <div className="flex items-start space-x-4">
-                <Award 
-                  className="h-8 w-8 flex-shrink-0 mt-1" 
-                  style={{ color: 'rgb(247, 87, 73)' }} 
-                />
+              {/* Decorative Elements */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-500/15 to-purple-500/15 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-br from-purple-500/15 to-pink-500/15 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+              
+              <div className="flex items-start space-x-4 relative z-10">
+                <div className="flex-shrink-0 p-4 bg-gradient-to-br from-indigo-500/25 to-purple-500/25 rounded-2xl backdrop-blur-sm border border-indigo-200/40">
+                  <Award className="h-8 w-8 text-indigo-600" />
+                </div>
                 <div>
-                  <h4 
-                    className="text-2xl font-bold mb-4"
-                    style={{ 
-                      background: 'linear-gradient(135deg, hsl(var(--sphere-blue-light)) 0%, hsl(var(--tech-teal)) 100%)',
-                      WebkitBackgroundClip: 'text',
-                      backgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent'
-                    }}
-                  >
+                  <h4 className="text-2xl font-bold mb-4 text-slate-800">
                     Our Mission
                   </h4>
-                  <p className="text-lg text-sphere-white/90 leading-relaxed">
-                    To be India&apos;s most trusted partner in fire and smoke protection, delivering innovative solutions that <span className="text-sphere-blue-light font-semibold">save lives while preserving architectural integrity</span>. We aim to make advanced fire safety accessible across all building types, from luxury developments to essential infrastructure.
+                  <p className="text-base text-slate-700 leading-relaxed">
+                    To be India's most trusted partner in fire and smoke protection, delivering innovative solutions that <span className="text-indigo-600 font-semibold">save lives while preserving architectural integrity</span>. We aim to make advanced fire safety accessible across all building types.
                   </p>
                 </div>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Image */}
+          {/* Enhanced Image with better styling */}
           <motion.div 
             className="relative"
             initial={{ opacity: 0, x: 30 }}
@@ -368,62 +350,47 @@ export default function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="relative bg-gradient-to-br from-sphere-navy-dark/70 to-sphere-navy-medium/70 backdrop-blur-md border border-sphere-blue-light/40 rounded-3xl overflow-hidden group shadow-2xl">
+            <div className="relative bg-gradient-to-br from-white/90 to-indigo-50/50 backdrop-blur-lg border border-indigo-200/50 rounded-3xl overflow-hidden group shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-purple-500/10"></div>
               <Image 
                 src={banner}
                 alt="Fire and smoke curtain protection system"
-                className="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div 
-                className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"
-              ></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
               
-              {/* Overlay Content */}
+              {/* Enhanced Overlay Content */}
               <div className="absolute bottom-8 left-8 right-8">
-                <div className="bg-gradient-to-r from-sphere-navy-dark/80 to-sphere-navy-medium/80 backdrop-blur-md border border-sphere-blue-light/40 rounded-xl p-6 shadow-lg">
-                  <h5 
-                    className="text-xl font-bold mb-2"
-                    style={{ 
-                      background: 'linear-gradient(135deg, hsl(var(--sphere-blue-light)) 0%, hsl(var(--tech-teal)) 100%)',
-                      WebkitBackgroundClip: 'text',
-                      backgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent'
-                    }}
-                  >
+                <div className="bg-white/90 backdrop-blur-lg border border-indigo-200/50 rounded-2xl p-6 shadow-xl">
+                  <h5 className="text-xl font-bold mb-2 text-slate-800">
                     Advanced Fire Protection
                   </h5>
-                  <p className="text-sphere-white/90">Cutting-edge technology ensuring safety and compliance</p>
+                  <p className="text-slate-600">Cutting-edge technology ensuring safety and compliance</p>
                 </div>
               </div>
             </div>
           </motion.div>
         </div>
 
-        {/* Core Values Section */}
+        {/* Enhanced Core Values Section */}
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
           <motion.h3 
-            className="text-4xl md:text-5xl font-bold mb-6 leading-tight"
-            style={{ 
-              background: 'linear-gradient(135deg, hsl(var(--sphere-blue-light)) 0%, hsl(var(--tech-teal)) 100%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}
+            className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-indigo-800 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            Our Core Values
+            Our Core <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Values</span>
           </motion.h3>
           <motion.p 
-            className="text-xl text-sphere-white/90 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -433,7 +400,7 @@ export default function AboutSection() {
           </motion.p>
         </motion.div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
           {values.map((value, index) => (
             <motion.div 
               key={index} 
@@ -442,34 +409,27 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ y: -8 }}
+              whileHover={{ y: -10 }}
             >
-              <div className="bg-gradient-to-br from-sphere-navy-dark/70 to-sphere-navy-medium/70 backdrop-blur-md border border-sphere-blue-light/30 rounded-2xl p-8 h-full transition-all duration-300 group-hover:from-sphere-navy-dark/90 group-hover:to-sphere-navy-medium/90 group-hover:border-teal-400/50 text-center shadow-xl">
-                {/* Icon */}
+              <div className="bg-white/80 backdrop-blur-lg border border-indigo-100/50 rounded-3xl p-8 h-full transition-all duration-500 group-hover:shadow-2xl group-hover:border-indigo-200/50 group-hover:bg-gradient-to-br group-hover:from-white/90 group-hover:to-indigo-50/50 relative overflow-hidden">
+                {/* Decorative corner elements */}
+                <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-br-full"></div>
+                <div className="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tr from-purple-500/10 to-pink-500/10 rounded-tl-full"></div>
+                
+                {/* Enhanced Icon */}
                 <motion.div 
-                  className="inline-flex items-center justify-center w-16 h-16 rounded-xl mb-6 bg-gradient-to-br from-sphere-navy-dark/60 to-sphere-navy-medium/60 border border-sphere-blue-light/40 shadow-md"
+                  className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 bg-gradient-to-br from-indigo-500/25 to-purple-500/25 backdrop-blur-sm border border-indigo-200/40"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <value.icon 
-                    className="h-8 w-8" 
-                    style={{ color: 'hsl(var(--tech-teal))' }} 
-                  />
+                  <value.icon className="h-8 w-8 text-indigo-600" />
                 </motion.div>
                 
                 {/* Content */}
-                <h4 
-                  className="text-xl font-bold mb-4"
-                  style={{ 
-                    background: 'linear-gradient(135deg, hsl(var(--sphere-blue-light)) 0%, hsl(var(--tech-teal)) 100%)',
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }}
-                >
+                <h4 className="text-xl font-bold mb-4 text-slate-800">
                   {value.title}
                 </h4>
-                <p className="text-sphere-white/90 leading-relaxed">
+                <p className="text-slate-600 leading-relaxed">
                   {value.description}
                 </p>
               </div>
@@ -477,22 +437,16 @@ export default function AboutSection() {
           ))}
         </div>
 
-        {/* Welcome Message Section (Managing Director) */}
+        {/* Welcome Message Section with enhanced design */}
         <motion.div 
-          className="mt-24 mb-16 text-center"
+          className="mt-24 mb-20 text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
           <motion.h3 
-            className="text-4xl md:text-5xl font-bold mb-6 leading-tight"
-            style={{ 
-              background: 'linear-gradient(135deg, hsl(var(--sphere-blue-light)) 0%, hsl(var(--tech-teal)) 100%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}
+            className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-indigo-800 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -500,163 +454,136 @@ export default function AboutSection() {
           >
             Welcome Message
           </motion.h3>
+          <motion.p 
+            className="text-lg text-slate-600 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            A word from our founder and managing director
+          </motion.p>
         </motion.div>
 
         <motion.div 
-          className="bg-gradient-to-br from-sphere-navy-dark/70 to-sphere-navy-medium/70 backdrop-blur-md border border-sphere-blue-light/40 rounded-3xl p-8 md:p-12 shadow-2xl mb-24"
+          className="bg-gradient-to-br from-white/90 to-indigo-50/50 backdrop-blur-lg border border-indigo-200/50 rounded-3xl p-10 shadow-2xl mb-24 relative overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
+          whileHover={{ y: -5 }}
         >
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="flex-shrink-0">
-              <div className="bg-gradient-to-br from-sphere-blue-primary/20 to-teal-500/20 border-2 border-sphere-blue-light/30 rounded-full w-48 h-48 md:w-56 md:h-56 flex items-center justify-center shadow-lg overflow-hidden">
-                {/* Actual Managing Director Image */}
+          {/* Decorative Elements */}
+          <div className="absolute top-0 left-0 w-full h-full">
+            <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+            <div className="absolute bottom-0 right-0 w-60 h-60 bg-gradient-to-tr from-purple-500/10 to-pink-500/10 rounded-full translate-x-1/2 translate-y-1/2"></div>
+          </div>
+          
+          <div className="flex flex-col md:flex-row items-center gap-10 relative z-10">
+            <motion.div 
+              className="flex-shrink-0"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="bg-gradient-to-br from-indigo-500/25 to-purple-500/25 border-2 border-indigo-200/40 rounded-3xl w-40 h-40 md:w-48 md:h-48 flex items-center justify-center shadow-xl overflow-hidden">
                 <Image 
                   src={mdImage}
                   alt="Vikas K Mathur, Founder & Managing Director"
-                  width={224}
-                  height={224}
+                  width={192}
+                  height={192}
                   className="object-cover"
                 />
               </div>
-            </div>
+            </motion.div>
             
             <div className="flex-1 text-center md:text-left">
               <div className="mb-6">
-                <h4 
-                  className="text-2xl md:text-3xl font-bold mb-2"
-                  style={{ 
-                    background: 'linear-gradient(135deg, hsl(var(--sphere-blue-light)) 0%, hsl(var(--tech-teal)) 100%)',
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }}
-                >
+                <h4 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2">
                   {managingDirector.name}
                 </h4>
-                <p className="text-xl text-sphere-blue-light font-semibold">{managingDirector.title}</p>
+                <p className="text-lg text-indigo-600 font-semibold">{managingDirector.title}</p>
               </div>
               
               <div className="relative">
-                <div className="absolute top-0 left-0 text-6xl text-sphere-blue-light/10 leading-none">“</div>
-                <p className="text-lg md:text-xl text-sphere-white/90 leading-relaxed pl-8 relative">
+                <div className="absolute top-0 left-0 text-6xl text-indigo-200 leading-none hidden md:block">"</div>
+                <p className="text-lg md:text-xl text-slate-700 leading-relaxed pl-0 md:pl-10 relative italic">
                   {managingDirector.message}
                 </p>
-                <div className="absolute bottom-0 right-0 text-6xl text-sphere-blue-light/10 leading-none">”</div>
+                <div className="absolute bottom-0 right-0 text-6xl text-indigo-200 leading-none hidden md:block">"</div>
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* Meet The Team Section */}
+        {/* Enhanced Meet The Team Section */}
         <motion.div 
-          className="mt-24 mb-16 text-center"
+          className="mt-20 mb-12 text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
           <motion.h3 
-            className="text-4xl md:text-5xl font-bold mb-6 leading-tight"
-            style={{ 
-              background: 'linear-gradient(135deg, hsl(var(--sphere-blue-light)) 0%, hsl(var(--tech-teal)) 100%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}
+            className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-indigo-800 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            Meet The Team
+            Meet Our <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Leadership</span>
           </motion.h3>
-        </motion.div>
-
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h4 
-            className="text-2xl md:text-3xl font-bold mb-4"
-            style={{ 
-              background: 'linear-gradient(135deg, hsl(var(--sphere-blue-light)) 0%, hsl(var(--tech-teal)) 100%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}
+          <motion.p 
+            className="text-lg text-slate-600 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            A STRONG TEAM, BEHIND EVERY SOLUTION.
-          </h4>
+            The experienced professionals driving our success
+          </motion.p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {teamMembers.map((member, index) => (
-            // Regular team member cards with images
             <motion.div
               key={index}
-              className="bg-gradient-to-br from-sphere-navy-dark/70 to-sphere-navy-medium/70 backdrop-blur-md border border-sphere-blue-light/30 rounded-2xl p-8 shadow-xl"
+              className="bg-white/80 backdrop-blur-lg border border-indigo-100/50 rounded-3xl p-8 shadow-xl relative overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
+              whileHover={{ y: -8, boxShadow: "0 25px 50px -12px rgba(99, 102, 241, 0.15)" }}
             >
+              {/* Decorative Elements */}
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-bl-full"></div>
+              
               <div className="flex flex-col items-center mb-6">
-                <div className="bg-gradient-to-br from-sphere-blue-primary/20 to-teal-500/20 border-2 border-sphere-blue-light/30 rounded-full w-32 h-32 flex items-center justify-center shadow-lg mb-4 overflow-hidden">
-                  {/* Actual team member image */}
-                  <Image 
-                    src={teamMemberImages[index]}
-                    alt={`${member.name}, ${member.position}`}
-                    width={128}
-                    height={128}
-                    className="object-cover"
-                  />
-                </div>
-                <h4 
-                  className="text-xl font-bold mb-2"
-                  style={{ 
-                    background: 'linear-gradient(135deg, hsl(var(--sphere-blue-light)) 0%, hsl(var(--tech-teal)) 100%)',
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }}
+                <motion.div 
+                  className="mb-6 overflow-hidden"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
                 >
+                  <div className="bg-gradient-to-br from-indigo-500/25 to-purple-500/25 border-2 border-indigo-200/40 rounded-2xl w-32 h-32 flex items-center justify-center shadow-lg">
+                    <Image 
+                      src={teamMemberImages[index]}
+                      alt={`${member.name}, ${member.position}`}
+                      width={128}
+                      height={128}
+                      className="object-cover"
+                    />
+                  </div>
+                </motion.div>
+                <h4 className="text-xl font-bold text-slate-800 mb-1">
                   {member.name}
                 </h4>
-                <p className="text-sphere-blue-light font-semibold text-center mb-4">{member.position}</p>
+                <p className="text-indigo-600 font-semibold text-center mb-3">{member.position}</p>
               </div>
-              <p className="text-sphere-white/90 leading-relaxed text-center">
+              <p className="text-slate-600 leading-relaxed text-center">
                 {member.description}
               </p>
             </motion.div>
           ))}
         </div>
-
-        <motion.div 
-          className="text-center mb-24"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-        </motion.div>
-
-        {/* Add Associated Brands Section after the main content grid */}
-        <motion.div 
-          className="mt-24"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-         
-        </motion.div>
       </div>
     </section>
   );

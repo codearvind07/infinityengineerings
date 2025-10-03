@@ -57,7 +57,7 @@ export default function ResourcesSection() {
   ];
 
   return (
-    <section id="resources" className="py-20 bg-gradient-to-br from-gray-900 to-black">
+    <section id="resources" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div 
@@ -67,7 +67,7 @@ export default function ResourcesSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-block px-4 py-1 mb-4 text-sm font-semibold text-fire-red bg-gray-800 rounded-full border border-fire-red/30">
+          <div className="inline-block px-4 py-1 mb-4 text-sm font-semibold text-fire-red bg-card rounded-full border border-fire-red/30">
             TECHNICAL RESOURCES
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
@@ -96,7 +96,7 @@ export default function ResourcesSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="bg-gradient-to-b from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl overflow-hidden hover:border-fire-red/50 transition-all duration-300 hover:transform hover:scale-105 h-full flex flex-col shadow-lg hover:shadow-xl">
+              <div className="bg-gradient-to-b from-card/50 to-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl overflow-hidden hover:border-fire-red/50 transition-all duration-300 hover:transform hover:scale-105 h-full flex flex-col shadow-lg hover:shadow-xl">
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden">
                   <img 
@@ -106,14 +106,14 @@ export default function ResourcesSection() {
                     width={resource.image.width}
                     height={resource.image.height}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
                   <div className="absolute top-4 left-4">
                     <div className="bg-fire-red/20 backdrop-blur-sm rounded-lg p-2 border border-fire-red/30">
                       <resource.icon className="h-6 w-6 text-fire-red" />
                     </div>
                   </div>
                   <div className="absolute bottom-4 left-4">
-                    <h3 className="text-xl font-bold text-white">{resource.title}</h3>
+                    <h3 className="text-xl font-bold text-foreground">{resource.title}</h3>
                   </div>
                 </div>
 
@@ -122,7 +122,7 @@ export default function ResourcesSection() {
                   <p className="text-muted-foreground leading-relaxed mb-6 flex-grow">{resource.description}</p>
                   
                   <Button 
-                    className="w-full bg-gradient-to-r from-gray-700 to-gray-800 hover:from-fire-red hover:to-fire-red/90 text-foreground group border border-gray-600 hover:border-fire-red/50 transition-all duration-300 font-semibold"
+                    className="w-full bg-gradient-to-r from-card to-card hover:from-fire-red hover:to-fire-red/90 text-foreground group border border-sphere-blue-primary/20 hover:border-fire-red/50 transition-all duration-300 font-semibold"
                   >
                     {resource.action}
                     <ExternalLink className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -135,7 +135,7 @@ export default function ResourcesSection() {
 
         {/* Additional Resources */}
         <motion.div 
-          className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8"
+          className="bg-gradient-to-r from-card/50 to-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl p-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -150,12 +150,12 @@ export default function ResourcesSection() {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-gradient-to-r from-fire-red to-fire-red/90 hover:from-fire-red/90 hover:to-fire-red text-foreground px-8 py-3 border border-fire-red/50 shadow-lg shadow-fire-red/20 hover:shadow-fire-red/40 transition-all duration-300 font-semibold">
+            <Button className="bg-gradient-to-r from-fire-red to-fire-red/90 hover:from-fire-red/90 hover:to-fire-red text-white px-8 py-3 border border-fire-red/50 shadow-lg shadow-fire-red/20 hover:shadow-fire-red/40 transition-all duration-300 font-semibold">
               Explore Articles
             </Button>
             <Button 
               variant="outline" 
-              className="border-gray-600 text-muted-foreground hover:text-foreground hover:bg-gray-700 hover:border-gray-400 px-8 py-3 transition-all duration-300 font-semibold"
+              className="border-sphere-blue-primary/30 text-foreground hover:text-foreground hover:bg-card/80 hover:border-sphere-blue-primary px-8 py-3 transition-all duration-300 font-semibold"
             >
               View Standards
             </Button>

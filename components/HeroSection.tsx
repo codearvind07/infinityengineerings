@@ -6,116 +6,144 @@ import slider from '../public/slider.jpg';
 import slider1 from '../public/slider1.jpg';
 import slider2 from '../public/slider2.jpg';
 import slider3 from '../public/slider3.avif';
-import anno from '../public/FSIE Expo Meet & Talk Announcement.png';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import Link from 'next/link';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const sliderImages: { url: StaticImageData; alt: string; title: string; subtitle: string }[] = [
+const sliderImages: { url: StaticImageData; alt: string }[] = [
   {
     url: slider,
     alt: 'Modern Building Safety Systems',
-    title: "India's Premier Fire Protection Specialists",
-    subtitle: 'Authorized distributor of COOPERS FIRE UK - bringing world-class fire curtain technology to India.',
   },
   {
     url: slider1,
     alt: 'Commercial Fire Protection',
-    title: "Comprehensive Fire Safety Solutions",
-    subtitle: 'Tailored systems for Indian commercial buildings, hospitals, and industrial facilities.',
   },
   {
     url: slider2,
     alt: 'Advanced Safety Technology',
-    title: "British Engineering Excellence",
-    subtitle: 'Over 15 years of delivering cutting-edge fire curtain systems across India.',
   },
   {
     url: slider3,
     alt: 'Architectural Safety Integration',
-    title: "Seamless Architectural Integration",
-    subtitle: 'Fire safety solutions that complement Indian architectural designs and building codes.',
   },
 ];
 
 export default function HeroSection(): JSX.Element {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isExpoDialogOpen, setIsExpoDialogOpen] = useState(false);
-  const [isHoverPopupOpen, setIsHoverPopupOpen] = useState(false);
+  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
 
   useEffect(() => {
     const interval = setInterval(() => {
+      setDirection(1);
       setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
-    }, 5000);
+    }, 7000); // Increased interval for better performance
     return () => clearInterval(interval);
   }, []);
 
+  const nextSlide = () => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
+  };
+
+  const prevSlide = () => {
+    setDirection(-1);
+    setCurrentSlide((prev) => (prev - 1 + sliderImages.length) % sliderImages.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setDirection(index > currentSlide ? 1 : -1);
+    setCurrentSlide(index);
+  };
+
   const activeSlide = sliderImages[currentSlide];
+
+  // Simplified variants for slide animation
+  const slideVariants = {
+    hiddenRight: {
+      x: "100%",
+      opacity: 0,
+    },
+    hiddenLeft: {
+      x: "-100%",
+      opacity: 0,
+    },
+    visible: {
+      x: "0",
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeInOut" as const,
+      },
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.95,
+      transition: {
+        duration: 0.4,
+        ease: "easeInOut" as const,
+      },
+    },
+  };
 
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center text-foreground overflow-hidden bg-[#0c101a]"
-      style={{ fontFamily: 'sans-serif' }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
-      {/* Background Image Slider */}
+      {/* Background Image Slider with Framer Motion */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src={activeSlide.url}
-          alt={activeSlide.alt}
-          fill
-          className="object-cover transition-opacity duration-1000"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-sphere-navy-dark/30 via-transparent to-sphere-navy-dark/30" />
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div
+            key={currentSlide}
+            custom={direction}
+            variants={slideVariants}
+            initial={direction === 1 ? "hiddenRight" : "hiddenLeft"}
+            animate="visible"
+            exit="exit"
+            className="absolute inset-0"
+          >
+            <Image
+              src={activeSlide.url}
+              alt={activeSlide.alt}
+              fill
+              className="object-cover" // Changed back to object-cover for full coverage
+              priority
+              sizes="100vw"
+            />
+          </motion.div>
+        </AnimatePresence>
       </div>
 
-
-      {/* Hero Content */}
-      <div className="relative z-10 text-center px-4 animate-fade-in-up">
-        <div className="mb-8">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-sphere-white">
-            {activeSlide.title}
-          </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-sphere-blue-light to-sphere-blue-light/50 mx-auto rounded-full animate-pulse" />
-        </div>
-        
-        <p className="text-xl md:text-2xl text-sphere-white/80 max-w-4xl mx-auto mb-12 leading-relaxed">
-          {activeSlide.subtitle}
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <Link href="/products">
-            <Button size="lg" className="bg-sphere-blue-light hover:bg-sphere-blue-light/90 text-sphere-navy-dark text-lg px-8 py-4 rounded-full font-semibold transition-all duration-300">
-              Explore Our Solutions
-            </Button>
-          </Link>
-          <Link href="/contact">
-            <Button size="lg" variant="outline" className="border-sphere-blue-light text-sphere-white hover:bg-sphere-blue-light/20 text-lg px-8 py-4 rounded-full font-semibold transition-all duration-300 bg-sphere-navy-dark/50">
-              Get In Touch
-            </Button>
-          </Link>
-        </div>
-      </div>
+      {/* Navigation Arrows */}
+      <button 
+        onClick={prevSlide}
+        className="absolute left-4 z-20 p-3 rounded-full bg-black/20 text-white hover:bg-black/30 backdrop-blur-sm border border-white/20 shadow-md"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="h-6 w-6" />
+      </button>
+      
+      <button 
+        onClick={nextSlide}
+        className="absolute right-4 z-20 p-3 rounded-full bg-black/20 text-white hover:bg-black/30 backdrop-blur-sm border border-white/20 shadow-md"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="h-6 w-6" />
+      </button>
 
       {/* Slider indicators */}
-      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
         {sliderImages.map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`relative transition-all duration-500 ${
+            onClick={() => goToSlide(index)}
+            className={`relative transition-all duration-300 ${
               index === currentSlide 
-                ? 'w-12 h-3 bg-gradient-to-r from-sphere-blue-light to-sphere-blue-light/70 rounded-full animate-pulse' 
-                : 'w-3 h-3 bg-sphere-white/50 rounded-full hover:bg-sphere-blue-light/70 hover:scale-125'
+                ? 'w-3 h-3 bg-white rounded-full' 
+                : 'w-2 h-2 bg-white/50 rounded-full hover:bg-white/80'
             }`}
-          >
-            {index === currentSlide && (
-              <div className="absolute inset-0 bg-gradient-to-r from-sphere-blue-light to-sphere-blue-light/70 rounded-full animate-pulse" />
-            )}
-          </button>
+            aria-label={`Go to slide ${index + 1}`}
+          />
         ))}
       </div>
     </section>

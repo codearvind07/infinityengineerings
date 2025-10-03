@@ -55,7 +55,7 @@ export default function ApplicationsSection() {
   ];
 
   return (
-    <section id="applications" className="py-20 bg-gray-900">
+    <section id="applications" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -70,7 +70,7 @@ export default function ApplicationsSection() {
               At Coopers, our commitment to life safety has led us to develop a wide range of fire and smoke curtains approved to protect every type of building application. From Atria and lobbies to escalators and doors, no matter what the application you're protecting, our fire and smoke curtains provide a modern, non-invasive alternative to traditional fire protection.
             </p>
             <div className="mt-8">
-              <button className="bg-fire-red hover:bg-fire-red/90 text-foreground px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-fire-red/20">
+              <button className="bg-fire-red hover:bg-fire-red/90 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-fire-red/20">
                 View our products
               </button>
             </div>
@@ -87,8 +87,8 @@ export default function ApplicationsSection() {
               {/* Content */}
               <div className="flex-1 space-y-6">
                 <div className="flex items-center space-x-4">
-                  <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-3">
-                    <app.icon className="h-8 w-8 text-muted-foreground" />
+                  <div className="bg-card/50 border border-sphere-blue-primary/20 rounded-xl p-3">
+                    <app.icon className="h-8 w-8 text-foreground" />
                   </div>
                   <h3 className="text-3xl font-bold text-foreground">{app.title}</h3>
                 </div>
@@ -96,10 +96,10 @@ export default function ApplicationsSection() {
                   {app.description}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="bg-gray-800 hover:bg-gray-700 text-foreground px-6 py-3 rounded-lg font-semibold transition-all duration-200 border border-gray-700">
+                  <button className="bg-card hover:bg-card/80 text-foreground px-6 py-3 rounded-lg font-semibold transition-all duration-200 border border-sphere-blue-primary/20">
                     Read more
                   </button>
-                  <button className="border border-gray-600 text-muted-foreground hover:text-foreground hover:border-gray-400 px-6 py-3 rounded-lg font-semibold transition-all duration-200">
+                  <button className="border border-sphere-blue-primary/30 text-foreground hover:text-sphere-blue-primary hover:border-sphere-blue-primary px-6 py-3 rounded-lg font-semibold transition-all duration-200">
                     Technical Specs
                   </button>
                 </div>
@@ -108,7 +108,7 @@ export default function ApplicationsSection() {
               {/* Image */}
               <div className="flex-1">
                 <div className="relative group">
-                  <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-1 border border-gray-700">
+                  <div className="bg-gradient-to-br from-card/50 to-card/50 rounded-2xl p-1 border border-sphere-blue-primary/20">
                     <img 
                       src={app.image}
                       alt={app.title}

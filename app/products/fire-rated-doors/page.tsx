@@ -79,14 +79,20 @@ export default function FireRatedDoorsPage() {
   ];
 
   return (
-    <main className="min-h-screen pt-16 bg-gradient-to-br from-sphere-navy-dark via-sphere-navy-medium to-sphere-navy-light">
+    <main className="min-h-screen pt-16 bg-gradient-to-br from-background via-card/80 to-sphere-blue-pale/30 relative overflow-hidden">
+      {/* Animated gradient background elements */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-sphere-blue-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-sphere-blue-light/15 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '1s' }} />
+        <div className="absolute bottom-1/3 left-1/3 w-56 h-56 bg-sphere-blue-pale/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '2s' }} />
+      </div>
       <Header />
       
       {/* Hero Section */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-1/2 left-1/4 w-96 h-96 bg-gradient-to-r from-sphere-navy-medium/30 to-sphere-navy-light/30 rounded-full mix-blend-soft-light filter blur-3xl opacity-20 animate-pulse"></div>
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-gradient-to-r from-sphere-navy-light/20 to-sphere-navy-medium/20 rounded-full mix-blend-soft-light filter blur-3xl opacity-15"></div>
+          <div className="absolute -top-1/2 left-1/4 w-96 h-96 bg-gradient-to-r from-sphere-blue-primary/10 to-sphere-blue-light/10 rounded-full mix-blend-soft-light filter blur-3xl opacity-20 animate-pulse"></div>
+          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-gradient-to-r from-sphere-blue-light/10 to-sphere-blue-pale/10 rounded-full mix-blend-soft-light filter blur-3xl opacity-15"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -95,7 +101,7 @@ export default function FireRatedDoorsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Link href="/products" className="inline-flex items-center text-sphere-blue-light hover:text-sphere-white transition-colors mb-8">
+            <Link href="/products" className="inline-flex items-center text-sphere-blue-primary hover:text-sphere-blue-light transition-colors mb-8">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Products
             </Link>
@@ -107,26 +113,26 @@ export default function FireRatedDoorsPage() {
               transition={{ duration: 0.8 }}
             >
               <div className="inline-block mb-4">
-                <div className="bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-full px-4 py-1.5">
-                  <span className="text-sphere-white text-sm font-medium">FIRE SAFETY DOORS</span>
+                <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-full px-4 py-1.5">
+                  <span className="text-foreground text-sm font-medium">FIRE SAFETY DOORS</span>
                 </div>
               </div>
               
-              <h1 className="text-4xl md:text-6xl font-bold text-sphere-white mb-6">
-                Fire Rated <span className="text-sphere-blue-light">Doors</span>
+              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+                Fire Rated <span className="text-sphere-blue-primary">Doors</span>
               </h1>
               
-              <p className="text-xl text-sphere-white/80 mb-8 leading-relaxed">
+              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
                 Designing Safety with Innovations - Clean Lines, Clear Minds: The Minimalist Way. We offer a comprehensive range of fire-rated doors, glazed partitions, and specialized hardware to protect your property.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/contact">
-                  <Button className="bg-sphere-blue-light hover:bg-sphere-blue-light/90 text-sphere-navy-dark text-lg px-8 py-3 rounded-full font-semibold">
+                  <Button className="bg-sphere-blue-primary hover:bg-sphere-blue-light text-white text-lg px-8 py-3 rounded-full font-semibold">
                     Get Quote
                   </Button>
                 </Link>
-                <Button variant="outline" className="border-sphere-blue-light text-sphere-white hover:bg-sphere-blue-light/20 text-lg px-8 py-3 rounded-full">
+                <Button variant="outline" className="border-sphere-blue-primary text-foreground hover:bg-sphere-blue-primary/10 text-lg px-8 py-3 rounded-full">
                   Door Configurator
                 </Button>
               </div>
@@ -138,7 +144,7 @@ export default function FireRatedDoorsPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-2xl overflow-hidden">
+              <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl overflow-hidden">
                 <Image 
                   src="https://images.pexels.com/photos/277574/pexels-photo-277574.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
                   alt="Fire Rated Door Installation"
@@ -163,10 +169,10 @@ export default function FireRatedDoorsPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-sphere-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Product Categories
             </h2>
-            <p className="text-xl text-sphere-white/80 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               From wooden & metal fire doors to acoustic solutions, clean room doors, and architectural systems - reliable safety products for all building requirements.
             </p>
           </motion.div>
@@ -175,20 +181,20 @@ export default function FireRatedDoorsPage() {
             {features.map((feature, index) => (
               <motion.div 
                 key={index}
-                className="bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-2xl p-8 transition-all duration-300 relative overflow-hidden"
+                className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl p-8 transition-all duration-300 relative overflow-hidden"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 whileHover={{ y: -10 }}
               >
-                <div className="bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/30 rounded-xl p-3 w-fit mb-6">
-                  <feature.icon className="h-8 w-8 text-sphere-blue-light animate-pulse" />
+                <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/30 rounded-xl p-3 w-fit mb-6">
+                  <feature.icon className="h-8 w-8 text-sphere-blue-primary animate-pulse" />
                 </div>
-                <h3 className="text-2xl font-bold text-sphere-white mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                   {feature.title}
                 </h3>
-                <p className="text-sphere-white/80 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
@@ -207,7 +213,7 @@ export default function FireRatedDoorsPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-sphere-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Door Solutions
             </h2>
           </motion.div>
@@ -216,7 +222,7 @@ export default function FireRatedDoorsPage() {
             {doorTypes.map((type, index) => (
               <motion.div 
                 key={index}
-                className="bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-2xl p-8 transition-all duration-300"
+                className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl p-8 transition-all duration-300"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -224,31 +230,31 @@ export default function FireRatedDoorsPage() {
               >
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <h3 className="text-2xl font-bold text-sphere-white mb-4">
+                    <h3 className="text-2xl font-bold text-foreground mb-4">
                       {type.name}
                     </h3>
-                    <p className="text-sphere-white/80 mb-6">
+                    <p className="text-muted-foreground mb-6">
                       {type.description}
                     </p>
                     <div>
-                      <h4 className="text-lg font-semibold text-sphere-blue-light mb-3">Key Features:</h4>
+                      <h4 className="text-lg font-semibold text-sphere-blue-primary mb-3">Key Features:</h4>
                       <div className="space-y-2">
                         {type.features.map((feature, featureIndex) => (
                           <div key={featureIndex} className="flex items-center space-x-2">
-                            <div className="w-1.5 h-1.5 bg-sphere-blue-light rounded-full animate-pulse"></div>
-                            <span className="text-sm text-sphere-white/80">{feature}</span>
+                            <div className="w-1.5 h-1.5 bg-sphere-blue-primary rounded-full animate-pulse"></div>
+                            <span className="text-sm text-muted-foreground">{feature}</span>
                           </div>
                         ))}
                       </div>
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-sphere-blue-light mb-3">Ideal Applications:</h4>
+                    <h4 className="text-lg font-semibold text-sphere-blue-primary mb-3">Ideal Applications:</h4>
                     <div className="space-y-2">
                       {type.applications.map((application, appIndex) => (
-                        <div key={appIndex} className="flex items-center space-x-3 p-2 bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-lg">
-                          <CheckCircle className="h-4 w-4 text-sphere-blue-light flex-shrink-0" />
-                          <span className="text-sphere-white">{application}</span>
+                        <div key={appIndex} className="flex items-center space-x-3 p-2 bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-lg">
+                          <CheckCircle className="h-4 w-4 text-sphere-blue-primary flex-shrink-0" />
+                          <span className="text-foreground">{application}</span>
                         </div>
                       ))}
                     </div>
@@ -270,40 +276,40 @@ export default function FireRatedDoorsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-4xl font-bold text-sphere-white mb-8">
+              <h2 className="text-4xl font-bold text-foreground mb-8">
                 Technical Specifications
               </h2>
               <div className="space-y-4 mb-12">
                 {specifications.map((spec, index) => (
                   <motion.div 
                     key={index}
-                    className="flex justify-between items-center p-4 bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-lg"
+                    className="flex justify-between items-center p-4 bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-lg"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <span className="text-sphere-white font-medium">{spec.label}</span>
-                    <span className="text-sphere-blue-light font-semibold">{spec.value}</span>
+                    <span className="text-foreground font-medium">{spec.label}</span>
+                    <span className="text-sphere-blue-primary font-semibold">{spec.value}</span>
                   </motion.div>
                 ))}
               </div>
 
-              <h2 className="text-4xl font-bold text-sphere-white mb-8">
+              <h2 className="text-4xl font-bold text-foreground mb-8">
                 Hardware Options
               </h2>
               <div className="grid grid-cols-1 gap-3">
                 {hardwareOptions.map((hardware, index) => (
                   <motion.div 
                     key={index}
-                    className="flex items-center space-x-3 p-3 bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-lg"
+                    className="flex items-center space-x-3 p-3 bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-lg"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <CheckCircle className="h-5 w-5 text-sphere-blue-light flex-shrink-0" />
-                    <span className="text-sphere-white">{hardware}</span>
+                    <CheckCircle className="h-5 w-5 text-sphere-blue-primary flex-shrink-0" />
+                    <span className="text-foreground">{hardware}</span>
                   </motion.div>
                 ))}
               </div>
@@ -315,44 +321,44 @@ export default function FireRatedDoorsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-4xl font-bold text-sphere-white mb-8">
+              <h2 className="text-4xl font-bold text-foreground mb-8">
                 Key Benefits
               </h2>
               <div className="grid grid-cols-1 gap-3 mb-12">
                 {benefits.map((benefit, index) => (
                   <motion.div 
                     key={index}
-                    className="flex items-center space-x-3 p-3 bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-lg"
+                    className="flex items-center space-x-3 p-3 bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-lg"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <CheckCircle className="h-5 w-5 text-sphere-blue-light flex-shrink-0" />
-                    <span className="text-sphere-white">{benefit}</span>
+                    <CheckCircle className="h-5 w-5 text-sphere-blue-primary flex-shrink-0" />
+                    <span className="text-foreground">{benefit}</span>
                   </motion.div>
                 ))}
               </div>
 
-              <div className="bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-2xl p-6">
-                <h3 className="text-2xl font-bold text-sphere-white mb-4">
+              <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl p-6">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                   Glazed Metal Fire Rated Door
                 </h3>
-                <p className="text-sphere-white/80 mb-4">
+                <p className="text-muted-foreground mb-4">
                   Special mention for our glazed metal fire-rated doors that provide exceptional visibility while maintaining fire protection standards.
                 </p>
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
-                    <div className="w-1.5 h-1.5 bg-sphere-blue-light rounded-full animate-pulse"></div>
-                    <span className="text-sm text-sphere-white/80">Clear sight lines for safety</span>
+                    <div className="w-1.5 h-1.5 bg-sphere-blue-primary rounded-full animate-pulse"></div>
+                    <span className="text-sm text-muted-foreground">Clear sight lines for safety</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <div className="w-1.5 h-1.5 bg-sphere-blue-light rounded-full animate-pulse"></div>
-                    <span className="text-sm text-sphere-white/80">Fire-rated glass integration</span>
+                    <div className="w-1.5 h-1.5 bg-sphere-blue-primary rounded-full animate-pulse"></div>
+                    <span className="text-sm text-muted-foreground">Fire-rated glass integration</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <div className="w-1.5 h-1.5 bg-sphere-blue-light rounded-full animate-pulse"></div>
-                    <span className="text-sm text-sphere-white/80">Modern architectural appeal</span>
+                    <div className="w-1.5 h-1.5 bg-sphere-blue-primary rounded-full animate-pulse"></div>
+                    <span className="text-sm text-muted-foreground">Modern architectural appeal</span>
                   </div>
                 </div>
               </div>
@@ -369,22 +375,22 @@ export default function FireRatedDoorsPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-2xl p-12"
+            className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl p-12"
           >
-            <h2 className="text-4xl font-bold text-sphere-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Secure Your Building's Safety
             </h2>
-            <p className="text-xl text-sphere-white/80 mb-8">
+            <p className="text-xl text-muted-foreground mb-8">
               Get expert consultation on fire-rated door solutions that meet building codes and enhance architectural design.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
-                <Button className="bg-sphere-blue-light hover:bg-sphere-blue-light/90 text-sphere-navy-dark text-lg px-8 py-3 rounded-full font-semibold">
+                <Button className="bg-sphere-blue-primary hover:bg-sphere-blue-light text-white text-lg px-8 py-3 rounded-full font-semibold">
                   Request Door Assessment
                 </Button>
               </Link>
               <Link href="/products">
-                <Button variant="outline" className="border-sphere-blue-light text-sphere-white hover:bg-sphere-blue-light/20 text-lg px-8 py-3 rounded-full">
+                <Button variant="outline" className="border-sphere-blue-primary text-foreground hover:bg-sphere-blue-primary/10 text-lg px-8 py-3 rounded-full">
                   Explore All Products
                 </Button>
               </Link>

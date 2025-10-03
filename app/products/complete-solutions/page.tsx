@@ -103,23 +103,29 @@ export default function CompleteSolutionsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sphere-navy-dark via-sphere-navy-medium to-sphere-navy-light">
+    <div className="min-h-screen bg-gradient-to-br from-background via-card/80 to-sphere-blue-pale/30 relative overflow-hidden">
+      {/* Animated gradient background elements */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-sphere-blue-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-sphere-blue-light/15 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '1s' }} />
+        <div className="absolute bottom-1/3 left-1/3 w-56 h-56 bg-sphere-blue-pale/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '2s' }} />
+      </div>
       <Header />
       
       {/* Hero Section */}
       <section className="pt-24 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-1/2 left-1/4 w-96 h-96 bg-gradient-to-r from-sphere-navy-medium/30 to-sphere-navy-light/30 rounded-full mix-blend-soft-light filter blur-3xl opacity-20 animate-pulse"></div>
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-gradient-to-r from-sphere-navy-light/20 to-sphere-navy-medium/20 rounded-full mix-blend-soft-light filter blur-3xl opacity-15"></div>
+          <div className="absolute -top-1/2 left-1/4 w-96 h-96 bg-gradient-to-r from-sphere-blue-primary/10 to-sphere-blue-light/10 rounded-full mix-blend-soft-light filter blur-3xl opacity-20 animate-pulse"></div>
+          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-gradient-to-r from-sphere-blue-light/10 to-sphere-blue-pale/10 rounded-full mix-blend-soft-light filter blur-3xl opacity-15"></div>
         </div>
-        
+      
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Link href="/products" className="inline-flex items-center text-sphere-blue-light hover:text-sphere-white transition-colors mb-8">
+            <Link href="/products" className="inline-flex items-center text-sphere-blue-primary hover:text-sphere-blue-light transition-colors mb-8">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Products
             </Link>
@@ -132,42 +138,42 @@ export default function CompleteSolutionsPage() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="inline-block mb-4"
                 >
-                  <div className="bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-full px-4 py-1.5">
-                    <span className="text-sphere-white text-sm font-medium">INTEGRATED SYSTEMS</span>
+                  <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-full px-4 py-1.5">
+                    <span className="text-foreground text-sm font-medium">INTEGRATED SYSTEMS</span>
                   </div>
                 </motion.div>
-                
-                <h1 className="text-4xl md:text-6xl font-bold text-sphere-white mb-6">
+              
+                <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
                   Complete Fire Safety 
-                  <span className="block text-sphere-blue-light">Solutions</span>
+                  <span className="block text-sphere-blue-primary">Solutions</span>
                 </h1>
-                
-                <p className="text-xl text-sphere-white/80 mb-8 leading-relaxed">
+              
+                <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
                   End-to-end fire safety solutions combining all our products for comprehensive building protection, 
                   from detection to evacuation systems with integrated management and monitoring.
                 </p>
-                
+              
                 <div className="flex flex-wrap gap-4">
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button className="bg-sphere-blue-light hover:bg-sphere-blue-light/90 text-sphere-navy-dark text-lg px-8 py-3 rounded-full">
+                    <Button className="bg-sphere-blue-primary hover:bg-sphere-blue-light text-white text-lg px-8 py-3 rounded-full">
                       Get Complete Assessment
                     </Button>
                   </motion.div>
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button variant="outline" className="border-sphere-blue-light text-sphere-white hover:bg-sphere-blue-light/20 text-lg px-8 py-3 rounded-full">
+                    <Button variant="outline" className="border-sphere-blue-primary text-foreground hover:bg-sphere-blue-primary/10 text-lg px-8 py-3 rounded-full">
                       View Case Studies
                     </Button>
                   </motion.div>
                 </div>
               </div>
-              
+            
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="relative"
               >
-                <div className="bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-2xl p-8">
+                <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl p-8">
                   <img 
                     src="https://images.pexels.com/photos/1106468/pexels-photo-1106468.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1"
                     alt="Complete Fire Safety Solutions"
@@ -190,10 +196,10 @@ export default function CompleteSolutionsPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-sphere-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Tailored Solution Packages
             </h2>
-            <p className="text-xl text-sphere-white/80 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Pre-configured fire safety packages designed for specific building types and industries
             </p>
           </motion.div>
@@ -206,18 +212,18 @@ export default function CompleteSolutionsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/20 rounded-xl p-8"
+                className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-xl p-8"
                 whileHover={{ y: -5 }}
               >
-                <h3 className="text-2xl font-bold text-sphere-white mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                   {package_.name}
                 </h3>
-                <p className="text-sphere-white/80 mb-6">
+                <p className="text-muted-foreground mb-6">
                   {package_.description}
                 </p>
-                
+              
                 <div className="mb-6">
-                  <h4 className="text-lg font-semibold text-sphere-blue-light mb-3">Package Components:</h4>
+                  <h4 className="text-lg font-semibold text-sphere-blue-primary mb-3">Package Components:</h4>
                   <ul className="space-y-2">
                     {package_.components.map((component, idx) => (
                       <motion.li
@@ -226,22 +232,22 @@ export default function CompleteSolutionsPage() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 * idx }}
-                        className="flex items-center text-sphere-white/80"
+                        className="flex items-center text-muted-foreground"
                       >
-                        <CheckCircle className="h-4 w-4 text-sphere-blue-light mr-2 flex-shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-sphere-blue-primary mr-2 flex-shrink-0" />
                         {component}
                       </motion.li>
                     ))}
                   </ul>
                 </div>
-                
+              
                 <div>
-                  <h4 className="text-lg font-semibold text-sphere-blue-light mb-3">Key Benefits:</h4>
+                  <h4 className="text-lg font-semibold text-sphere-blue-primary mb-3">Key Benefits:</h4>
                   <div className="flex flex-wrap gap-2">
                     {package_.benefits.map((benefit, idx) => (
                       <span
                         key={idx}
-                        className="bg-sphere-navy-dark/50 backdrop-blur-sm border border-sphere-blue-light/30 px-3 py-1 rounded-full text-sm text-sphere-white/80"
+                        className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/30 px-3 py-1 rounded-full text-sm text-muted-foreground"
                       >
                         {benefit}
                       </span>
@@ -264,10 +270,10 @@ export default function CompleteSolutionsPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gold-platinum mb-6 gold-glow-text">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Implementation Process
             </h2>
-            <p className="text-xl text-gold-platinum/80 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Our proven 5-step process ensures successful project delivery from concept to commissioning
             </p>
           </motion.div>
@@ -282,15 +288,15 @@ export default function CompleteSolutionsPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="gold-card rounded-xl p-6 gold-interactive mb-4 h-full">
-                  <div className="gold-glass rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-gold-accent">{step.step}</span>
+                <div className="bg-card/50 border border-sphere-blue-primary/20 rounded-xl p-6 hover:bg-card/80 transition-all duration-300 mb-4 h-full">
+                  <div className="bg-card border border-sphere-blue-primary/30 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-sphere-blue-primary">{step.step}</span>
                   </div>
-                  <step.icon className="h-8 w-8 text-gold-light mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-gold-platinum mb-2 gold-glow-text">
+                  <step.icon className="h-8 w-8 text-sphere-blue-primary mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-gold-platinum/80 text-sm">
+                  <p className="text-muted-foreground text-sm">
                     {step.description}
                   </p>
                 </div>

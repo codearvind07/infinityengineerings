@@ -39,46 +39,36 @@ export function debounce<T extends (...args: any[]) => any>(
   };
 }
 
-// Throttle function to limit the rate at which a function is called
+// Improved Throttle function to limit the rate at which a function is called
 export function throttle<T extends (...args: any[]) => any>(
   func: T,
   limit: number
 ): (...args: Parameters<T>) => void {
-  let inThrottle: boolean;
+  let lastFunc: NodeJS.Timeout;
+  let lastRan: number;
+  
   return function executedFunction(...args: Parameters<T>) {
-    if (!inThrottle) {
+    if (!lastRan) {
       func(...args);
-      inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
+      lastRan = Date.now();
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(function() {
+        if ((Date.now() - lastRan) >= limit) {
+          func(...args);
+          lastRan = Date.now();
+        }
+      }, limit - (Date.now() - lastRan));
     }
   };
 }
 
 // Optimize scroll performance
 export function optimizeScrollPerformance() {
-  // Disable scroll anchoring to prevent layout shifts during scroll
-  document.documentElement.style.scrollBehavior = 'smooth';
-  document.documentElement.style.scrollPaddingTop = '0';
-  
-  // Optimize rendering during scroll
-  let ticking = false;
-  
-  function updateScrollPosition() {
-    // Any scroll-related updates can go here
-    ticking = false;
-  }
-  
-  function requestTick() {
-    if (!ticking) {
-      requestAnimationFrame(updateScrollPosition);
-      ticking = true;
-    }
-  }
-  
   // Use passive event listeners for better performance
-  window.addEventListener('scroll', requestTick, { passive: true });
-  window.addEventListener('touchmove', requestTick, { passive: true });
-  window.addEventListener('wheel', requestTick, { passive: true });
+  window.addEventListener('scroll', () => {}, { passive: true });
+  window.addEventListener('touchmove', () => {}, { passive: true });
+  window.addEventListener('wheel', () => {}, { passive: true });
 }
 
 // Lazy load images for better performance
@@ -101,7 +91,7 @@ export function lazyLoadImages() {
       });
     }, {
       // Optimize the observer
-      rootMargin: '50px 0px',
+      rootMargin: '100px 0px',
       threshold: 0.01
     });
     
@@ -113,40 +103,22 @@ export function lazyLoadImages() {
 
 // Optimize CSS animations
 export function optimizeCSSAnimations() {
-  // Add will-change property to animated elements
-  const animatedElements = document.querySelectorAll(
-    '.animate-fade-in-up, .animate-marquee, .navy-glow, .navy-pulse, .gold-glow, .gold-pulse, .gold-float, .gold-rotate, .gold-shimmer, .gold-drift, .gold-sparkle, .will-change-transform'
-  );
-  
-  animatedElements.forEach(el => {
-    // Only add will-change if not already present
-    if (!el.classList.contains('will-change-transform')) {
-      el.classList.add('will-change-transform');
-    }
-  });
-  
   // Reduce animation intensity for users who prefer reduced motion
   if (prefersReducedMotion()) {
     document.body.classList.add('reduce-motion');
   }
-}
-
-// Optimize rendering performance
-export function optimizeRendering() {
-  // Enable hardware acceleration for composited layers
-  const compositedElements = document.querySelectorAll('.composited');
-  compositedElements.forEach(el => {
-    (el as HTMLElement).style.transform = 'translateZ(0)';
-  });
-  
-  // Optimize font rendering - using type assertion for vendor-prefixed properties
-  (document.body.style as any).webkitFontSmoothing = 'antialiased';
-  (document.body.style as any).mozOsxFontSmoothing = 'grayscale';
   
   // Reduce animations on low performance devices
   if (isLowPerformanceDevice()) {
     document.body.classList.add('low-performance');
   }
+}
+
+// Optimize rendering performance
+export function optimizeRendering() {
+  // Optimize font rendering
+  (document.body.style as any).webkitFontSmoothing = 'antialiased';
+  (document.body.style as any).mozOsxFontSmoothing = 'grayscale';
 }
 
 // Initialize performance optimizations

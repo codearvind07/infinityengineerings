@@ -58,11 +58,11 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-sphere-navy-dark via-sphere-navy-medium to-sphere-navy-light relative overflow-hidden">
-      {/* Navy blue animated background elements */}
+    <section id="contact" className="py-20 bg-gradient-to-br from-background via-card to-background relative overflow-hidden">
+      {/* Simplified background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 left-1/4 w-96 h-96 bg-gradient-to-r from-sphere-blue-primary/20 to-sphere-blue-light/20 rounded-full mix-blend-soft-light filter blur-3xl opacity-15 animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-gradient-to-r from-sphere-blue-bright/20 to-sphere-blue-accent/20 rounded-full mix-blend-soft-light filter blur-3xl opacity-10 animate-pulse"></div>
+        <div className="absolute -top-1/2 left-1/4 w-80 h-80 bg-gradient-to-r from-sphere-blue-primary/5 to-sphere-blue-light/5 rounded-full filter blur-2xl opacity-3"></div>
+        <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-gradient-to-r from-sphere-blue-bright/5 to-sphere-blue-accent/5 rounded-full filter blur-2xl opacity-2"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -72,31 +72,31 @@ export default function ContactSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-sphere-white mb-6">
-            Get in <span className="text-sphere-blue-light">Touch</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+            Get in <span className="text-sphere-blue-primary">Touch</span>
           </h2>
-          <p className="text-xl text-sphere-slate-light max-w-3xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Ready to discuss your fire protection needs? Our experts are here to help you 
             find the perfect solution for your building&apos;s safety requirements.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-8">
           {/* Contact Form */}
           <motion.div 
-            className="bg-sphere-navy-light/20 border border-sphere-blue-primary/20 backdrop-blur-sm rounded-2xl p-8"
+            className="bg-card/20 border border-sphere-blue-primary/20 backdrop-blur-sm rounded-2xl p-6"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
           >
-            <h3 className="text-2xl font-bold text-sphere-white mb-6">Send Us a Message</h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <h3 className="text-xl font-bold text-foreground mb-5">Send Us a Message</h3>
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-sphere-blue-light mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-sphere-blue-primary mb-2">
                     Full Name *
                   </label>
                   <Input
@@ -106,12 +106,12 @@ export default function ContactSection() {
                     required
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="bg-sphere-navy-dark/50 border-sphere-blue-primary/30 text-sphere-white focus:border-sphere-blue-light"
+                    className="bg-card/50 border-sphere-blue-primary/30 text-foreground focus:border-sphere-blue-primary"
                     placeholder="John Smith"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-sphere-blue-light mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-sphere-blue-primary mb-2">
                     Email Address *
                   </label>
                   <Input
@@ -121,7 +121,7 @@ export default function ContactSection() {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="bg-sphere-navy-dark/50 border-sphere-blue-primary/30 text-sphere-white focus:border-sphere-blue-light"
+                    className="bg-card/50 border-sphere-blue-primary/30 text-foreground focus:border-sphere-blue-primary"
                     placeholder="john@company.com"
                   />
                 </div>
@@ -129,7 +129,7 @@ export default function ContactSection() {
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-sphere-blue-light mb-2">
+                  <label htmlFor="company" className="block text-sm font-medium text-sphere-blue-primary mb-2">
                     Company
                   </label>
                   <Input
@@ -138,12 +138,12 @@ export default function ContactSection() {
                     type="text"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="bg-sphere-navy-dark/50 border-sphere-blue-primary/30 text-sphere-white focus:border-sphere-blue-light"
+                    className="bg-card/50 border-sphere-blue-primary/30 text-foreground focus:border-sphere-blue-primary"
                     placeholder="Your Company"
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-sphere-blue-light mb-2">
+                  <label htmlFor="phone" className="block text-sm font-medium text-sphere-blue-primary mb-2">
                     Phone Number
                   </label>
                   <Input
@@ -152,14 +152,14 @@ export default function ContactSection() {
                     type="tel"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="bg-sphere-navy-dark/50 border-sphere-blue-primary/30 text-sphere-white focus:border-sphere-blue-light"
+                    className="bg-card/50 border-sphere-blue-primary/30 text-foreground focus:border-sphere-blue-primary"
                     placeholder="+1 (555) 123-4567"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-sphere-blue-light mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-sphere-blue-primary mb-2">
                   Subject *
                 </label>
                 <Input
@@ -169,63 +169,56 @@ export default function ContactSection() {
                   required
                   value={formData.subject}
                   onChange={handleInputChange}
-                  className="bg-sphere-navy-dark/50 border-sphere-blue-primary/30 text-sphere-white focus:border-sphere-blue-light"
+                  className="bg-card/50 border-sphere-blue-primary/30 text-foreground focus:border-sphere-blue-primary"
                   placeholder="Fire Protection Consultation"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-sphere-blue-light mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-sphere-blue-primary mb-2">
                   Message *
                 </label>
                 <Textarea
                   id="message"
                   name="message"
                   required
-                  rows={5}
+                  rows={4}
                   value={formData.message}
                   onChange={handleInputChange}
-                  className="bg-sphere-navy-dark/50 border-sphere-blue-primary/30 text-sphere-white focus:border-sphere-blue-light"
+                  className="bg-card/50 border-sphere-blue-primary/30 text-foreground focus:border-sphere-blue-primary"
                   placeholder="Please provide details about your project requirements, building type, and specific fire protection needs..."
                 />
               </div>
 
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Button 
-                  type="submit" 
-                  className="w-full bg-sphere-blue-primary hover:bg-sphere-blue-light text-sphere-white py-3 text-lg font-semibold transition-all duration-200 hover:transform hover:scale-105 rounded-full"
-                >
-                  Send Message
-                </Button>
-              </motion.div>
+              <Button 
+                type="submit" 
+                className="w-full bg-sphere-blue-primary hover:bg-sphere-blue-light text-white py-2.5 text-base font-semibold transition-all duration-200 rounded-full"
+              >
+                Send Message
+              </Button>
             </form>
           </motion.div>
 
           {/* Contact Information */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             {contactInfo.map((info, index) => (
               <motion.div 
                 key={index} 
-                className="bg-sphere-navy-light/20 border border-sphere-blue-primary/20 backdrop-blur-sm rounded-xl p-6 hover:border-sphere-blue-light/40 transition-all duration-300"
+                className="bg-card/20 border border-sphere-blue-primary/20 backdrop-blur-sm rounded-xl p-5 hover:border-sphere-blue-primary/40 transition-all duration-300"
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                whileHover={{ y: -5 }}
+                transition={{ delay: index * 0.1, duration: 0.4 }}
               >
                 <div className="flex items-start space-x-4">
-                  <motion.div 
-                    className={`bg-sphere-navy-light/30 border border-sphere-blue-primary/30 rounded-lg p-3`}
-                    whileHover={{ rotate: 10 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <info.icon className={`h-6 w-6 text-${info.color}`} />
-                  </motion.div>
+                  <div className={`bg-card/30 border border-sphere-blue-primary/30 rounded-lg p-3`}>
+                    <info.icon className={`h-5 w-5 text-${info.color}`} />
+                  </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-sphere-white mb-2">{info.title}</h4>
+                    <h4 className="text-base font-semibold text-foreground mb-2">{info.title}</h4>
                     <div className="space-y-1">
                       {info.details.map((detail, idx) => (
-                        <p key={idx} className="text-sphere-slate-light">{detail}</p>
+                        <p key={idx} className="text-muted-foreground text-sm">{detail}</p>
                       ))}
                     </div>
                   </div>
@@ -235,18 +228,18 @@ export default function ContactSection() {
 
             {/* Emergency Contact */}
             <motion.div 
-              className="bg-gradient-to-r from-sphere-navy-dark/60 to-sphere-navy-medium/70 border border-sphere-blue-primary/30 rounded-xl p-6"
+              className="bg-gradient-to-r from-card/60 to-card/70 border border-sphere-blue-primary/30 rounded-xl p-5"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.8 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
             >
-              <h4 className="text-xl font-bold text-sphere-white mb-3">Emergency Support</h4>
-              <p className="text-sphere-slate-light mb-4">
+              <h4 className="text-lg font-bold text-foreground mb-2">Emergency Support</h4>
+              <p className="text-muted-foreground mb-3 text-sm">
                 24/7 emergency support for critical fire protection system issues.
               </p>
-              <div className="flex items-center space-x-2 text-sphere-blue-light font-semibold">
-                <Phone className="h-5 w-5" />
+              <div className="flex items-center space-x-2 text-sphere-blue-primary font-semibold">
+                <Phone className="h-4 w-4" />
                 <span>971-817-0004</span>
               </div>
             </motion.div>

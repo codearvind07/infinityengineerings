@@ -49,7 +49,7 @@ export default function RootLayout({
   
   return (
     <html lang="en" className={`scroll-smooth ${interTight.variable}`}>
-      <body className={`${interTight.className} bg-background text-foreground antialiased`}>
+      <body className={`${interTight.className} bg-background text-foreground two-color-gradient`}>
         {children}
       </body>
     </html>
