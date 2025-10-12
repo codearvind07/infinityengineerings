@@ -1,15 +1,20 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import slider from '../public/slider.jpg';
-import slider1 from '../public/slider1.jpg';
+import slider1 from '../public/slider1.webp';
 import slider2 from '../public/slider2.jpg';
 import slider3 from '../public/slider3.avif';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const sliderImages: { url: StaticImageData; alt: string }[] = [
+interface Slide {
+  url: StaticImageData;
+  alt: string;
+}
+
+const sliderContent: Slide[] = [
   {
     url: slider,
     alt: 'Modern Building Safety Systems',
@@ -29,86 +34,65 @@ const sliderImages: { url: StaticImageData; alt: string }[] = [
 ];
 
 export default function HeroSection(): JSX.Element {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
+  const [activeSlide, setActiveSlide] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setDirection(1);
-      setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
-    }, 7000); // Increased interval for better performance
-    return () => clearInterval(interval);
+    startAutoplay();
+    return () => stopAutoplay();
   }, []);
 
+  const stopAutoplay = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
+  const startAutoplay = () => {
+    stopAutoplay();
+    intervalRef.current = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % sliderContent.length);
+    }, 7000);
+  };
+
   const nextSlide = () => {
-    setDirection(1);
-    setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
+    setActiveSlide((prev) => (prev + 1) % sliderContent.length);
+    startAutoplay();
   };
 
   const prevSlide = () => {
-    setDirection(-1);
-    setCurrentSlide((prev) => (prev - 1 + sliderImages.length) % sliderImages.length);
+    setActiveSlide((prev) => (prev - 1 + sliderContent.length) % sliderContent.length);
+    startAutoplay();
   };
 
   const goToSlide = (index: number) => {
-    setDirection(index > currentSlide ? 1 : -1);
-    setCurrentSlide(index);
-  };
-
-  const activeSlide = sliderImages[currentSlide];
-
-  // Simplified variants for slide animation
-  const slideVariants = {
-    hiddenRight: {
-      x: "100%",
-      opacity: 0,
-    },
-    hiddenLeft: {
-      x: "-100%",
-      opacity: 0,
-    },
-    visible: {
-      x: "0",
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeInOut" as const,
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.95,
-      transition: {
-        duration: 0.4,
-        ease: "easeInOut" as const,
-      },
-    },
+    setActiveSlide(index);
+    startAutoplay();
   };
 
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+      className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-background text-white"
     >
-      {/* Background Image Slider with Framer Motion */}
+      {/* Main Image Display Area */}
       <div className="absolute inset-0 z-0">
-        <AnimatePresence initial={false} custom={direction}>
+        <AnimatePresence>
           <motion.div
-            key={currentSlide}
-            custom={direction}
-            variants={slideVariants}
-            initial={direction === 1 ? "hiddenRight" : "hiddenLeft"}
-            animate="visible"
-            exit="exit"
+            key={activeSlide}
+            layoutId={`card-${activeSlide}`}
             className="absolute inset-0"
+            transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
           >
             <Image
-              src={activeSlide.url}
-              alt={activeSlide.alt}
+              src={sliderContent[activeSlide].url}
+              alt={sliderContent[activeSlide].alt}
               fill
-              className="object-cover" // Changed back to object-cover for full coverage
+              className="object-cover w-full h-full"
               priority
-              sizes="100vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+              quality={90}
             />
           </motion.div>
         </AnimatePresence>
@@ -132,18 +116,25 @@ export default function HeroSection(): JSX.Element {
       </button>
 
       {/* Slider indicators */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-        {sliderImages.map((_, index) => (
-          <button
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20" onMouseEnter={stopAutoplay} onMouseLeave={startAutoplay}>
+        {sliderContent.map((slide, index) => (
+          <motion.button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`relative transition-all duration-300 ${
-              index === currentSlide 
-                ? 'w-3 h-3 bg-white rounded-full' 
-                : 'w-2 h-2 bg-white/50 rounded-full hover:bg-white/80'
+            className={`relative w-24 h-14 rounded-md overflow-hidden cursor-pointer transition-all duration-300 border-2 ${
+              index === activeSlide
+                ? 'border-white scale-110'
+                : 'border-transparent opacity-60 hover:opacity-100 hover:border-white/50'
             }`}
             aria-label={`Go to slide ${index + 1}`}
-          />
+          >
+            <motion.div layoutId={`card-${index}`} className="relative w-full h-full">
+              <Image src={slide.url} alt={`Thumbnail for ${slide.alt}`} fill className="object-cover" />
+            </motion.div>
+            {index === activeSlide && (
+              <motion.div className="absolute bottom-0 left-0 h-1 bg-white" initial={{ width: '0%' }} animate={{ width: '100%' }} transition={{ duration: 7, ease: 'linear' }} />
+            )}
+          </motion.button>
         ))}
       </div>
     </section>

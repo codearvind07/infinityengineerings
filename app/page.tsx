@@ -12,15 +12,7 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
-// Commenting out the heavy ThreeDSphereSection component that was causing performance issues
-// const ThreeDSphereSection = dynamic(() => import('@/components/ThreeDSphereSection'), {
-//   ssr: false,
-//   loading: () => (
-//     <div className="relative min-h-screen flex items-center justify-center">
-//       <div className="animate-pulse text-foreground">Loading...</div>
-//     </div>
-//   )
-// });
+
 
 const SectorsPage = dynamic(() => import('./sectors/page'), {
   ssr: false,
@@ -49,17 +41,7 @@ export default function Home() {
         <div className="absolute bottom-1/3 left-1/3 w-1 h-1 bg-sphere-blue-accent rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
       
-      <Header />
-      
-      {/* Removing the ThreeDSphereSection component that was causing performance issues */}
-      {/* <Suspense fallback={
-        <div className="relative min-h-screen flex items-center justify-center">
-          <div className="animate-pulse text-foreground">Loading...</div>
-        </div>
-      }>
-        <ThreeDSphereSection />
-      </Suspense> */}
-      
+      <Header />      
       <HeroSection />
      
       <AboutSection />

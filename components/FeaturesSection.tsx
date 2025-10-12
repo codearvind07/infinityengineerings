@@ -10,55 +10,77 @@ export default function FeaturesSection() {
       title: 'Certified Excellence',
       description: 'All our systems meet international fire safety standards and certifications including UL, FM, and CE marking.',
       stats: '100% Compliant',
-      color: 'fire-red'
+      color: 'from-amber-400 to-orange-500',
+      dark: true
     },
     {
       icon: Clock,
       title: 'Rapid Deployment',
       description: 'Quick installation with minimal disruption to building operations. Expert team ensures efficient project completion.',
       stats: '< 30 Days',
-      color: 'energy-orange'
+      color: 'from-cyan-400 to-blue-500',
+      dark: false
     },
     {
       icon: Settings,
       title: 'Custom Engineering',
       description: 'Tailored solutions for unique architectural requirements. Every system is designed to fit your specific needs.',
       stats: '500+ Designs',
-      color: 'tech-teal'
+      color: 'from-emerald-400 to-teal-500',
+      dark: true
     },
     {
       icon: Zap,
       title: 'Automatic Operation',
       description: 'Smart fire detection integration with automatic curtain deployment. No manual intervention required during emergencies.',
       stats: '99.9% Reliable',
-      color: 'safety-blue'
+      color: 'from-violet-400 to-purple-500',
+      dark: false
     },
     {
       icon: ShieldCheck,
       title: 'Proven Reliability',
       description: 'Decades of field-tested performance in real-world applications. Our systems protect millions of square feet globally.',
       stats: '25+ Years',
-      color: 'success-green'
+      color: 'from-rose-400 to-pink-500',
+      dark: true
     },
     {
       icon: Users,
       title: 'Expert Support',
       description: '24/7 technical support and maintenance services. Comprehensive training and documentation provided.',
       stats: '24/7 Support',
-      color: 'premium-gold'
+      color: 'from-indigo-400 to-blue-500',
+      dark: false
     }
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-background via-card to-background relative overflow-hidden">
-      {/* Simplified background elements */}
+    <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
+      {/* Unique Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 left-1/4 w-80 h-80 bg-gradient-to-r from-sphere-blue-primary/5 to-sphere-blue-light/5 rounded-full filter blur-2xl opacity-5"></div>
-        <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-gradient-to-r from-sphere-blue-bright/5 to-sphere-blue-accent/5 rounded-full filter blur-2xl opacity-3"></div>
+        {/* Dual-tone radial gradients */}
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-gray-900/5 via-transparent to-transparent"></div>
+        <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-gray-200/50 via-transparent to-transparent"></div>
+        
+        {/* Geometric floating shapes */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-900/10 to-transparent blur-3xl"></div>
+        <div className="absolute bottom-1/3 right-1/3 w-80 h-80 rounded-full bg-gradient-to-tr from-cyan-200/30 to-transparent blur-3xl"></div>
+        
+        {/* Abstract line patterns */}
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-1/3 left-10 w-1/3 h-0.5 bg-gradient-to-r from-indigo-500/20 to-transparent"></div>
+          <div className="absolute top-2/3 right-10 w-1/4 h-0.5 bg-gradient-to-l from-cyan-500/20 to-transparent"></div>
+        </div>
+        
+        {/* Floating particles */}
+        <div className="absolute top-1/5 left-1/6 w-3 h-3 bg-indigo-500 rounded-full animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/5 w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+        <div className="absolute top-2/5 right-1/3 w-1.5 h-1.5 bg-violet-500 rounded-full animate-pulse"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
+        {/* Header with professional typography */}
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -73,22 +95,26 @@ export default function FeaturesSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            <div className="bg-card/20 border border-sphere-blue-primary/20 rounded-full px-4 py-1.5">
-              <span className="text-sphere-blue-primary text-sm font-medium">WHY CHOOSE US</span>
+            <div className="inline-flex items-center px-4 py-2 text-xs font-semibold text-indigo-700 bg-white/80 rounded-full shadow-lg backdrop-blur-sm border border-indigo-200 uppercase tracking-wider">
+              <span className="w-2 h-2 mr-2 bg-gradient-to-br from-indigo-600 to-cyan-500 rounded-full animate-pulse" />
+              WHY CHOOSE US
             </div>
           </motion.div>
           
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-foreground mb-6"
+            className="text-3xl md:text-4xl font-bold text-gray-900 mb-5"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Why Choose <span className="text-sphere-blue-primary">INFINITY ENGINEERINGS</span>?
+            Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-500">INFINITY ENGINEERINGS</span>?
           </motion.h2>
+          
+          <div className="w-20 h-1 bg-gradient-to-r from-indigo-500 via-cyan-500 to-indigo-500 mx-auto rounded-full mb-6"></div>
+          
           <motion.p 
-            className="text-lg text-muted-foreground max-w-3xl mx-auto"
+            className="text-lg text-gray-600 max-w-3xl mx-auto font-normal"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -99,7 +125,7 @@ export default function FeaturesSection() {
           </motion.p>
         </motion.div>
 
-        {/* Features Grid */}
+        {/* Features Grid with standardized typography */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <motion.div 
@@ -108,24 +134,32 @@ export default function FeaturesSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.4 }}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
             >
-              <div className="bg-card/20 border border-sphere-blue-primary/10 backdrop-blur-sm rounded-2xl p-6 h-full hover:border-sphere-blue-primary/30 transition-all duration-300">
+              <div className={`${feature.dark ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white' : 'bg-white text-gray-900'} rounded-2xl p-6 h-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 relative overflow-hidden border ${feature.dark ? 'border-gray-700/50' : 'border-gray-200'}`}>
+                {/* Decorative corner element */}
+                <div className={`absolute top-0 right-0 w-32 h-32 ${feature.dark ? 'bg-gradient-to-br from-indigo-900/30 to-transparent' : 'bg-gradient-to-br from-indigo-100/50 to-transparent'} rounded-bl-full`}></div>
+                
                 {/* Icon & Stats */}
                 <div className="flex items-center justify-between mb-5">
-                  <div className="bg-card/30 border border-sphere-blue-primary/20 rounded-xl p-3">
-                    <feature.icon className="h-7 w-7 text-sphere-blue-primary" />
+                  <div className="relative">
+                    <div className={`w-14 h-14 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center shadow-lg`}>
+                      <feature.icon className="h-7 w-7 text-white" />
+                    </div>
+                    <div className={`absolute -bottom-1 -right-1 w-5 h-5 ${feature.dark ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} rounded-full border-2 flex items-center justify-center`}>
+                      <div className="w-1.5 h-1.5 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-full animate-pulse"></div>
+                    </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-xl font-bold text-sphere-blue-primary">{feature.stats}</div>
+                    <div className={`text-xl font-bold bg-gradient-to-r ${feature.color} bg-clip-text ${feature.dark ? 'text-transparent' : 'text-transparent'}`}>{feature.stats}</div>
                   </div>
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-foreground mb-3">
+                <h3 className="text-xl font-bold mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground text-sm">
+                <p className={`text-sm ${feature.dark ? 'text-gray-300' : 'text-gray-600'} leading-relaxed`}>
                   {feature.description}
                 </p>
               </div>
@@ -133,7 +167,7 @@ export default function FeaturesSection() {
           ))}
         </div>
 
-        {/* CTA Section */}
+        {/* CTA Section with professional typography */}
         <motion.div 
           className="mt-16 text-center"
           initial={{ opacity: 0, y: 30 }}
@@ -141,20 +175,28 @@ export default function FeaturesSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          <div className="bg-card/20 border border-sphere-blue-primary/20 backdrop-blur-sm rounded-2xl p-8">
-            <div className="border-t border-sphere-blue-primary/10 pb-6 mb-6"></div>
+          <div className="bg-gradient-to-r from-white via-indigo-50/30 to-white rounded-2xl p-8 shadow-xl relative overflow-hidden border border-indigo-100/50">
+            {/* Decorative elements */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-cyan-500 to-indigo-500"></div>
+            <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gradient-to-br from-indigo-900/10 to-cyan-900/10"></div>
+            <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-gradient-to-tr from-cyan-200/30 to-indigo-200/30"></div>
+            
+            <div className="border-t border-indigo-100/50 pb-6 mb-6"></div>
             
             <motion.h3 
-              className="text-2xl md:text-3xl font-bold text-foreground mb-4"
+              className="text-2xl md:text-3xl font-bold text-gray-900 mb-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
             >
-              Ready to Enhance Your <span className="text-sphere-blue-primary">Building's Safety</span>?
+              Ready to Enhance Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-500">Building's Safety</span>?
             </motion.h3>
+            
+            <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 via-cyan-500 to-indigo-500 mx-auto rounded-full mb-6"></div>
+            
             <motion.p 
-              className="text-base text-muted-foreground mb-6 max-w-2xl mx-auto"
+              className="text-base text-gray-600 mb-6 max-w-2xl mx-auto font-normal"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -165,7 +207,7 @@ export default function FeaturesSection() {
             </motion.p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <motion.button 
-                className="bg-sphere-blue-primary hover:bg-sphere-blue-light text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 text-sm"
+                className="bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-700 hover:to-cyan-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-sm"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, x: -20 }}
@@ -176,7 +218,7 @@ export default function FeaturesSection() {
                 Schedule Consultation
               </motion.button>
               <motion.button 
-                className="border border-sphere-blue-primary/20 text-foreground hover:text-sphere-blue-primary hover:bg-sphere-blue-primary/10 px-6 py-3 rounded-lg font-semibold transition-all duration-300 bg-card/20 text-sm"
+                className="border-2 border-indigo-300 text-gray-800 hover:text-white hover:bg-gradient-to-r hover:from-indigo-600 hover:to-cyan-500 px-6 py-3 rounded-lg font-semibold transition-all duration-300 bg-white text-sm shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, x: 20 }}

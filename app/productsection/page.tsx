@@ -8,6 +8,7 @@ import { useState, useMemo } from 'react';
 import ProductCard, { type Product } from './ProductCard';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Image from 'next/image';
 import master1 from '@/public/FireMaster1.webp';
 import master2 from '@/public/FireMaster2.webp';
 import master3 from '@/public/FireMaster3.webp';
@@ -33,9 +34,7 @@ import master22 from '@/public/FireMaster22.webp';
 import master23 from '@/public/FireMaster23.webp';
 import master24 from '@/public/FireMaster24.webp';
 
-// --- Data Layer ---
-// By defining product data outside the component, we prevent it from being
-// redeclared on every render, improving performance.
+// Product data defined as a constant outside the component for performance optimization.
 const products: Product[] = [
   {
     id: 1,
@@ -280,7 +279,7 @@ const products: Product[] = [
     name: 'SmokeStop Concertina "Closed" Smoke Curtain',
     category: 'Smoke Curtains',
     type: 'Concertina',
-    image:master18,
+    image: master18,
     dimensions: 'Up to 8m (W) x 4m (H)',
     fireRating: 'Smoke only',
     integrityRating: 'Up to 60 mins',
@@ -373,7 +372,6 @@ const products: Product[] = [
     productStandards: 'BS EN 12101',
     orientations: 'Vertical'
   }
-  // ... more products
 ];
 
 export default function ProductsSection(): JSX.Element {
@@ -386,55 +384,45 @@ export default function ProductsSection(): JSX.Element {
   const [selectedRadiation, setSelectedRadiation] = useState('all');
   const [selectedInsulation, setSelectedInsulation] = useState('all');
 
-  // --- Derived State & Memos ---
-  // useMemo ensures these values are only recalculated when their dependencies change.
+  // Memoized filter options derived from products data.
+  const categories = useMemo(
+    () => ['all', ...Array.from(new Set(products.map((p) => p.category)))],
+    []
+  );
 
-  // Dynamically generate unique categories from the products list for maintainability.
-  const categories = useMemo(() => {
-    const uniqueCategories = new Set(products.map(p => p.category));
-    return ['all', ...Array.from(uniqueCategories)];
-  }, []); // Empty dependency array because `products` is a stable constant.
+  const types = useMemo(
+    () => ['all', ...Array.from(new Set(products.map((p) => p.type)))],
+    []
+  );
 
-  // Dynamically generate unique types.
-  const types = useMemo(() => {
-    const uniqueTypes = new Set(products.map(p => p.type));
-    return ['all', ...Array.from(uniqueTypes)];
-  }, []);
+  const standards = useMemo(
+    () => ['all', ...Array.from(new Set(products.map((p) => p.productStandards)))],
+    []
+  );
 
-  // Dynamically generate unique standards.
-  const standards = useMemo(() => {
-    const uniqueStandards = new Set(products.map(p => p.productStandards));
-    return ['all', ...Array.from(uniqueStandards)];
-  }, []);
+  const orientations = useMemo(
+    () => ['all', ...Array.from(new Set(products.map((p) => p.orientations)))],
+    []
+  );
 
-  // Dynamically generate unique orientations.
-  const orientations = useMemo(() => {
-    const uniqueOrientations = new Set(products.map(p => p.orientations));
-    return ['all', ...Array.from(uniqueOrientations)];
-  }, []);
+  const integrityRatings = useMemo(
+    () => ['all', ...Array.from(new Set(products.map((p) => p.integrityRating)))],
+    []
+  );
 
-  // Dynamically generate unique integrity ratings.
-  const integrityRatings = useMemo(() => {
-    const uniqueIntegrity = new Set(products.map(p => p.integrityRating));
-    return ['all', ...Array.from(uniqueIntegrity)];
-  }, []);
+  const radiationRatings = useMemo(
+    () => ['all', ...Array.from(new Set(products.map((p) => p.radiationRating)))],
+    []
+  );
 
-  // Dynamically generate unique radiation ratings.
-  const radiationRatings = useMemo(() => {
-    const uniqueRadiation = new Set(products.map(p => p.radiationRating));
-    return ['all', ...Array.from(uniqueRadiation)];
-  }, []);
+  const insulationRatings = useMemo(
+    () => ['all', ...Array.from(new Set(products.map((p) => p.insulationRating)))],
+    []
+  );
 
-  // Dynamically generate unique insulation ratings.
-  const insulationRatings = useMemo(() => {
-    const uniqueInsulation = new Set(products.map(p => p.insulationRating));
-    return ['all', ...Array.from(uniqueInsulation)];
-  }, []);
-
- 
-  // This calculation now only runs when a filter state changes.
+  // Memoized filtered products to avoid unnecessary recalculations.
   const filteredProducts = useMemo(() => {
-    return products.filter((product: Product) => {
+    return products.filter((product) => {
       const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
       const matchesType = selectedType === 'all' || product.type === selectedType;
@@ -443,90 +431,150 @@ export default function ProductsSection(): JSX.Element {
       const matchesIntegrity = selectedIntegrity === 'all' || product.integrityRating === selectedIntegrity;
       const matchesRadiation = selectedRadiation === 'all' || product.radiationRating === selectedRadiation;
       const matchesInsulation = selectedInsulation === 'all' || product.insulationRating === selectedInsulation;
-      
-      return matchesSearch && matchesCategory && matchesType && matchesStandard && 
-             matchesOrientation && matchesIntegrity && matchesRadiation && matchesInsulation;
+
+      return (
+        matchesSearch &&
+        matchesCategory &&
+        matchesType &&
+        matchesStandard &&
+        matchesOrientation &&
+        matchesIntegrity &&
+        matchesRadiation &&
+        matchesInsulation
+      );
     });
-  }, [searchTerm, selectedCategory, selectedType, selectedStandard, selectedOrientation, 
-      selectedIntegrity, selectedRadiation, selectedInsulation]);
+  }, [
+    searchTerm,
+    selectedCategory,
+    selectedType,
+    selectedStandard,
+    selectedOrientation,
+    selectedIntegrity,
+    selectedRadiation,
+    selectedInsulation,
+  ]);
 
   return (
-    <main className="min-h-screen two-color-gradient relative">
+    <main className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden">
+      {/* Subtle background effects with balanced blue-indigo palette */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 rounded-full blur-3xl opacity-30 animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-indigo-500/10 to-slate-500/10 rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-3xl opacity-15 animate-pulse" style={{ animationDelay: '4s' }}></div>
+        </div>
+
+        {/* Minimal geometric elements in cohesive colors */}
+        <div className="absolute inset-0">
+          <div className="absolute top-10 left-10 w-24 h-24 border-2 border-blue-200/50 rotate-45 rounded-lg"></div>
+          <div className="absolute bottom-20 right-20 w-20 h-20 border-2 border-indigo-200/50 rounded-full"></div>
+          <div className="absolute top-1/4 left-1/4 w-16 h-16 border-2 border-slate-200/50 rotate-12 rounded-xl"></div>
+        </div>
+      </div>
+
       <Header />
-      
-      <section id="products" className="pt-20 md:pt-24 py-20 two-color-gradient text-foreground">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <div className="inline-block px-4 py-1 mb-6 text-sm font-semibold text-sphere-blue-primary bg-card/50 rounded-full border border-sphere-blue-primary/30">
-              PRODUCT CATALOG
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Fire & Smoke Curtain Solutions
+
+      <section id="hero" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/slider.jpg"
+            alt="Fire safety systems in commercial building"
+            fill
+            className="object-cover opacity-90"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+              Advanced Fire & Smoke
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300"> Protection Systems</span>
             </h1>
-            <h2 className="text-xl font-semibold text-foreground/80 mb-6 max-w-3xl mx-auto">
-              Professional-grade fire protection systems engineered for modern building safety requirements
-            </h2>
-            <div className="max-w-4xl mx-auto text-foreground/70 space-y-4">
-              <p>
-                Our comprehensive range of fire and smoke curtains are designed to meet the most demanding safety standards. 
-                Each product is certified to British/European standards and carries the CE mark, ensuring compliance with 
-                international fire safety regulations.
-              </p>
+            <p className="text-xl md:text-2xl text-gray-100 mb-8 max-w-4xl mx-auto leading-relaxed">
+              Engineered solutions for modern building safety, combining cutting-edge technology with proven performance
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                Explore Products
+              </Button>
+              <Button variant="outline" className="border-2 border-white/50 text-white hover:bg-white/20 px-8 py-6 rounded-xl text-lg font-semibold transition-all duration-300 backdrop-blur-sm">
+                Request Consultation
+              </Button>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Product Description */}
-          <div className="bg-gradient-to-r from-card/50 to-card/50 border border-sphere-blue-primary/20 p-8 rounded-2xl mb-12">
-            <h3 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
-              <Filter className="text-sphere-blue-primary" />
+      <section id="products" className="py-24 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 text-gray-900 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <div className="inline-block px-6 py-2 mb-6 text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full border border-blue-600/30 shadow-lg backdrop-blur-sm">
+              PREMIUM PROTECTION
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Advanced Fire & Smoke Protection Systems
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Our comprehensive range of fire and smoke curtains are designed to meet the most demanding safety standards. 
+              Each product is certified to British/European standards and carries the CE mark, ensuring compliance with 
+              international fire safety regulations.
+            </p>
+          </div>
+
+          {/* Product Overview Section - Consolidated and non-repetitive */}
+          <div className="bg-white/80 border border-blue-200/50 p-8 rounded-2xl mb-12 backdrop-blur-sm">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <Filter className="text-blue-600 h-6 w-6" />
               Complete Fire Protection Solutions
             </h3>
-            <div className="text-foreground/80 space-y-4">
+            <div className="text-gray-700 space-y-4">
               <p className="text-lg">
-                <strong className="text-foreground">FireMaster Range:</strong> Our flagship fire curtain systems provide 
+                <strong className="text-gray-900">FireMaster Range:</strong> Our flagship fire curtain systems provide 
                 advanced compartmentation solutions for new buildings while ensuring virtually uninterrupted pedestrian 
-                and goods movement.
+                and goods movement. Explore options tailored for various applications, from vertical drops to multi-sided enclosures.
               </p>
               <div className="flex flex-wrap gap-4 mt-6">
-                <Button className="bg-sphere-blue-primary hover:bg-sphere-blue-light text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300">
                   Explore FireMaster Range
                 </Button>
-                <Button variant="outline" className="border-sphere-blue-primary/30 text-foreground hover:bg-sphere-blue-primary/10 px-6 py-3 rounded-lg font-semibold">
+                <Button variant="outline" className="border-blue-600/50 text-gray-700 hover:bg-blue-50 px-6 py-3 rounded-lg font-semibold">
                   Request Technical Specifications
                 </Button>
               </div>
             </div>
           </div> 
 
-          {/* Horizontal Filters */}
-          <div className="mb-12 p-6 bg-card/50 rounded-2xl border border-sphere-blue-primary/20">
-            <div className="flex flex-wrap items-end gap-6">
+          {/* Advanced Filters - All filters now included for completeness */}
+          <div className="mb-12 p-6 bg-white/80 rounded-2xl border border-blue-200/50 backdrop-blur-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Search */}
-              <div className="flex-1 min-w-[250px]">
-                <label className="block text-sm font-medium text-foreground/80 mb-2">Search Products</label>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Search Products</label>
                 <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-sphere-blue-primary/50" />
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-blue-500/50" />
                   <Input
                     type="text"
                     placeholder="Search by name, standard, or type..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-12 pr-4 py-3 bg-card/50 border border-sphere-blue-primary/20 text-foreground focus:border-sphere-blue-primary focus:ring-2 focus:ring-sphere-blue-primary/30 rounded-xl w-full"
+                    className="pl-10 pr-4 py-3 bg-white/50 border border-blue-200/50 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 rounded-xl w-full"
                   />
                 </div>
               </div>
 
-              {/* Curtain Types */}
-              <div className="min-w-[180px]">
-                <label className="block text-sm font-medium text-foreground/80 mb-2">Curtain Types</label>
+              {/* Categories */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Categories</label>
                 <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                  <SelectTrigger className="bg-card/50 border border-sphere-blue-primary/20 text-foreground focus:border-sphere-blue-primary focus:ring-2 focus:ring-sphere-blue-primary/30 rounded-xl py-3">
-                    <SelectValue placeholder="Select Category" />
+                  <SelectTrigger className="bg-white/50 border border-blue-200/50 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 rounded-xl py-3">
+                    <SelectValue placeholder="All Categories" />
                   </SelectTrigger>
-                  <SelectContent className="bg-card border border-sphere-blue-primary/20 text-foreground rounded-xl">
+                  <SelectContent className="bg-white border border-blue-200/50 text-gray-900 rounded-xl">
                     {categories.map((category) => (
-                      <SelectItem key={category} value={category} className="py-2 hover:bg-card/80 hover:text-foreground">
+                      <SelectItem key={category} value={category} className="py-2 hover:bg-blue-50">
                         {category === 'all' ? 'All Categories' : category}
                       </SelectItem>
                     ))}
@@ -534,16 +582,33 @@ export default function ProductsSection(): JSX.Element {
                 </Select>
               </div>
 
-              {/* Product Standards */}
-              <div className="min-w-[180px]">
-                <label className="block text-sm font-medium text-foreground/80 mb-2">Standards</label>
-                <Select value={selectedStandard} onValueChange={setSelectedStandard}>
-                  <SelectTrigger className="bg-card/50 border border-sphere-blue-primary/20 text-foreground focus:border-sphere-blue-primary focus:ring-2 focus:ring-sphere-blue-primary/30 rounded-xl py-3">
-                    <SelectValue placeholder="Select Standard" />
+              {/* Types */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Types</label>
+                <Select value={selectedType} onValueChange={setSelectedType}>
+                  <SelectTrigger className="bg-white/50 border border-blue-200/50 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 rounded-xl py-3">
+                    <SelectValue placeholder="All Types" />
                   </SelectTrigger>
-                  <SelectContent className="bg-card border border-sphere-blue-primary/20 text-foreground rounded-xl">
+                  <SelectContent className="bg-white border border-blue-200/50 text-gray-900 rounded-xl">
+                    {types.map((type) => (
+                      <SelectItem key={type} value={type} className="py-2 hover:bg-blue-50">
+                        {type === 'all' ? 'All Types' : type}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Standards */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Standards</label>
+                <Select value={selectedStandard} onValueChange={setSelectedStandard}>
+                  <SelectTrigger className="bg-white/50 border border-blue-200/50 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 rounded-xl py-3">
+                    <SelectValue placeholder="All Standards" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-blue-200/50 text-gray-900 rounded-xl max-h-48 overflow-y-auto">
                     {standards.map((standard) => (
-                      <SelectItem key={standard} value={standard} className="py-2 hover:bg-card/80 hover:text-foreground">
+                      <SelectItem key={standard} value={standard} className="py-2 hover:bg-blue-50">
                         {standard === 'all' ? 'All Standards' : standard.substring(0, 25) + (standard.length > 25 ? '...' : '')}
                       </SelectItem>
                     ))}
@@ -551,17 +616,68 @@ export default function ProductsSection(): JSX.Element {
                 </Select>
               </div>
 
-              {/* Orientations */}
-              <div className="min-w-[180px]">
-                <label className="block text-sm font-medium text-foreground/80 mb-2">Orientation</label>
+              {/* Orientation */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Orientation</label>
                 <Select value={selectedOrientation} onValueChange={setSelectedOrientation}>
-                  <SelectTrigger className="bg-card/50 border border-sphere-blue-primary/20 text-foreground focus:border-sphere-blue-primary focus:ring-2 focus:ring-sphere-blue-primary/30 rounded-xl py-3">
-                    <SelectValue placeholder="Select Orientation" />
+                  <SelectTrigger className="bg-white/50 border border-blue-200/50 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 rounded-xl py-3">
+                    <SelectValue placeholder="All Orientations" />
                   </SelectTrigger>
-                  <SelectContent className="bg-card border border-sphere-blue-primary/20 text-foreground rounded-xl">
+                  <SelectContent className="bg-white border border-blue-200/50 text-gray-900 rounded-xl">
                     {orientations.map((orientation) => (
-                      <SelectItem key={orientation} value={orientation} className="py-2 hover:bg-card/80 hover:text-foreground">
+                      <SelectItem key={orientation} value={orientation} className="py-2 hover:bg-blue-50">
                         {orientation === 'all' ? 'All Orientations' : orientation}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Integrity Rating */}
+              <div className="lg:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Integrity Rating</label>
+                <Select value={selectedIntegrity} onValueChange={setSelectedIntegrity}>
+                  <SelectTrigger className="bg-white/50 border border-blue-200/50 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 rounded-xl py-3">
+                    <SelectValue placeholder="All Ratings" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-blue-200/50 text-gray-900 rounded-xl">
+                    {integrityRatings.map((rating) => (
+                      <SelectItem key={rating} value={rating} className="py-2 hover:bg-blue-50">
+                        {rating === 'all' ? 'All Ratings' : rating}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Radiation Rating */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Radiation Rating</label>
+                <Select value={selectedRadiation} onValueChange={setSelectedRadiation}>
+                  <SelectTrigger className="bg-white/50 border border-blue-200/50 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 rounded-xl py-3">
+                    <SelectValue placeholder="All Ratings" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-blue-200/50 text-gray-900 rounded-xl">
+                    {radiationRatings.map((rating) => (
+                      <SelectItem key={rating} value={rating} className="py-2 hover:bg-blue-50">
+                        {rating === 'all' ? 'All Ratings' : rating}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Insulation Rating */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Insulation Rating</label>
+                <Select value={selectedInsulation} onValueChange={setSelectedInsulation}>
+                  <SelectTrigger className="bg-white/50 border border-blue-200/50 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 rounded-xl py-3">
+                    <SelectValue placeholder="All Ratings" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-blue-200/50 text-gray-900 rounded-xl">
+                    {insulationRatings.map((rating) => (
+                      <SelectItem key={rating} value={rating} className="py-2 hover:bg-blue-50">
+                        {rating === 'all' ? 'All Ratings' : rating}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -576,19 +692,19 @@ export default function ProductsSection(): JSX.Element {
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
-          
+
           {filteredProducts.length === 0 && (
-            <div className="text-center py-16">
+            <div className="text-center py-16 col-span-full">
               <div className="text-5xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold text-foreground/80 mb-2">No Products Found</h3>
-              <p className="text-foreground/60 text-lg">
+              <h3 className="text-2xl font-bold text-gray-700 mb-2">No Products Found</h3>
+              <p className="text-gray-500 text-lg">
                 Try adjusting your filters or search terms to find what you're looking for.
               </p>
             </div>
           )}
         </div>
       </section>
-      
+
       <Footer />
     </main>
   );

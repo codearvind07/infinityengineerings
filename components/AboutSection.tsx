@@ -12,6 +12,9 @@ import hiteshImage from '@/public/Hitesh.png';
 import shrutiImage from '@/public/Shruti.png';
 import aryanImage from '@/public/Aryan.png';
 import { useState, useEffect, useRef } from 'react';
+import SectionHeader from '@/components/SectionHeader';
+import ContentSection from '@/components/ContentSection';
+import StandardCard from '@/components/StandardCard';
 // Import the AssociatedBrandsSection from the correct location
 
 
@@ -178,7 +181,7 @@ export default function AboutSection() {
   };
 
   return (
-    <section id="about" className="py-24 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 relative overflow-hidden">
+    <ContentSection id="about" className="py-24 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 relative overflow-hidden">
       {/* Enhanced Background Effects with more vibrant colors */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Gradient Orbs with warm colors */}
@@ -207,7 +210,7 @@ export default function AboutSection() {
           transition={{ duration: 0.8 }}
         >
           <motion.div 
-            className="inline-flex items-center bg-gradient-to-r from-indigo-600/15 to-purple-600/15 backdrop-blur-sm border border-indigo-200/50 rounded-full px-6 py-2 mb-6 shadow-lg"
+            className="standard-badge"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -223,17 +226,17 @@ export default function AboutSection() {
           </motion.div>
           
           <motion.h2 
-            className="text-4xl md:text-6xl font-bold mb-8 leading-tight bg-gradient-to-r from-slate-800 via-indigo-900 to-purple-900 bg-clip-text text-transparent"
+            className="standard-heading-1 standard-gradient-text"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            INFINITY <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">ENGINEERINGS</span>
+            INFINITY <span className="standard-accent-gradient-text">ENGINEERINGS</span>
           </motion.h2>
           
           <motion.p 
-            className="text-lg md:text-xl text-center max-w-4xl mx-auto leading-relaxed text-slate-700 font-light"
+            className="standard-subheading"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -261,7 +264,7 @@ export default function AboutSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="bg-white/80 backdrop-blur-lg border border-indigo-100/50 rounded-2xl p-6 h-full transition-all duration-500 group-hover:shadow-xl group-hover:border-indigo-200/50 group-hover:bg-gradient-to-br group-hover:from-white/90 group-hover:to-indigo-50/50">
+              <div className="bg-white/90 backdrop-blur-lg border border-indigo-400/60 rounded-2xl p-6 h-full transition-all duration-500 group-hover:shadow-xl group-hover:border-indigo-400/70 group-hover:bg-gradient-to-br group-hover:from-white/98 group-hover:to-indigo-100/70">
                 <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                   <CountUp end={stat.number} duration={stat.duration} suffix={stat.suffix} />
                 </div>
@@ -283,13 +286,13 @@ export default function AboutSection() {
           >
             <div>
               <motion.h3 
-                className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-indigo-800 bg-clip-text text-transparent"
+                className="standard-heading-2 standard-gradient-text"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                Leading Fire Protection <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Solutions</span>
+                Leading Fire Protection <span className="standard-accent-gradient-text">Solutions</span>
               </motion.h3>
               
               <div className="space-y-5 text-base text-slate-700 leading-relaxed">
@@ -315,7 +318,7 @@ export default function AboutSection() {
             
             {/* Enhanced Mission Card */}
             <motion.div 
-              className="bg-gradient-to-br from-white/90 to-indigo-50/50 backdrop-blur-lg border border-indigo-200/50 rounded-3xl p-8 shadow-xl relative overflow-hidden"
+              className="bg-gradient-to-br from-white/95 to-indigo-100/60 backdrop-blur-lg border border-indigo-300/60 rounded-3xl p-8 shadow-xl relative overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -380,24 +383,11 @@ export default function AboutSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <motion.h3 
-            className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-indigo-800 bg-clip-text text-transparent"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Our Core <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Values</span>
-          </motion.h3>
-          <motion.p 
-            className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            The principles that guide everything we do in delivering exceptional fire protection solutions
-          </motion.p>
+          <SectionHeader 
+            title="Our Core Values"
+            subtitle="The principles that guide everything we do in delivering exceptional fire protection solutions"
+            className="mb-0"
+          />
         </motion.div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
@@ -411,7 +401,7 @@ export default function AboutSection() {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               whileHover={{ y: -10 }}
             >
-              <div className="bg-white/80 backdrop-blur-lg border border-indigo-100/50 rounded-3xl p-8 h-full transition-all duration-500 group-hover:shadow-2xl group-hover:border-indigo-200/50 group-hover:bg-gradient-to-br group-hover:from-white/90 group-hover:to-indigo-50/50 relative overflow-hidden">
+              <div className="bg-white/90 backdrop-blur-lg border border-indigo-400/60 rounded-3xl p-8 h-full transition-all duration-500 group-hover:shadow-2xl group-hover:border-indigo-400/70 group-hover:bg-gradient-to-br group-hover:from-white/98 group-hover:to-indigo-100/70 relative overflow-hidden">
                 {/* Decorative corner elements */}
                 <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-br-full"></div>
                 <div className="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tr from-purple-500/10 to-pink-500/10 rounded-tl-full"></div>
@@ -547,7 +537,7 @@ export default function AboutSection() {
           {teamMembers.map((member, index) => (
             <motion.div
               key={index}
-              className="bg-white/80 backdrop-blur-lg border border-indigo-100/50 rounded-3xl p-8 shadow-xl relative overflow-hidden"
+              className="bg-white/90 backdrop-blur-lg border border-indigo-400/60 rounded-3xl p-8 shadow-xl relative overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -585,6 +575,6 @@ export default function AboutSection() {
           ))}
         </div>
       </div>
-    </section>
+    </ContentSection>
   );
 }

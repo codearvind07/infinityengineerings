@@ -7,7 +7,7 @@ import datasheetsImg from '@/public/FireMaster1.webp';
 import optionalExtrasImg from '@/public/FireMaster2.webp';
 import wiringImg from '@/public/FireMaster3.webp';
 import nbsImg from '@/public/FireMaster4.webp';
-import videosImg from '@/public/slider1.jpg';
+import videosImg from '@/public/slider1.webp';
 import brochuresImg from '@/public/slider2.jpg';
 
 export default function ResourcesSection() {
