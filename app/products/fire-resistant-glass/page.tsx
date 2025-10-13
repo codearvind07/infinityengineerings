@@ -12,7 +12,7 @@ export default function FireResistantGlassPage() {
   const specifications = [
     { label: 'Fire Rating', value: 'Up to 120 minutes' },
     { label: 'Glass Type', value: 'Laminated & Tempered' },
-    { label: 'Thickness Range', value: '6mm to 25mm' },
+    { label: 'Thickness Range', value: '10mm' },
     { label: 'Max Size', value: '3000mm x 2500mm' },
     { label: 'Transparency', value: '90%+ Light Transmission' },
     { label: 'Standards', value: 'EN 1364-1, ASTM E119' }
@@ -22,17 +22,17 @@ export default function FireResistantGlassPage() {
     {
       icon: Thermometer,
       title: 'Superior Insulation Performance',
-      description: 'Advanced glass technology provides exceptional thermal insulation, preventing heat transfer and maintaining cool surfaces on the non-fire side for safe evacuation.'
+      description: 'Advanced glass technology provides exceptional thermal insulation, preventing heat transfer and protecting people on the safe side while maintaining clear visibility for emergency responders and evacuation teams.'
     },
     {
       icon: Eye,
       title: 'Multi-Purpose Safety Solution',
-      description: 'Combines everyday functionality with emergency protection, serving as regular windows or partitions that instantly become life-saving barriers when needed.'
+      description: 'Combines everyday functionality with emergency protection, serving as regular windows or partitions that instantly become life-saving barriers when needed most.'
     },
     {
       icon: Shield,
       title: 'Transparent Protection',
-      description: 'Unlike traditional fire barriers, fire glass maintains visibility during normal operations while transforming into protective barriers during emergencies.'
+      description: 'Unlike traditional fire barriers, fire glass maintains visibility during normal operations while transforming into protective foam barriers during emergencies, allowing for rescue operations and situational awareness.'
     }
   ];
 
@@ -105,7 +105,7 @@ export default function FireResistantGlassPage() {
               </h1>
               
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                Cutting-edge fire glass technology creates an invisible lifeline during emergencies, transforming from clear panels into protective barriers that block deadly flames and toxic smoke while maintaining visibility for safe evacuation.
+                Cutting-edge fire glass technology creates an invisible lifeline during emergencies, transforming from clear panels into protective barriers that block deadly flames and toxic smoke. When fire strikes, these intelligent glass systems automatically activate, forming insulating foam that maintains visibility for safe evacuation and rescue efforts. Designed for moments when every second counts, fire-resistant glass keeps escape routes clear and accessible while providing superior protection. You get the transparency needed for daily operations and the fire resistance that could save lives during critical moments.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
@@ -128,7 +128,7 @@ export default function FireResistantGlassPage() {
             >
               <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl overflow-hidden">
                 <Image 
-                  src="https://images.pexels.com/photos/2041627/pexels-photo-2041627.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
+                  src="/fireresistant.webp"
                   alt="Fire Resistant Glass Installation"
                   width={800}
                   height={600}

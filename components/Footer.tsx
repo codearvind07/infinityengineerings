@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import logo from '@/public/logo-transparent.png';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { isLowPerformanceDevice, prefersReducedMotion } from '@/lib/performance';
 
 const quickLinks = [
   { name: 'Home', href: '/' },
@@ -36,121 +37,179 @@ const socialLinks = [
 
 export default function Footer() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const isLowPerf = isLowPerformanceDevice();
+  const prefersReducedMotionEnabled = prefersReducedMotion();
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+    // Only add mouse move listener if not on low performance device and motion is not reduced
+    if (!isLowPerf && !prefersReducedMotionEnabled) {
+      const handleMouseMove = (e: MouseEvent) => {
+        setMousePosition({ x: e.clientX, y: e.clientY });
+      };
+      
+      window.addEventListener('mousemove', handleMouseMove);
+      return () => window.removeEventListener('mousemove', handleMouseMove);
+    }
+  }, [isLowPerf, prefersReducedMotionEnabled]);
 
   return (
     <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-      {/* Enhanced animated background elements */}
+      {/* Enhanced animated background elements - optimized for performance */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Primary gradient orb */}
-        <motion.div 
-          className="absolute top-0 left-1/4 w-96 h-96 rounded-full mix-blend-soft-light filter blur-3xl opacity-20"
-          animate={{
-            background: [
-              'radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, rgba(147, 197, 253, 0.3) 100%)',
-              'radial-gradient(circle, rgba(234, 88, 12, 0.5) 0%, rgba(251, 146, 60, 0.3) 100%)',
-              'radial-gradient(circle, rgba(14, 165, 233, 0.5) 0%, rgba(56, 189, 248, 0.3) 100%)',
-              'radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, rgba(147, 197, 253, 0.3) 100%)'
-            ]
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        />
+        {/* Primary gradient orb - simplified for low performance */}
+        {!isLowPerf && !prefersReducedMotionEnabled ? (
+          <motion.div 
+            className="absolute top-0 left-1/4 w-96 h-96 rounded-full mix-blend-soft-light filter blur-3xl opacity-20"
+            animate={{
+              background: [
+                'radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, rgba(147, 197, 253, 0.3) 100%)',
+                'radial-gradient(circle, rgba(234, 88, 12, 0.5) 0%, rgba(251, 146, 60, 0.3) 100%)',
+                'radial-gradient(circle, rgba(14, 165, 233, 0.5) 0%, rgba(56, 189, 248, 0.3) 100%)',
+                'radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, rgba(147, 197, 253, 0.3) 100%)'
+              ]
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+          />
+        ) : (
+          <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full mix-blend-soft-light filter blur-3xl opacity-10"
+            style={{
+              background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(147, 197, 253, 0.15) 100%)'
+            }}
+          />
+        )}
         
-        {/* Secondary gradient orb */}
-        <motion.div 
-          className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full mix-blend-soft-light filter blur-3xl opacity-20"
-          animate={{
-            background: [
-              'radial-gradient(circle, rgba(16, 185, 129, 0.5) 0%, rgba(52, 211, 153, 0.3) 100%)',
-              'radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, rgba(167, 139, 250, 0.3) 100%)',
-              'radial-gradient(circle, rgba(245, 158, 11, 0.5) 0%, rgba(251, 191, 36, 0.3) 100%)',
-              'radial-gradient(circle, rgba(16, 185, 129, 0.5) 0%, rgba(52, 211, 153, 0.3) 100%)'
-            ]
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-          style={{ animationDelay: '2s' }}
-        />
+        {/* Secondary gradient orb - simplified for low performance */}
+        {!isLowPerf && !prefersReducedMotionEnabled ? (
+          <motion.div 
+            className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full mix-blend-soft-light filter blur-3xl opacity-20"
+            animate={{
+              background: [
+                'radial-gradient(circle, rgba(16, 185, 129, 0.5) 0%, rgba(52, 211, 153, 0.3) 100%)',
+                'radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, rgba(167, 139, 250, 0.3) 100%)',
+                'radial-gradient(circle, rgba(245, 158, 11, 0.5) 0%, rgba(251, 191, 36, 0.3) 100%)',
+                'radial-gradient(circle, rgba(16, 185, 129, 0.5) 0%, rgba(52, 211, 153, 0.3) 100%)'
+              ]
+            }}
+            transition={{
+              duration: 18,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+            style={{ animationDelay: '2s' }}
+          />
+        ) : (
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full mix-blend-soft-light filter blur-3xl opacity-10"
+            style={{
+              background: 'radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, rgba(52, 211, 153, 0.15) 100%)'
+            }}
+          />
+        )}
         
-        {/* Tertiary gradient orb */}
-        <motion.div 
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full mix-blend-soft-light filter blur-3xl opacity-15"
-          animate={{
-            background: [
-              'radial-gradient(circle, rgba(236, 72, 153, 0.5) 0%, rgba(244, 114, 182, 0.3) 100%)',
-              'radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, rgba(147, 197, 253, 0.3) 100%)',
-              'radial-gradient(circle, rgba(16, 185, 129, 0.5) 0%, rgba(52, 211, 153, 0.3) 100%)',
-              'radial-gradient(circle, rgba(236, 72, 153, 0.5) 0%, rgba(244, 114, 182, 0.3) 100%)'
-            ]
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-          style={{ animationDelay: '4s' }}
-        />
+        {/* Tertiary gradient orb - simplified for low performance */}
+        {!isLowPerf && !prefersReducedMotionEnabled ? (
+          <motion.div 
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full mix-blend-soft-light filter blur-3xl opacity-15"
+            animate={{
+              background: [
+                'radial-gradient(circle, rgba(236, 72, 153, 0.5) 0%, rgba(244, 114, 182, 0.3) 100%)',
+                'radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, rgba(147, 197, 253, 0.3) 100%)',
+                'radial-gradient(circle, rgba(16, 185, 129, 0.5) 0%, rgba(52, 211, 153, 0.3) 100%)',
+                'radial-gradient(circle, rgba(236, 72, 153, 0.5) 0%, rgba(244, 114, 182, 0.3) 100%)'
+              ]
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+            style={{ animationDelay: '4s' }}
+          />
+        ) : (
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full mix-blend-soft-light filter blur-3xl opacity-7"
+            style={{
+              background: 'radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, rgba(244, 114, 182, 0.1) 100%)'
+            }}
+          />
+        )}
         
-        {/* Interactive cursor follower */}
-        <motion.div
-          className="absolute w-64 h-64 rounded-full bg-gradient-to-r from-orange-500/10 to-amber-500/10 blur-3xl pointer-events-none"
-          animate={{
-            x: mousePosition.x - 128,
-            y: mousePosition.y - 128,
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 500,
-            damping: 28,
-          }}
-        />
+        {/* Interactive cursor follower - only on high performance devices */}
+        {!isLowPerf && !prefersReducedMotionEnabled && (
+          <motion.div
+            className="absolute w-64 h-64 rounded-full bg-gradient-to-r from-orange-500/10 to-amber-500/10 blur-3xl pointer-events-none"
+            animate={{
+              x: mousePosition.x - 128,
+              y: mousePosition.y - 128,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 500,
+              damping: 28,
+            }}
+          />
+        )}
       </div>
       
-      {/* Enhanced particle animation */}
-      {[...Array(25)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full bg-white/10"
-          style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            width: `${Math.random() * 12 + 2}px`,
-            height: `${Math.random() * 12 + 2}px`,
-          }}
-          animate={{
-            y: [0, -(Math.random() * 40 + 10), 0],
-            x: [0, Math.random() * 30 - 15, 0],
-            opacity: [0.1, Math.random() * 0.3 + 0.1, 0.1],
-            scale: [1, Math.random() * 0.5 + 0.8, 1],
-          }}
-          transition={{
-            duration: Math.random() * 8 + 6,
-            repeat: Infinity,
-            delay: Math.random() * 5,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
+      {/* Simplified particle animation for low performance devices */}
+      {!isLowPerf && !prefersReducedMotionEnabled ? (
+        [...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-white/10"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 8 + 2}px`,
+              height: `${Math.random() * 8 + 2}px`,
+            }}
+            animate={{
+              y: [0, -(Math.random() * 20 + 5), 0],
+              x: [0, Math.random() * 15 - 7.5, 0],
+              opacity: [0.1, Math.random() * 0.2 + 0.1, 0.1],
+              scale: [1, Math.random() * 0.3 + 0.85, 1],
+            }}
+            transition={{
+              duration: Math.random() * 6 + 4,
+              repeat: Infinity,
+              delay: Math.random() * 3,
+              ease: "easeInOut"
+            }}
+          />
+        ))
+      ) : (
+        // Reduced number of particles for low performance
+        [...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-white/5"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 4 + 1}px`,
+              height: `${Math.random() * 4 + 1}px`,
+            }}
+          />
+        ))
+      )}
       
-      {/* Decorative geometric elements */}
-      <div className="absolute top-1/4 left-10 w-24 h-24 border border-white/10 rotate-45 rounded-sm backdrop-blur-sm"></div>
-      <div className="absolute bottom-1/3 right-20 w-16 h-16 border border-white/10 rounded-full backdrop-blur-sm"></div>
-      <div className="absolute top-1/3 right-1/3 w-8 h-32 border border-white/10 rotate-12 rounded-sm backdrop-blur-sm"></div>
+      {/* Decorative geometric elements - simplified for low performance */}
+      {!isLowPerf ? (
+        <>
+          <div className="absolute top-1/4 left-10 w-24 h-24 border border-white/10 rotate-45 rounded-sm backdrop-blur-sm"></div>
+          <div className="absolute bottom-1/3 right-20 w-16 h-16 border border-white/10 rounded-full backdrop-blur-sm"></div>
+          <div className="absolute top-1/3 right-1/3 w-8 h-32 border border-white/10 rotate-12 rounded-sm backdrop-blur-sm"></div>
+        </>
+      ) : (
+        // Simplified elements for low performance
+        <>
+          <div className="absolute top-1/4 left-10 w-16 h-16 border border-white/5 rotate-45 rounded-sm"></div>
+          <div className="absolute bottom-1/3 right-20 w-12 h-12 border border-white/5 rounded-full"></div>
+          <div className="absolute top-1/3 right-1/3 w-6 h-24 border border-white/5 rotate-12 rounded-sm"></div>
+        </>
+      )}
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Footer */}

@@ -19,40 +19,40 @@ export default function LEDLightingPage() {
 
   const features = [
     {
-      icon: Zap,
-      title: 'Industrial LED Systems',
-      description: 'High-performance lighting for warehouses, factories, and industrial facilities. Designed to withstand harsh environments while providing optimal illumination.'
+      icon: Lightbulb,
+      title: 'Commercial LED Lightings',
+      description: 'Designed for offices, retail, hospitality, and public spaces with a focus on energy efficiency, aesthetics, comfort, and low maintenance.'
     },
     {
-      icon: Lightbulb,
-      title: 'Commercial Applications',
-      description: 'Professional lighting solutions for offices, retail spaces, and commercial buildings. Energy-efficient designs that enhance productivity and comfort.'
+      icon: Zap,
+      title: 'Industrial LED Lightings',
+      description: 'Industrial lighting is not just about lighting production lines, machinery, and stocks; it is also about providing light for the people who need it to do their work effectively.'
     },
     {
       icon: Leaf,
-      title: 'Street Lighting Solutions',
-      description: 'Smart street lighting systems for roads, highways, and public spaces. Weather-resistant and energy-efficient for 24/7 operation.'
+      title: 'Street LED Lightings',
+      description: 'LED luminaires for roads, parking, and highways, providing optimal illumination and smart control options.'
     }
   ];
 
   const lightingTypes = [
     {
-      category: 'Industrial LED Lightings',
-      description: 'High-bay and low-bay lighting solutions for warehouses and manufacturing facilities',
-      applications: ['Warehouses', 'Manufacturing Plants', 'Storage Facilities', 'Distribution Centers'],
-      features: ['High lumen output', 'Heat resistance', 'Dust protection', 'Long lifespan']
+      category: 'Commercial LED Lightings',
+      description: 'It includes baselights, linear lights, downlights, panel lights, track lights, and decorative fixtures.',
+      applications: ['Offices', 'Retail Stores', 'Hospitality', 'Public Spaces'],
+      features: ['Energy efficiency', 'Aesthetics', 'Comfort', 'Low maintenance']
     },
     {
-      category: 'Commercial LED Lightings', 
-      description: 'Professional lighting for offices, retail, hospitality and public spaces',
-      applications: ['Office Buildings', 'Retail Stores', 'Hotels', 'Conference Rooms'],
-      features: ['Stylish designs', 'Dimming controls', 'Color temperature options', 'Energy efficiency']
+      category: 'Industrial LED Lightings', 
+      description: 'Industrial lighting is not just about lighting production lines, machinery, and stocks; it is also about providing light for the people who need it to do their work effectively.',
+      applications: ['Factories', 'Warehouses', 'Production Lines', 'Workshops'],
+      features: ['High durability', 'Optimal illumination', 'Energy efficient', 'Long lifespan']
     },
     {
       category: 'Street LED Lightings',
-      description: 'Outdoor lighting solutions for roads, parking, and public area illumination',
-      applications: ['Highways', 'City Streets', 'Parking Lots', 'Public Parks'],
-      features: ['Weather resistant', 'Smart controls', 'Motion sensors', 'Remote monitoring']
+      description: 'Flood lights are used to illuminate a wide area while projecting a broad angle. You can cover a wider range of surfaces when mounted at a well-defined and proper position.',
+      applications: ['Roads', 'Parking Areas', 'Highways', 'Public Areas'],
+      features: ['Wide illumination', 'Smart controls', 'Weather resistant', 'Energy saving']
     }
   ];
 
@@ -68,7 +68,7 @@ export default function LEDLightingPage() {
   ];
 
   return (
-    <main className="min-h-screen pt-16 bg-gradient-to-br from-background via-card/80 to-sphere-blue-pale/30 relative overflow-hidden">
+    <main className="min-h-screen pt-16 indigo-purple-gradient-light relative">
       {/* Animated gradient background elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-sphere-blue-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
@@ -103,7 +103,7 @@ export default function LEDLightingPage() {
               </div>
               
               <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-                LED <span className="text-sphere-blue-primary">Lighting Solutions</span>
+                LED <span className="text-sphere-blue-primary">Lightings</span>
               </h1>
               
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
@@ -130,7 +130,7 @@ export default function LEDLightingPage() {
             >
               <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl overflow-hidden">
                 <Image 
-                  src="https://images.pexels.com/photos/1036936/pexels-photo-1036936.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
+                  src="/LEDLightingSolutions.jpg"
                   alt="LED Lighting Installation"
                   width={800}
                   height={600}

@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 
 export default function SectorsPage() {
   return (
-    <main className="min-h-screen py-16 sm:py-20 relative">
+    <main className="min-h-screen py-16 sm:py-20 relative indigo-purple-gradient-light">
       <ShaderBackground />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div

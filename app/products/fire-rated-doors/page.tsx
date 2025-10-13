@@ -21,17 +21,17 @@ export default function FireRatedDoorsPage() {
     {
       icon: DoorClosed,
       title: 'Wooden & Metal Fire Doors',
-      description: 'Comprehensive range of fire-rated doors from traditional wooden designs to modern metal constructions, offering flexibility in architectural aesthetics.'
+      description: 'From wooden & metal fire doors to acoustic solutions, clean room doors, and architectural systems, we deliver reliable safety products that meet all building requirements and regulations.'
     },
     {
       icon: Shield,
-      title: 'Glazed Metal Systems',
-      description: 'Advanced glazed metal fire-rated doors that combine transparency with protection, perfect for maintaining visibility in emergency situations.'
+      title: 'Glazed Partitions',
+      description: 'Comprehensive range of fire-rated glazed partitions that combine transparency with protection, perfect for maintaining visibility while ensuring safety.'
     },
     {
       icon: Wrench,
-      title: 'Architectural Integration',
-      description: 'Seamlessly designed to integrate with modern architectural requirements while meeting all fire safety regulations and building codes.'
+      title: 'Specialized Hardware',
+      description: 'Complete range of specialized hardware solutions designed to complement our fire-rated doors and partitions for optimal performance.'
     }
   ];
 
@@ -79,7 +79,7 @@ export default function FireRatedDoorsPage() {
   ];
 
   return (
-    <main className="min-h-screen pt-16 bg-gradient-to-br from-background via-card/80 to-sphere-blue-pale/30 relative overflow-hidden">
+    <main className="min-h-screen pt-16 indigo-purple-gradient-light relative">
       {/* Animated gradient background elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-sphere-blue-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
@@ -123,7 +123,7 @@ export default function FireRatedDoorsPage() {
               </h1>
               
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                Designing Safety with Innovations - Clean Lines, Clear Minds: The Minimalist Way. We offer a comprehensive range of fire-rated doors, glazed partitions, and specialized hardware to protect your property.
+                Designing Safety with<br />innovations<br /><br />Clean Lines, Clear<br />Minds: The Minimalist<br />Way<br /><br />We offer a comprehensive range of firerated doors, glazed partitions, and<br />specialized hardware to protect your<br />property.<br />From wooden & metal fire doors to<br />acoustic solutions, clean room doors,<br />and architectural systems, we deliver<br />reliable safety products that meet all<br />building requirements and regulations.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
@@ -146,7 +146,7 @@ export default function FireRatedDoorsPage() {
             >
               <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl overflow-hidden">
                 <Image 
-                  src="https://images.pexels.com/photos/277574/pexels-photo-277574.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
+                  src="/FireRatedDoors.jpg"
                   alt="Fire Rated Door Installation"
                   width={800}
                   height={600}

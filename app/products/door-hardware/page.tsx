@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowLeft, Shield, Lock, Key, Zap, CheckCircle, Star, Phone, Mail } from 'lucide-react';
+import { ArrowLeft, Shield, Lock, Key, Zap, CheckCircle, Star, Phone, Mail, DoorClosed, Unlock, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Header from '@/components/Header';
@@ -10,28 +10,36 @@ import Footer from '@/components/Footer';
 export default function DoorHardwarePage() {
   const hardwareTypes = [
     {
-      name: 'Emergency Exit Systems',
-      description: 'Advanced exit devices ensuring rapid egress during emergencies',
-      features: ['Panic bar mechanisms', 'Electromagnetic locks', 'Delayed egress systems', 'Emergency push plates'],
-      applications: ['High-security facilities', 'Shopping centers', 'Office buildings', 'Educational institutions']
+      name: 'DOOR CLOSERS',
+      description: 'Precision-engineered door closing mechanisms for optimal performance',
+      icon: DoorClosed,
+      image: '/FireMaster1.webp',
+      features: ['Hydraulic control', 'Adjustable closing force', 'Backcheck function', 'Hold open options'],
+      applications: ['Commercial buildings', 'Healthcare facilities', 'Educational institutions', 'Residential complexes']
     },
     {
-      name: 'Panic Hardware',
-      description: 'Life-safety hardware designed for immediate emergency exit',
+      name: 'EMERGENCY EXIT SYSTEMS',
+      description: 'Life-safety hardware ensuring rapid egress during emergencies',
+      icon: Unlock,
+      image: '/FireMaster5.webp',
+      features: ['Panic bar mechanisms', 'Electromagnetic locks', 'Delayed egress systems', 'Emergency push plates'],
+      applications: ['High-security facilities', 'Shopping centers', 'Office buildings', 'Public venues']
+    },
+    {
+      name: 'PANIC HARDWARE',
+      description: 'Immediate emergency exit solutions with fail-safe operation',
+      icon: Zap,
+      image: '/FireMaster10.webp',
       features: ['Touch bar operation', 'Fail-safe operation', 'ADA compliant', 'Weatherproof options'],
       applications: ['Assembly occupancies', 'Retail stores', 'Hospitals', 'Schools']
     },
     {
-      name: 'Access Control Technology',
-      description: 'Intelligent access management systems with security integration',
+      name: 'ELECTRIFIED DOOR HARDWARE',
+      description: 'Advanced electronic access control and security systems',
+      icon: Lock,
+      image: '/FireMaster15.webp',
       features: ['Card reader integration', 'Biometric systems', 'Remote monitoring', 'Audit trail logging'],
       applications: ['Corporate offices', 'Data centers', 'Laboratories', 'Government facilities']
-    },
-    {
-      name: 'Door Closers & Operators',
-      description: 'Automatic door control systems for smooth operation',
-      features: ['Hydraulic closers', 'Pneumatic operators', 'Adjustable closing force', 'Hold-open features'],
-      applications: ['Commercial buildings', 'Healthcare facilities', 'Retail environments', 'Industrial sites']
     }
   ];
 
@@ -40,15 +48,6 @@ export default function DoorHardwarePage() {
     { label: 'Security Level', value: 'Grade 1 Commercial', icon: Lock },
     { label: 'Compliance', value: 'ADA, UL, ANSI Standards', icon: CheckCircle },
     { label: 'Operation', value: '-40°F to 150°F', icon: Zap }
-  ];
-
-  const certifications = [
-    'UL Listed Components',
-    'ANSI/BHMA Certified',
-    'ADA Compliant Design',
-    'Fire Safety Standards',
-    'Security Grade Ratings',
-    'Environmental Testing'
   ];
 
   return (
@@ -88,19 +87,28 @@ export default function DoorHardwarePage() {
                   className="inline-block mb-4"
                 >
                   <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-full px-4 py-1.5">
-                    <span className="text-foreground text-sm font-medium">SECURITY SYSTEMS</span>
+                    <span className="text-foreground text-sm font-medium">DOOR HARDWARES/ SECURITY</span>
                   </div>
                 </motion.div>
                 
                 <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-                  Door Hardware & 
-                  <span className="block text-sphere-blue-primary">Security Solutions</span>
+                  FUNCTIONS
                 </h1>
                 
-                <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                  Comprehensive door hardware and security solutions including emergency exit systems, 
-                  panic hardware, and advanced access control technology for maximum safety and security.
-                </p>
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-xl p-4">
+                    <h3 className="text-lg font-bold text-foreground">DOOR CLOSERS</h3>
+                  </div>
+                  <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-xl p-4">
+                    <h3 className="text-lg font-bold text-foreground">EMERGENCY EXIT SYSTEMS</h3>
+                  </div>
+                  <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-xl p-4">
+                    <h3 className="text-lg font-bold text-foreground">PANIC HARDWARE</h3>
+                  </div>
+                  <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-xl p-4">
+                    <h3 className="text-lg font-bold text-foreground">ELECTRIFIED DOOR HARDWARE</h3>
+                  </div>
+                </div>
                 
                 <div className="flex flex-wrap gap-4">
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -124,7 +132,7 @@ export default function DoorHardwarePage() {
               >
                 <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl p-8">
                   <img 
-                    src="https://images.pexels.com/photos/2090644/pexels-photo-2090644.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1"
+                    src="/DoorHardware.jpg"
                     alt="Door Hardware & Security Systems"
                     className="w-full h-80 object-cover rounded-xl"
                   />
@@ -164,9 +172,23 @@ export default function DoorHardwarePage() {
                 className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-xl p-8 transition-all duration-300"
                 whileHover={{ y: -5 }}
               >
-                <h3 className="text-2xl font-bold text-foreground mb-4">
-                  {type.name}
-                </h3>
+                <div className="flex items-center mb-4">
+                  <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/30 rounded-lg p-3 w-fit mr-4">
+                    <type.icon className="h-8 w-8 text-sphere-blue-primary" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground">
+                    {type.name}
+                  </h3>
+                </div>
+                
+                <div className="mb-6 rounded-xl overflow-hidden">
+                  <img 
+                    src={type.image}
+                    alt={type.name}
+                    className="w-full h-48 object-cover"
+                  />
+                </div>
+                
                 <p className="text-muted-foreground mb-6">
                   {type.description}
                 </p>
@@ -245,34 +267,6 @@ export default function DoorHardwarePage() {
               </motion.div>
             ))}
           </div>
-
-          {/* Certifications */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-xl p-8 transition-all duration-300"
-          >
-            <h3 className="text-2xl font-bold text-foreground mb-6 text-center">
-              Certifications & Standards
-            </h3>
-            <div className="grid md:grid-cols-3 gap-4">
-              {certifications.map((cert, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center space-x-3 bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/30 rounded-lg p-4"
-                >
-                  <Star className="h-5 w-5 text-sphere-blue-primary flex-shrink-0" />
-                  <span className="text-muted-foreground">{cert}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
         </div>
       </section>
 

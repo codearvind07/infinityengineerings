@@ -6,46 +6,40 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { useState } from 'react';
 
-// Brand data
+// Updated brand data with partner information
 const brands = [
   {
-    name: 'Coopers Fire UK',
-    description: 'World-leading manufacturer of fire curtain systems with over 30 years of engineering excellence.',
-    logo: '/CoopersFireUK.webp',
+    name: 'Cooper Fire UK',
+    description: 'Innovative advanced fire and smoke curtains for superior safety, compliance, and reliable business protection.',
+    logo: '/Cooper.png',
     certifications: ['UL Listed', 'FM Approved', 'CE Marked', 'ISO 9001']
   },
   {
-    name: '3M Fire Protection',
-    description: 'Innovative fire protection solutions from the global materials science leader.',
-    logo: '/3MFireProtection.png',
-    certifications: ['NFPA Compliant', 'ASFP Member', 'CFPA-E Approved', 'BSI Certified']
+    name: 'FireView Glasses',
+    description: 'Independent manufacturer of high-quality fire resistant glasses.',
+    logo: '/FireView.png',
+    certifications: ['UL Listed', 'CE Marked', 'ISO 9001', 'NFPA Compliant']
   },
   {
-    name: 'Honeywell Safety',
-    description: 'Global leader in smart fire detection and suppression systems for commercial applications.',
-    logo: '/Honeywell-global-logo.jpg',
-    certifications: ['UL Listed', 'FM Approved', 'ISO 9001', 'CFPA-E Approved']
+    name: 'BHAWANI',
+    description: 'A house of complete fire exit solutions.',
+    logo: '/Bhawani.png',
+    certifications: ['ISO 9001', 'CE Marked', 'UL Listed', 'NFPA Compliant']
   },
   {
-    name: 'Siemens Building Tech',
-    description: 'Smart building systems integration with advanced fire safety monitoring capabilities.',
-    logo: '/Siemens-Logo.png',
-    certifications: ['CE Marked', 'NFPA Compliant', 'BSI Certified', 'ISO 9001']
+    name: 'Panasonic',
+    description: 'Panasonic LED lighting provides a clear advantage over conventional lighting solutions.',
+    logo: '/Panasonic.png',
+    certifications: ['UL Listed', 'CE Marked', 'ISO 9001', 'NFPA Compliant']
   },
   {
-    name: 'Johnson Controls',
-    description: 'Comprehensive fire safety solutions from the global building technology leader.',
-    logo: '/JohnsonControls.png',
-    certifications: ['UL Listed', 'FM Approved', 'ASFP Member', 'ISO 9001']
+    name: 'Dormakaba',
+    description: 'DORMA MAKE - DOOR HARDWARES PRODUCTS/SECURITY FUNCTIONS & VISUAL APPEAL FOR ANY COMMERCIAL BUILDINGS.',
+    logo: '/Dormakaba.png',
+    certifications: ['UL Listed', 'CE Marked', 'ISO 9001', 'FM Approved']
   },
   {
-    name: 'Tyco Fire Solutions',
-    description: 'Global provider of fire detection, suppression and life safety systems.',
-    logo: '/TycoFireSolutions.png',
-    certifications: ['UL Listed', 'FM Approved', 'CE Marked', 'ISO 9001']
-  },
-  {
-    name: 'Auronyx Systems',
+    name: 'AuronyxSystems',
     description: 'Advanced fire protection technology with innovative smart detection systems.',
     logo: '/AuronyxSystems.png',
     certifications: ['UL Listed', 'CE Marked', 'ISO 9001', 'NFPA Compliant']
@@ -91,7 +85,7 @@ export default function AssociatedBrandsSection() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             {/* Enhanced section header */}
             <motion.div 
-              className="text-center mb-20"
+              className="text-center mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -130,7 +124,7 @@ export default function AssociatedBrandsSection() {
               </motion.p>
             </motion.div>
             
-            {/* Enhanced brands grid */}
+            {/* Enhanced brands grid - 3 columns for desktop to show 3 partners per row */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
               {brands.map((brand, index) => {
                 const isHovered = hoveredBrand === index;
@@ -164,16 +158,16 @@ export default function AssociatedBrandsSection() {
                         <div className="absolute inset-0 bg-gradient-to-br from-amber-50/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl z-0"></div>
                         
                         {/* Content */}
-                        <div className="relative z-10 p-7 h-full">
-                          {/* Logo */}
-                          <div className="flex items-center mb-5">
-                            <div className="w-18 h-18 mr-4 relative bg-white rounded-xl flex-shrink-0 border border-gray-200/70 shadow-sm flex items-center justify-center transition-all duration-300 group-hover:shadow-md">
-                              <div className="relative w-14 h-14">
+                        <div className="relative z-10 p-8 h-full flex flex-col items-center text-center">
+                          {/* Logo - Larger size for better visibility */}
+                          <div className="mb-6">
+                            <div className="w-32 h-32 mx-auto relative bg-white rounded-2xl flex-shrink-0 border border-gray-200/70 shadow-lg flex items-center justify-center transition-all duration-300 group-hover:shadow-xl">
+                              <div className="relative w-24 h-24">
                                 <Image
                                   src={brand.logo}
                                   alt={`${brand.name} logo`}
                                   fill
-                                  className="object-contain p-2"
+                                  className="object-contain p-4"
                                   onError={(e) => {
                                     const target = e.target as HTMLImageElement;
                                     target.style.display = 'none';
@@ -181,43 +175,15 @@ export default function AssociatedBrandsSection() {
                                 />
                               </div>
                             </div>
-                            <h3 className="text-xl font-bold text-gray-900 tracking-tight">{brand.name}</h3>
                           </div>
+                          
+                          {/* Brand Name */}
+                          <h3 className="text-2xl font-bold text-gray-900 tracking-tight mb-4">{brand.name}</h3>
                           
                           {/* Description */}
-                          <p className="text-gray-600 mb-5 leading-relaxed text-sm font-light">
+                          <p className="text-gray-600 leading-relaxed text-base font-light">
                             {brand.description}
                           </p>
-                          
-                          {/* Certifications */}
-                          <div className="mb-5">
-                            <h4 className="text-xs font-semibold text-amber-600 uppercase tracking-wider mb-2.5">Industry Certifications</h4>
-                            <div className="flex flex-wrap gap-2">
-                              {brand.certifications.map((cert, certIndex) => {
-                                const Icon = brandIcons[cert].icon;
-                                const color = brandIcons[cert].color;
-                                return (
-                                  <div
-                                    key={certIndex}
-                                    className="flex items-center space-x-1.5 bg-gray-50/80 px-2.5 py-1.5 rounded-lg border border-gray-200/60 hover:border-amber-200/50 transition-colors duration-200"
-                                  >
-                                    <Icon className={`h-3.5 w-3.5 ${color}`} />
-                                    <span className="text-gray-700 text-xs font-medium">{cert}</span>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-                          
-                          {/* Action button */}
-                          <div className="pt-3">
-                            <Button 
-                              variant="outline"
-                              className="w-full border-2 border-amber-500/30 text-amber-700 hover:bg-gradient-to-r hover:from-amber-500/10 hover:to-yellow-500/10 hover:border-amber-500 hover:text-amber-800 text-sm font-medium py-2.5 rounded-xl transition-all duration-300"
-                            >
-                              Explore Partnership
-                            </Button>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -225,51 +191,6 @@ export default function AssociatedBrandsSection() {
                 );
               })}
             </div>
-            
-            {/* Enhanced certification standards section */}
-            <motion.div 
-              className="bg-gradient-to-br from-white/90 to-gray-50/60 backdrop-blur-sm rounded-3xl p-10 shadow-xl border border-gray-200/70"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="flex flex-col md:flex-row items-start md:items-center mb-8 pb-6 border-b border-gray-200/50">
-                <div className="w-14 h-14 mr-5 relative mb-4 md:mb-0">
-                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <ShieldCheck className="h-7 w-7 text-white" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2 tracking-tight">Global Compliance Excellence</h3>
-                  <p className="text-gray-600 text-base font-light max-w-2xl">
-                    Our strategic partnerships ensure adherence to the highest international safety standards, with all products rigorously tested and certified by leading global authorities.
-                  </p>
-                </div>
-              </div>
-              
-              {/* Enhanced certification display */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
-                {Object.keys(brandIcons).map((cert, index) => {
-                  const Icon = brandIcons[cert].icon;
-                  const color = brandIcons[cert].color;
-                  return (
-                    <motion.div
-                      key={cert}
-                      className="flex flex-col items-center p-5 rounded-2xl bg-white/60 border border-gray-200/60 hover:border-indigo-200/80 transition-all duration-300 hover:shadow-sm"
-                      whileHover={{ y: -5 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center mb-3 border border-gray-200/70 shadow-sm">
-                        <Icon className={`h-6 w-6 ${color}`} />
-                      </div>
-                      <span className="text-gray-700 text-sm font-medium text-center leading-tight">{cert}</span>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </motion.div>
           </div>
         </section>
       </div>

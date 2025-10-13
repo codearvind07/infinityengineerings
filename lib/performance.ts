@@ -121,12 +121,32 @@ export function optimizeRendering() {
   (document.body.style as any).mozOsxFontSmoothing = 'grayscale';
 }
 
+// Scroll optimization to reduce reflows and repaints
+export function optimizeScrolling() {
+  let ticking = false;
+  
+  function updateScrollPosition() {
+    // Perform scroll-related updates here
+    ticking = false;
+  }
+  
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(updateScrollPosition);
+      ticking = true;
+    }
+  }
+  
+  window.addEventListener('scroll', requestTick, { passive: true });
+}
+
 // Initialize performance optimizations
 export function initPerformanceOptimizations() {
   optimizeScrollPerformance();
   lazyLoadImages();
   optimizeCSSAnimations();
   optimizeRendering();
+  optimizeScrolling();
   
   // Add performance monitoring
   if (process.env.NODE_ENV === 'development') {

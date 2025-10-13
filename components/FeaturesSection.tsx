@@ -2,6 +2,7 @@
 
 import { Award, Clock, Settings, Zap, ShieldCheck, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { isLowPerformanceDevice, prefersReducedMotion } from '@/lib/performance';
 
 export default function FeaturesSection() {
   const features = [
@@ -41,7 +42,7 @@ export default function FeaturesSection() {
       icon: ShieldCheck,
       title: 'Proven Reliability',
       description: 'Decades of field-tested performance in real-world applications. Our systems protect millions of square feet globally.',
-      stats: '25+ Years',
+      stats: '5+ Years',
       color: 'from-rose-400 to-pink-500',
       dark: true
     },
@@ -55,28 +56,59 @@ export default function FeaturesSection() {
     }
   ];
 
+  const isLowPerf = isLowPerformanceDevice();
+  const prefersReducedMotionEnabled = prefersReducedMotion();
+
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
-      {/* Unique Background Elements */}
+      {/* Unique Background Elements - simplified for low performance */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Dual-tone radial gradients */}
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-gray-900/5 via-transparent to-transparent"></div>
         <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-gray-200/50 via-transparent to-transparent"></div>
         
-        {/* Geometric floating shapes */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-900/10 to-transparent blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-80 h-80 rounded-full bg-gradient-to-tr from-cyan-200/30 to-transparent blur-3xl"></div>
+        {/* Geometric floating shapes - simplified for low performance */}
+        {!isLowPerf && !prefersReducedMotionEnabled ? (
+          <>
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-900/10 to-transparent blur-3xl"></div>
+            <div className="absolute bottom-1/3 right-1/3 w-80 h-80 rounded-full bg-gradient-to-tr from-cyan-200/30 to-transparent blur-3xl"></div>
+          </>
+        ) : (
+          // Simplified versions for low performance
+          <>
+            <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-indigo-900/5 to-transparent blur-xl"></div>
+            <div className="absolute bottom-1/3 right-1/3 w-56 h-56 rounded-full bg-gradient-to-tr from-cyan-200/15 to-transparent blur-xl"></div>
+          </>
+        )}
         
-        {/* Abstract line patterns */}
-        <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-1/3 left-10 w-1/3 h-0.5 bg-gradient-to-r from-indigo-500/20 to-transparent"></div>
-          <div className="absolute top-2/3 right-10 w-1/4 h-0.5 bg-gradient-to-l from-cyan-500/20 to-transparent"></div>
-        </div>
+        {/* Abstract line patterns - simplified for low performance */}
+        {!isLowPerf && !prefersReducedMotionEnabled ? (
+          <div className="absolute top-0 left-0 w-full h-full">
+            <div className="absolute top-1/3 left-10 w-1/3 h-0.5 bg-gradient-to-r from-indigo-500/20 to-transparent"></div>
+            <div className="absolute top-2/3 right-10 w-1/4 h-0.5 bg-gradient-to-l from-cyan-500/20 to-transparent"></div>
+          </div>
+        ) : (
+          // Simplified versions for low performance
+          <div className="absolute top-0 left-0 w-full h-full">
+            <div className="absolute top-1/3 left-10 w-1/3 h-0.5 bg-gradient-to-r from-indigo-500/10 to-transparent"></div>
+            <div className="absolute top-2/3 right-10 w-1/4 h-0.5 bg-gradient-to-l from-cyan-500/10 to-transparent"></div>
+          </div>
+        )}
         
-        {/* Floating particles */}
-        <div className="absolute top-1/5 left-1/6 w-3 h-3 bg-indigo-500 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/5 w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-        <div className="absolute top-2/5 right-1/3 w-1.5 h-1.5 bg-violet-500 rounded-full animate-pulse"></div>
+        {/* Floating particles - reduced for low performance */}
+        {!isLowPerf && !prefersReducedMotionEnabled ? (
+          <>
+            <div className="absolute top-1/5 left-1/6 w-3 h-3 bg-indigo-500 rounded-full animate-pulse"></div>
+            <div className="absolute bottom-1/4 right-1/5 w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+            <div className="absolute top-2/5 right-1/3 w-1.5 h-1.5 bg-violet-500 rounded-full animate-pulse"></div>
+          </>
+        ) : (
+          // Simplified versions for low performance
+          <>
+            <div className="absolute top-1/5 left-1/6 w-2 h-2 bg-indigo-500 rounded-full"></div>
+            <div className="absolute bottom-1/4 right-1/5 w-1.5 h-1.5 bg-cyan-400 rounded-full"></div>
+          </>
+        )}
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -137,8 +169,12 @@ export default function FeaturesSection() {
               transition={{ delay: index * 0.1, duration: 0.6 }}
             >
               <div className={`${feature.dark ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white' : 'bg-white text-gray-900'} rounded-2xl p-6 h-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 relative overflow-hidden border ${feature.dark ? 'border-gray-700/50' : 'border-gray-200'}`}>
-                {/* Decorative corner element */}
-                <div className={`absolute top-0 right-0 w-32 h-32 ${feature.dark ? 'bg-gradient-to-br from-indigo-900/30 to-transparent' : 'bg-gradient-to-br from-indigo-100/50 to-transparent'} rounded-bl-full`}></div>
+                {/* Decorative corner element - simplified for low performance */}
+                {!isLowPerf && !prefersReducedMotionEnabled ? (
+                  <div className={`absolute top-0 right-0 w-32 h-32 ${feature.dark ? 'bg-gradient-to-br from-indigo-900/30 to-transparent' : 'bg-gradient-to-br from-indigo-100/50 to-transparent'} rounded-bl-full`}></div>
+                ) : (
+                  <div className={`absolute top-0 right-0 w-24 h-24 ${feature.dark ? 'bg-gradient-to-br from-indigo-900/20 to-transparent' : 'bg-gradient-to-br from-indigo-100/30 to-transparent'} rounded-bl-full`}></div>
+                )}
                 
                 {/* Icon & Stats */}
                 <div className="flex items-center justify-between mb-5">
@@ -176,10 +212,20 @@ export default function FeaturesSection() {
           transition={{ delay: 0.3, duration: 0.6 }}
         >
           <div className="bg-gradient-to-r from-white via-indigo-50/30 to-white rounded-2xl p-8 shadow-xl relative overflow-hidden border border-indigo-100/50">
-            {/* Decorative elements */}
+            {/* Decorative elements - simplified for low performance */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-cyan-500 to-indigo-500"></div>
-            <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gradient-to-br from-indigo-900/10 to-cyan-900/10"></div>
-            <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-gradient-to-tr from-cyan-200/30 to-indigo-200/30"></div>
+            {!isLowPerf && !prefersReducedMotionEnabled ? (
+              <>
+                <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gradient-to-br from-indigo-900/10 to-cyan-900/10"></div>
+                <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-gradient-to-tr from-cyan-200/30 to-indigo-200/30"></div>
+              </>
+            ) : (
+              // Simplified versions for low performance
+              <>
+                <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-gradient-to-br from-indigo-900/5 to-cyan-900/5"></div>
+                <div className="absolute -bottom-20 -left-20 w-40 h-40 rounded-full bg-gradient-to-tr from-cyan-200/15 to-indigo-200/15"></div>
+              </>
+            )}
             
             <div className="border-t border-indigo-100/50 pb-6 mb-6"></div>
             

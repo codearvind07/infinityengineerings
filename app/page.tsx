@@ -11,8 +11,7 @@ import AssociatedBrandsSection from '@/components/AssociatedBrandsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
-
-
+import { isLowPerformanceDevice } from '@/lib/performance';
 
 const SectorsPage = dynamic(() => import('./sectors/page'), {
   ssr: false,
@@ -32,14 +31,21 @@ const SectorsPage = dynamic(() => import('./sectors/page'), {
 });
 
 export default function Home() {
+  const isLowPerf = isLowPerformanceDevice();
+  
   return (
     <main className="min-h-screen indigo-purple-gradient-light relative">
       {/* Light background particles - reduced for better performance */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-sphere-blue-light rounded-full animate-pulse" />
-        <div className="absolute top-1/3 right-1/4 w-0.5 h-0.5 bg-sphere-blue-primary rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-1/3 left-1/3 w-1 h-1 bg-sphere-blue-accent rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
-      </div>
+      {!isLowPerf ? (
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-sphere-blue-light rounded-full animate-pulse" />
+          <div className="absolute top-1/3 right-1/4 w-0.5 h-0.5 bg-sphere-blue-primary rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-1/3 left-1/3 w-1 h-1 bg-sphere-blue-accent rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
+        </div>
+      ) : (
+        // No particles on low performance devices
+        <div className="fixed inset-0 pointer-events-none"></div>
+      )}
       
       <Header />      
       <HeroSection />

@@ -102,8 +102,17 @@ export default function CompleteSolutionsPage() {
     'Future-ready technology'
   ];
 
+  // Product images for the gallery
+  const productImages = [
+    { src: '/LEDLightingSolutions.jpg', alt: 'LED Lighting Solutions', title: 'LED Lighting' },
+    { src: '/DoorHardware.jpg', alt: 'Door Hardware', title: 'Door Hardware' },
+    { src: '/FireMaster1.webp', alt: 'Fire Curtain', title: 'Fire Curtains' },
+    { src: '/FireRatedDoors.jpg', alt: 'Fire Rated Doors', title: 'Fire Rated Doors' },
+    { src: '/fireresistant.webp', alt: 'Fire Resistant Glass', title: 'Fire Resistant Glass' }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-card/80 to-sphere-blue-pale/30 relative overflow-hidden">
+    <div className="min-h-screen indigo-purple-gradient-light relative">
       {/* Animated gradient background elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-sphere-blue-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
@@ -175,7 +184,7 @@ export default function CompleteSolutionsPage() {
               >
                 <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl p-8">
                   <img 
-                    src="https://images.pexels.com/photos/1106468/pexels-photo-1106468.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1"
+                    src="/CompleteFire.jpg"
                     alt="Complete Fire Safety Solutions"
                     className="w-full h-80 object-cover rounded-xl"
                   />
@@ -183,6 +192,51 @@ export default function CompleteSolutionsPage() {
               </motion.div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Product Gallery Section */}
+      <section className="py-10 bg-card/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Our Product Range
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Explore our comprehensive range of fire safety and lighting solutions
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {productImages.map((image, index) => (
+              <motion.div
+                key={index}
+                className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="aspect-square overflow-hidden">
+                  <img 
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-center font-semibold text-foreground">{image.title}</h3>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

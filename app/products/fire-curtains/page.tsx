@@ -10,7 +10,7 @@ import Link from 'next/link';
 export default function FireCurtainsPage() {
   const specifications = [
     { label: 'Fire Resistance', value: 'Up to 240 minutes' },
-    { label: 'Standards Compliance', value: 'IS 15741:2007, IS 1644:1988' },
+    { label: 'Standards Compliance', value: 'IS 15741:2007, IS 1641:1988' },
     { label: 'Installation', value: 'Flexible, No Extra Efforts' },
     { label: 'Operation', value: 'Automatic Deployment' },
     { label: 'Coverage', value: 'Horizontal & Vertical Configurations' },
@@ -21,17 +21,17 @@ export default function FireCurtainsPage() {
     {
       icon: Shield,
       title: 'Certified Fire Resistance Standards',
-      description: 'Fire curtains comply with Indian certifications, including BIS standards, IS 15741:2007, IS 1644:1988, and National Building Code requirements.'
+      description: 'Fire curtains comply with Indian certifications, including BIS standards, IS 15741:2007, IS 1641:1988, and National Building Code requirements.'
     },
     {
       icon: Settings,
       title: 'Flexible and Easy Installation',
-      description: 'Various types of fire curtains, including vertical and horizontal configurations, each tailored to suit your different architectural and fire safety requirements.'
+      description: 'There are various types of fire curtains, including vertical and horizontal configurations, each tailored to suit your different architectural and fire safety requirements.'
     },
     {
       icon: Clock,
       title: 'Automatic Fire Compartmentation',
-      description: 'They can be deployed automatically when fire detection systems are triggered, creating instant fire barriers and safe evacuation routes.'
+      description: 'They can be deployed automatically when fire detection systems are triggered, creating instant fire barriers.'
     }
   ];
 
@@ -47,7 +47,7 @@ export default function FireCurtainsPage() {
   ];
 
   return (
-    <main className="min-h-screen pt-16 bg-gradient-to-br from-background via-card/80 to-sphere-blue-pale/30 relative overflow-hidden">
+    <main className="min-h-screen pt-16 indigo-purple-gradient-light relative">
       {/* Animated gradient background elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-sphere-blue-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
@@ -87,12 +87,11 @@ export default function FireCurtainsPage() {
               </div>
               
               <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-                Fire & Smoke <span className="text-sphere-blue-primary">Curtains</span>
+                Fire Curtains / Smoke <span className="text-sphere-blue-primary">Curtain</span>
               </h1>
               
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                Advanced fire and smoke curtain systems for modern building safety requirements. 
-                Engineered to provide effective compartmentation and protect escape routes in commercial buildings.
+                When fire strikes, every second counts, and our advanced fire curtains activate instantly to create protective barriers that stop flames and heat from spreading, giving people precious time to evacuate safely. Built with cutting-edge fire-resistant materials, these curtains work automatically or on command to seal off dangerous areas, protecting both your property and the lives that matter most. This isn't just about meeting safety codes; it's about peace of mind, knowing that invisible guardians are seamlessly woven into your space, ready to spring into action and give your family, employees, or visitors the best chance to get home safely.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
@@ -115,7 +114,7 @@ export default function FireCurtainsPage() {
             >
               <div className="bg-card/50 backdrop-blur-sm border border-sphere-blue-primary/20 rounded-2xl overflow-hidden">
                 <Image 
-                  src="https://images.pexels.com/photos/257699/pexels-photo-257699.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
+                  src="/FireMaster1.webp"
                   alt="Fire Curtain Installation"
                   width={800}
                   height={600}

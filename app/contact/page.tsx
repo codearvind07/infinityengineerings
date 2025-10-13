@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen pt-16 two-color-gradient">
+    <main className="min-h-screen pt-16 indigo-purple-gradient-light">
       <Header />
       <ContactSection />
       <Footer />

@@ -1,8 +1,9 @@
 'use client';
 
-import { Star, Quote, Shield, Award, CheckCircle, Badge, FileText } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { motion } from 'framer-motion';
+import { isLowPerformanceDevice, prefersReducedMotion } from '@/lib/performance';
 
 export default function TestimonialsSection() {
   const testimonials = [
@@ -32,30 +33,36 @@ export default function TestimonialsSection() {
     }
   ];
 
-  const certifications = [
-    { name: 'UL Listed', icon: Shield, color: 'text-red-500' },
-    { name: 'FM Approved', icon: CheckCircle, color: 'text-blue-500' },
-    { name: 'CE Marked', icon: Award, color: 'text-purple-500' },
-    { name: 'NFPA Compliant', icon: Badge, color: 'text-orange-500' },
-    { name: 'ISO 9001', icon: FileText, color: 'text-green-500' },
-    { name: 'ASFP Member', icon: Shield, color: 'text-indigo-500' },
-    { name: 'CFPA-E Approved', icon: CheckCircle, color: 'text-teal-500' },
-    { name: 'BSI Certified', icon: Award, color: 'text-pink-500' }
-  ];
+  const isLowPerf = isLowPerformanceDevice();
+  const prefersReducedMotionEnabled = prefersReducedMotion();
 
   return (
     <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden">
-      {/* Enhanced Background Elements */}
+      {/* Enhanced Background Elements - simplified for low performance */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Large radial gradients for depth */}
-        <div className="absolute -top-1/2 -right-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-indigo-200/30 to-blue-100/20 blur-3xl"></div>
-        <div className="absolute -bottom-1/2 -left-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-cyan-200/30 to-indigo-100/20 blur-3xl"></div>
+        {/* Large radial gradients for depth - simplified for low performance */}
+        {!isLowPerf && !prefersReducedMotionEnabled ? (
+          <>
+            <div className="absolute -top-1/2 -right-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-indigo-200/30 to-blue-100/20 blur-3xl"></div>
+            <div className="absolute -bottom-1/2 -left-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-cyan-200/30 to-indigo-100/20 blur-3xl"></div>
+            
+            {/* Geometric decorative elements */}
+            <div className="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-indigo-300/10 blur-2xl"></div>
+            <div className="absolute bottom-1/3 right-10 w-72 h-72 rounded-full bg-cyan-300/10 blur-2xl"></div>
+          </>
+        ) : (
+          // Simplified versions for low performance
+          <>
+            <div className="absolute -top-1/2 -right-1/2 w-[400px] h-[400px] rounded-full bg-gradient-to-br from-indigo-200/20 to-blue-100/10 blur-xl"></div>
+            <div className="absolute -bottom-1/2 -left-1/2 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-cyan-200/20 to-indigo-100/10 blur-xl"></div>
+            
+            {/* Geometric decorative elements - simplified */}
+            <div className="absolute top-1/4 left-10 w-48 h-48 rounded-full bg-indigo-300/5 blur-xl"></div>
+            <div className="absolute bottom-1/3 right-10 w-56 h-56 rounded-full bg-cyan-300/5 blur-xl"></div>
+          </>
+        )}
         
-        {/* Geometric decorative elements */}
-        <div className="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-indigo-300/10 blur-2xl"></div>
-        <div className="absolute bottom-1/3 right-10 w-72 h-72 rounded-full bg-cyan-300/10 blur-2xl"></div>
-        
-        {/* Subtle pattern overlay */}
+        {/* Subtle pattern overlay - simplified for low performance */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-transparent via-indigo-100/5 to-transparent"></div>
       </div>
       
@@ -83,7 +90,7 @@ export default function TestimonialsSection() {
         </motion.div>
 
         {/* Testimonials with new balanced design */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div 
               key={index} 
@@ -94,8 +101,12 @@ export default function TestimonialsSection() {
               transition={{ delay: index * 0.1, duration: 0.6 }}
             >
               <div className="bg-white/90 backdrop-blur-md border border-indigo-100/50 rounded-3xl p-8 h-full shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 relative overflow-hidden">
-                {/* Decorative corner element */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-500/5 to-cyan-500/5 rounded-bl-full"></div>
+                {/* Decorative corner element - simplified for low performance */}
+                {!isLowPerf && !prefersReducedMotionEnabled ? (
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-500/5 to-cyan-500/5 rounded-bl-full"></div>
+                ) : (
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-500/3 to-cyan-500/3 rounded-bl-full"></div>
+                )}
                 
                 {/* Quote Icon with enhanced styling */}
                 <div className="relative mb-6">
@@ -138,56 +149,6 @@ export default function TestimonialsSection() {
             </motion.div>
           ))}
         </div>
-
-        {/* Certifications with enhanced design */}
-        <motion.div 
-          className="bg-white/90 backdrop-blur-md border border-indigo-100/50 rounded-3xl p-10 shadow-xl relative overflow-hidden"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {/* Decorative elements */}
-          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-indigo-500 via-cyan-500 to-indigo-500"></div>
-          <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gradient-to-br from-indigo-500/10 to-cyan-500/10"></div>
-          <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-gradient-to-tr from-cyan-500/10 to-indigo-500/10"></div>
-          
-          <motion.h3 
-            className="text-3xl font-extrabold text-gray-900 mb-10 text-center relative"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-          >
-            Industry Certifications & Standards
-            <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 to-cyan-500 mx-auto rounded-full mt-3"></div>
-          </motion.h3>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-5">
-            {certifications.map((cert, index) => {
-              const IconComponent = cert.icon;
-              return (
-                <motion.div 
-                  key={index} 
-                  className="text-center group"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.4 + index * 0.05 }}
-                >
-                  <div className="bg-gradient-to-br from-white to-indigo-50/50 border border-indigo-100/50 rounded-2xl p-5 hover:border-indigo-300/80 transition-all duration-300 h-full shadow-lg hover:shadow-xl transform hover:-translate-y-2 backdrop-blur-sm">
-                    <div className="w-14 h-14 bg-gradient-to-br from-white to-indigo-100 rounded-xl mx-auto mb-3 flex items-center justify-center shadow-sm border border-indigo-50">
-                      <IconComponent className={`h-7 w-7 ${cert.color}`} />
-                    </div>
-                    <p className="text-xs font-extrabold text-gray-800 leading-tight tracking-wide">
-                      {cert.name}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

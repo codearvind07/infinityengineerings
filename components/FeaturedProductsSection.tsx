@@ -12,7 +12,7 @@ const featuredProducts = [
     id: 1,
     name: 'Fire Curtains / Smoke Curtains',
     category: 'Fire Protection Systems',
-    image: 'https://images.pexels.com/photos/221012/pexels-photo-221012.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
+    image: '/FireMaster1.webp',
     description: 'Advanced fire curtains that activate instantly to create protective barriers, featuring certified fire resistance standards and automatic fire compartmentation.',
     features: ['Certified Fire Resistance Standards', 'Flexible Installation', 'Automatic Fire Compartmentation'],
     slug: 'fire-curtains'
@@ -21,7 +21,7 @@ const featuredProducts = [
     id: 2,
     name: 'Advanced Fire-Resistant Glass',
     category: 'Fire Glass Technology',
-    image: 'https://images.pexels.com/photos/2041627/pexels-photo-2041627.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
+    image: '/fireresistant.webp',
     description: 'Cutting-edge fire glass technology that transforms from clear panels into protective barriers, maintaining visibility for safe evacuation.',
     features: ['Superior Insulation Performance', 'Multi-Purpose Safety Solution', 'Transparent Protection'],
     slug: 'fire-resistant-glass'
@@ -30,7 +30,7 @@ const featuredProducts = [
     id: 3,
     name: 'LED Lighting Solutions',
     category: 'LED Technology',
-    image: 'https://images.pexels.com/photos/1036936/pexels-photo-1036936.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
+    image: '/LEDLightingSolutions.jpg',
     description: 'Comprehensive range of industrial, commercial, and street LED lighting solutions designed for optimal illumination and energy efficiency.',
     features: ['Industrial LED Systems', 'Commercial Applications', 'Street Lighting Solutions'],
     slug: 'led-lighting'
@@ -39,7 +39,7 @@ const featuredProducts = [
     id: 4,
     name: 'Fire Rated Doors',
     category: 'Fire Safety Doors',
-    image: 'https://images.pexels.com/photos/277574/pexels-photo-277574.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
+    image: '/FireRatedDoors.jpg',
     description: 'Comprehensive range of fire-rated doors, glazed partitions, and specialized hardware designed with clean lines for modern safety requirements.',
     features: ['Wooden & Metal Fire Doors', 'Glazed Metal Systems', 'Architectural Integration'],
     slug: 'fire-rated-doors'
@@ -48,7 +48,7 @@ const featuredProducts = [
     id: 5,
     name: 'Door Hardware & Security',
     category: 'Security Systems',
-    image: 'https://images.pexels.com/photos/2090644/pexels-photo-2090644.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
+    image: '/DoorHardware.jpg',
     description: 'Complete door hardware and security solutions including door closers, emergency exit systems, panic hardware, and advanced access control systems.',
     features: ['Emergency Exit Systems', 'Panic Hardware', 'Access Control Technology'],
     slug: 'door-hardware'
@@ -57,7 +57,7 @@ const featuredProducts = [
     id: 6,
     name: 'Complete Fire Safety Solutions',
     category: 'Integrated Systems',
-    image: 'https://images.pexels.com/photos/1106468/pexels-photo-1106468.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
+    image: '/CompleteFire.jpg',
     description: 'End-to-end fire safety solutions combining all our products for comprehensive building protection, from detection to evacuation systems.',
     features: ['Integrated Fire Protection', 'Complete Building Safety', 'Professional Installation'],
     slug: 'complete-solutions'
