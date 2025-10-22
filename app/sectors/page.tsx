@@ -7,8 +7,29 @@ import { motion } from 'framer-motion';
 
 export default function SectorsPage() {
   return (
-    <main className="min-h-screen py-16 sm:py-20 relative indigo-purple-gradient-light">
+    <main className="min-h-screen py-16 sm:py-20 relative overflow-hidden">
+      {/* Enhanced animated background with multiple gradient layers */}
+      <div className="fixed inset-0 pointer-events-none">
+        {/* Primary gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-purple-900/15 to-rose-900/10"></div>
+        
+        {/* Animated floating orbs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-amber-500/15 to-orange-500/15 rounded-full filter blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/15 to-pink-500/15 rounded-full filter blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-indigo-500/15 to-blue-500/15 rounded-full filter blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
+        
+        {/* Geometric elements for visual interest */}
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-10 left-10 w-32 h-32 border-2 border-amber-200/20 rotate-45 rounded-lg"></div>
+          <div className="absolute top-32 right-20 w-24 h-24 border-2 border-purple-200/20 rounded-full"></div>
+          <div className="absolute bottom-40 left-20 w-28 h-28 border-2 border-orange-200/20 rotate-12 rounded-xl"></div>
+          <div className="absolute bottom-20 right-10 w-20 h-20 border-2 border-rose-200/20 rotate-[-30deg] rounded-full"></div>
+        </div>
+      </div>
+      
+      {/* Shader background for dynamic effects */}
       <ShaderBackground />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

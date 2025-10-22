@@ -13,35 +13,36 @@ const ShaderBackground = () => {
     }
   `;
 
-  // Fragment shader source code
+  // Fragment shader source code - Enhanced with consistent speed across devices
   const fsSource = `
     precision highp float;
     uniform vec2 iResolution;
     uniform float iTime;
 
-    const float overallSpeed = 0.2;
-    const float gridSmoothWidth = 0.015;
-    const float axisWidth = 0.05;
-    const float majorLineWidth = 0.025;
-    const float minorLineWidth = 0.0125;
-    const float majorLineFrequency = 5.0;
-    const float minorLineFrequency = 1.0;
-    const vec4 gridColor = vec4(0.5);
-    const float scale = 5.0;
-    const vec4 lineColor = vec4(0.4, 0.2, 0.8, 1.0);
-    const float minLineWidth = 0.01;
-    const float maxLineWidth = 0.2;
-    const float lineSpeed = 1.0 * overallSpeed;
-    const float lineAmplitude = 1.0;
-    const float lineFrequency = 0.2;
-    const float warpSpeed = 0.2 * overallSpeed;
-    const float warpFrequency = 0.5;
-    const float warpAmplitude = 1.0;
-    const float offsetFrequency = 0.5;
-    const float offsetSpeed = 1.33 * overallSpeed;
-    const float minOffsetSpread = 0.6;
-    const float maxOffsetSpread = 2.0;
-    const int linesPerGroup = 16;
+    // Consistent speed parameters for all devices
+    const float overallSpeed = 0.1;
+    const float gridSmoothWidth = 0.02;
+    const float axisWidth = 0.04;
+    const float majorLineWidth = 0.02;
+    const float minorLineWidth = 0.01;
+    const float majorLineFrequency = 8.0;
+    const float minorLineFrequency = 2.0;
+    const vec4 gridColor = vec4(0.8, 0.4, 0.2, 0.7);
+    const float scale = 4.0;
+    const vec4 lineColor = vec4(0.9, 0.5, 0.2, 1.0);
+    const float minLineWidth = 0.005;
+    const float maxLineWidth = 0.15;
+    const float lineSpeed = 0.6 * overallSpeed;
+    const float lineAmplitude = 1.2;
+    const float lineFrequency = 0.3;
+    const float warpSpeed = 0.15 * overallSpeed;
+    const float warpFrequency = 0.7;
+    const float warpAmplitude = 1.5;
+    const float offsetFrequency = 0.6;
+    const float offsetSpeed = 0.8 * overallSpeed;
+    const float minOffsetSpread = 0.5;
+    const float maxOffsetSpread = 2.5;
+    const int linesPerGroup = 20;
 
     #define drawCircle(pos, radius, coord) smoothstep(radius + gridSmoothWidth, radius, length(coord - (pos)))
     #define drawSmoothLine(pos, halfWidth, t) smoothstep(halfWidth, 0.0, abs(pos - (t)))
@@ -59,11 +60,21 @@ const ShaderBackground = () => {
     }
 
     float random(float t) {
-      return (cos(t) + cos(t * 1.3 + 1.3) + cos(t * 1.4 + 1.4)) / 3.0;
+      return (cos(t) + cos(t * 1.5 + 1.5) + cos(t * 1.8 + 1.8)) / 3.0;
     }
 
     float getPlasmaY(float x, float horizontalFade, float offset) {
       return random(x * lineFrequency + iTime * lineSpeed) * horizontalFade * lineAmplitude + offset;
+    }
+
+    // Fire color palette function
+    vec3 firePalette(float t) {
+      vec3 a = vec3(0.5, 0.5, 0.5);
+      vec3 b = vec3(0.5, 0.5, 0.5);
+      vec3 c = vec3(1.0, 1.0, 1.0);
+      vec3 d = vec3(0.263, 0.416, 0.557);
+      
+      return a + b * cos(6.28318 * (c * t + d));
     }
 
     void main() {
@@ -72,16 +83,23 @@ const ShaderBackground = () => {
       vec2 uv = fragCoord.xy / iResolution.xy;
       vec2 space = (fragCoord - iResolution.xy / 2.0) / iResolution.x * 2.0 * scale;
 
+      // Create dynamic warping effect
       float horizontalFade = 1.0 - (cos(uv.x * 6.28) * 0.5 + 0.5);
       float verticalFade = 1.0 - (cos(uv.y * 6.28) * 0.5 + 0.5);
 
       space.y += random(space.x * warpFrequency + iTime * warpSpeed) * warpAmplitude * (0.5 + horizontalFade);
       space.x += random(space.y * warpFrequency + iTime * warpSpeed + 2.0) * warpAmplitude * horizontalFade;
 
-      vec4 lines = vec4(0.0);
-      vec4 bgColor1 = vec4(0.1, 0.1, 0.3, 1.0);
-      vec4 bgColor2 = vec4(0.3, 0.1, 0.5, 1.0);
+      // Enhanced background with fire colors - consistent speed
+      vec3 bgColor1 = firePalette(0.0 + iTime * 0.015);
+      vec3 bgColor2 = firePalette(0.3 + iTime * 0.015);
+      vec3 bgColor3 = firePalette(0.6 + iTime * 0.015);
+      
+      vec4 background = vec4(mix(bgColor1, bgColor2, uv.x * 0.5 + 0.5), 1.0);
+      background = mix(background, vec4(bgColor3, 1.0), uv.y * 0.3);
 
+      // Create animated line effects
+      vec4 lines = vec4(0.0);
       for(int l = 0; l < linesPerGroup; l++) {
         float normalizedLineIndex = float(l) / float(linesPerGroup);
         float offsetTime = iTime * offsetSpeed;
@@ -92,18 +110,23 @@ const ShaderBackground = () => {
         float linePosition = getPlasmaY(space.x, horizontalFade, offset);
         float line = drawSmoothLine(linePosition, halfWidth, space.y) / 2.0 + drawCrispLine(linePosition, halfWidth * 0.15, space.y);
 
-        float circleX = mod(float(l) + iTime * lineSpeed, 25.0) - 12.0;
+        // Add animated circles for particle effects
+        float circleX = mod(float(l) + iTime * lineSpeed, 30.0) - 15.0;
         vec2 circlePosition = vec2(circleX, getPlasmaY(circleX, horizontalFade, offset));
-        float circle = drawCircle(circlePosition, 0.01, space) * 4.0;
+        float circle = drawCircle(circlePosition, 0.015, space) * 3.0;
 
         line = line + circle;
-        lines += line * lineColor * rand;
+        
+        // Apply fire-themed coloring to lines
+        vec3 lineColorFire = firePalette(rand * 0.5 + 0.2 + iTime * 0.03);
+        lines += line * vec4(lineColorFire, 1.0) * rand * 0.7;
       }
 
-      fragColor = mix(bgColor1, bgColor2, uv.x);
-      fragColor *= verticalFade;
+      // Combine background with line effects
+      fragColor = background;
+      fragColor *= verticalFade * 0.9 + 0.1;
       fragColor.a = 1.0;
-      fragColor += lines;
+      fragColor += lines * 0.8;
 
       gl_FragColor = fragColor;
     }

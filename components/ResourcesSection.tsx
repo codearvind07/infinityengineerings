@@ -69,12 +69,12 @@ export default function ResourcesSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#E28C00] mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-amber-500 mb-4">
            Resources That Empower Your Growth
           </h2>
           <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-           At Infinity Engineerings, we believe knowledge is the foundation of innovation. Our Resource Center is built to help you explore, learn, and make the most of our solutions. Whether you’re an engineer looking for detailed product guides, a partner seeking marketing assets, or a client exploring best practices, you’ll find everything you need to succeed.
-            From installation manuals and case studies to training videos and technical insights, we’ve curated our most valuable materials in one place, so you can stay informed, confident, and ahead of the curve.
+           At Infinity Engineerings, we believe knowledge is the foundation of innovation. Our Resource Center is built to help you explore, learn, and make the most of our solutions. Whether you're an engineer looking for detailed product guides, a partner seeking marketing assets, or a client exploring best practices, you'll find everything you need to succeed.
+            From installation manuals and case studies to training videos and technical insights, we've curated our most valuable materials in one place, so you can stay informed, confident, and ahead of the curve.
           </p>
         </motion.div>
 
@@ -102,7 +102,7 @@ export default function ResourcesSection() {
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-semibold text-[#1C4E29] mb-3">
+              <h3 className="text-xl font-semibold text-amber-600 mb-3">
                 {resource.title}
               </h3>
 
@@ -112,7 +112,7 @@ export default function ResourcesSection() {
               </p>
 
               {/* Button */}
-              <Button className="bg-[#1C4E29] hover:bg-[#256d3b] text-white font-medium px-6 py-2 rounded-full transition-all duration-300">
+              <Button className="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-white font-medium px-6 py-2 rounded-full transition-all duration-300">
                 {resource.action}
                 <ExternalLink className="ml-2 h-4 w-4" />
               </Button>

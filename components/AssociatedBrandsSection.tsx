@@ -34,12 +34,12 @@ const brands = [
   },
   {
     name: 'Dormakaba',
-    description: 'DORMA MAKE - DOOR HARDWARES PRODUCTS/SECURITY FUNCTIONS & VISUAL APPEAL FOR ANY COMMERCIAL BUILDINGS.',
+    description: 'Dorma make - Door hardwares products/security functions & visual appeal for any commercial buildings.',
     logo: '/Dormakaba.png',
     certifications: ['UL Listed', 'CE Marked', 'ISO 9001', 'FM Approved']
   },
   {
-    name: 'AuronyxSystems',
+    name: 'Auronyx Systems',
     description: 'Advanced fire protection technology with innovative smart detection systems.',
     logo: '/AuronyxSystems.png',
     certifications: ['UL Listed', 'CE Marked', 'ISO 9001', 'NFPA Compliant']
@@ -159,10 +159,10 @@ export default function AssociatedBrandsSection() {
                         
                         {/* Content */}
                         <div className="relative z-10 p-8 h-full flex flex-col items-center text-center">
-                          {/* Logo - Larger size for better visibility */}
+                          {/* Logo - Increased size for better visibility */}
                           <div className="mb-6">
-                            <div className="w-32 h-32 mx-auto relative bg-white rounded-2xl flex-shrink-0 border border-gray-200/70 shadow-lg flex items-center justify-center transition-all duration-300 group-hover:shadow-xl">
-                              <div className="relative w-24 h-24">
+                            <div className="w-40 h-40 mx-auto relative bg-white rounded-2xl flex-shrink-0 border border-gray-200/70 shadow-lg flex items-center justify-center transition-all duration-300 group-hover:shadow-xl">
+                              <div className="relative w-32 h-32">
                                 <Image
                                   src={brand.logo}
                                   alt={`${brand.name} logo`}
